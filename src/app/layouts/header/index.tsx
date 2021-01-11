@@ -73,36 +73,6 @@ export const Header = () => {
           )}
         </div>
       </div>
-      <div
-        style={{
-          padding: "0 14px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <h1 style={{ margin: "0 0 15px" }}>STORE OF KING</h1>
-        <p style={{ margin: "0 0 60px" }}>
-          Ready to wear dresses tailored for you from online. Hurry up while
-          stock lasts.
-        </p>
-        <input
-          style={{
-            margin: "6px 4px",
-            paddingRight: "5%",
-            borderRadius: "5px",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderColor: "hsla(0, 0%, 0%, 0.12)",
-            outline: "none",
-            boxShadow: "none",
-            width: "25%",
-          }}
-          type="search"
-          value=""
-          placeholder="Tìm kiếm sản phẩm..."
-        />
-      </div>
     </>
   );
 };

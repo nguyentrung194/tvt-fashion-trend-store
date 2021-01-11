@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
-import { Header } from "../layouts/header";
 
 export const AuthLayout = () => {
   const { state }: any = useAuth();
@@ -24,7 +23,6 @@ export const AuthLayout = () => {
   }, [state, navigate]);
   return (
     <>
-      <Header />
       <div
         style={{
           display: "grid",
