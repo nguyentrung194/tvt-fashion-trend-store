@@ -124,6 +124,11 @@ function App() {
           state.customClaims.claims["https://hasura.io/jwt/claims"][
             "x-hasura-default-role"
           ];
+        const roleAlow =
+          state.customClaims.claims["https://hasura.io/jwt/claims"][
+            "x-hasura-allowed-roles"
+          ];
+        console.log(roleAlow);
 
         if (role === "user") {
           return (

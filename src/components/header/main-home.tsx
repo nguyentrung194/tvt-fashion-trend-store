@@ -1,12 +1,14 @@
 import React from "react";
+import useMedia from "../../hooks/use-media";
 import background from "./background.png";
 
 export const MainHome = () => {
+  const isWide = useMedia("(min-width: 480px)");
   return (
     <>
       <div
         style={{
-          padding: "0 14px",
+          padding: "200px 14px 0",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -16,6 +18,7 @@ export const MainHome = () => {
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          marginLeft: isWide ? "calc(var(--vw, 1vw) * 20)" : "",
         }}
       >
         <h1
@@ -26,7 +29,7 @@ export const MainHome = () => {
             lineHeight: "36px",
           }}
         >
-          STORE OF KING
+          SHOP YOUR DESIGNER DRESSES
         </h1>
         <p
           style={{
