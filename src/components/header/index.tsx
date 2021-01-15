@@ -1,10 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
-import logo64 from "./logo64.png";
-import cart24 from "./cart-24.png";
-import logout24 from "./logout-24.png";
-import login24 from "./login-24.png";
 import { MainHome } from "./main-home";
 import useMedia from "../../hooks/use-media";
 
@@ -43,7 +39,7 @@ export const Header = () => {
             <Link to="/">
               <img
                 style={{ width: "40px", paddingRight: "16px" }}
-                src={logo64}
+                src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
                 alt="Logo"
               />
             </Link>
@@ -79,7 +75,10 @@ export const Header = () => {
                   to="/"
                 >
                   {isWide ? "Logout" : ""}
-                  <img src={logout24} alt="Logout" />
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogout-24.png?alt=media&token=95aa0afe-73f9-41df-b6f8-9384cac6f467"
+                    alt="Logout"
+                  />
                 </Link>
                 <Link
                   to=""
@@ -92,7 +91,10 @@ export const Header = () => {
                   }}
                 >
                   {isWide ? "Cart" : ""}
-                  <img src={cart24} alt="Cart" />
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
+                    alt="Cart"
+                  />
                 </Link>
               </>
             ) : (
@@ -107,7 +109,10 @@ export const Header = () => {
                 to="/auth/sign-in"
               >
                 {isWide ? "Login" : ""}
-                <img src={login24} alt="Login" />
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogin-24.png?alt=media&token=9ef01eab-9547-4317-8217-61e56e380fdb"
+                  alt="Login"
+                />
               </Link>
             )}
           </div>

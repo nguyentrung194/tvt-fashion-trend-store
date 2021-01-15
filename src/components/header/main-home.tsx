@@ -1,6 +1,5 @@
 import React from "react";
 import useMedia from "../../hooks/use-media";
-import background from "./background.png";
 
 export const MainHome = () => {
   const isWide = useMedia("(min-width: 480px)");
@@ -14,7 +13,7 @@ export const MainHome = () => {
           alignItems: "center",
           flexDirection: "column",
           textAlign: "center",
-          backgroundImage: `url(${background})`,
+          backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fbackground.png?alt=media&token=1d07174b-df32-437e-9abb-39b94a96a261)`,
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",

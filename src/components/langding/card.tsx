@@ -1,5 +1,4 @@
 import React from "react";
-import imageProduct from "./image-product.jpg";
 
 export const Card = () => {
   return (
@@ -17,7 +16,7 @@ export const Card = () => {
           width: "100%",
           padding: "3px",
         }}
-        src={imageProduct}
+        src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fimage-product.jpg?alt=media&token=aa684176-a048-42f7-b52f-379aca5beaf8"
         alt="product"
       />
       <p>Sale off 20%</p>
