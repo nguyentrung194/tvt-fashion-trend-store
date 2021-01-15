@@ -3,8 +3,10 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 
 import { fbase } from "../../hooks/use-auth";
+import useMedia from "../../hooks/use-media";
 
 export const ForgotPassword: React.FC<{}> = () => {
+  const isWide = useMedia("(min-width: 480px)");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,7 +30,7 @@ export const ForgotPassword: React.FC<{}> = () => {
           flexDirection: "column",
           textAlign: "center",
           height: "80%",
-          width: "450px",
+          width: isWide ? "450px" : "100%",
           margin: "auto",
           borderRadius: "6px",
           borderWidth: "1px",

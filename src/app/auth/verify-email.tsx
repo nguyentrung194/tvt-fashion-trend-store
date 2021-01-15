@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
+import useMedia from "../../hooks/use-media";
 
 export const VerifyEmail = () => {
   const [refresh, setRefresh] = useState(false);
-
+  const isWide = useMedia("(min-width: 480px)");
   const {
     state: { user },
     signout,
@@ -19,7 +20,7 @@ export const VerifyEmail = () => {
         flexDirection: "column",
         textAlign: "center",
         height: "80%",
-        width: "600px",
+        width: isWide ? "600px" : "100%",
         margin: "auto",
       }}
     >
@@ -33,9 +34,8 @@ export const VerifyEmail = () => {
         <div
           style={{
             fontWeight: 400,
-            marginBottom: "18px",
-            fontSize: "16px",
-            lineHeight: "24px",
+            fontSize: "26px",
+            lineHeight: "20px",
           }}
         >
           Confirm Your Email
@@ -53,6 +53,13 @@ export const VerifyEmail = () => {
           <span style={{ fontWeight: 500 }}>{user.email}</span>. If you didn’t
           receive the email, check your spam folder,{" "}
           <button
+            style={{
+              color: "#03713d",
+              padding: "0",
+              cursor: "pointer",
+              background: "hsla(0, 0%, 0%, 0)",
+              border: "none",
+            }}
             onClick={async () => {
               try {
                 await user.sendEmailVerification();

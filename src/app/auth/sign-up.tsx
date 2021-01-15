@@ -2,8 +2,10 @@ import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import { fana, fbase } from "../../hooks/use-auth";
+import useMedia from "../../hooks/use-media";
 
 export const Signup = () => {
+  const isWide = useMedia("(min-width: 480px)");
   const handelSignInWithGoogle = async () => {
     const provider = new fbase.auth.GoogleAuthProvider();
     return await fbase.auth().signInWithPopup(provider);
@@ -39,7 +41,7 @@ export const Signup = () => {
           flexDirection: "column",
           textAlign: "center",
           height: "80%",
-          width: "450px",
+          width: isWide ? "450px" : "100%",
           margin: "auto",
           borderRadius: "6px",
           borderWidth: "1px",

@@ -2,8 +2,10 @@ import React from "react";
 import { useFormik } from "formik";
 import { useMutation, gql } from "@apollo/client";
 import { useAuth, storage, fbase, fana } from "../../hooks/use-auth";
+import useMedia from "../../hooks/use-media";
 
 export const SetupAccount = () => {
+  const isWide = useMedia("(min-width: 480px)");
   const [userSetup] = useMutation(gql`
     mutation UserSetup($input: UserSetupInput!) {
       userSetup(input: $input) {
@@ -25,9 +27,8 @@ export const SetupAccount = () => {
       countryCode: "94000",
       country: "Viet Nam",
       dial: "+84",
-      fullName: user.displayName || "",
-      avatarURL:
-        "https://scontent.fsgn5-6.fna.fbcdn.net/v/t1.0-9/42518855_1070437466474838_255121452519391232_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=yYvomR-upV8AX8iLfL2&_nc_ht=scontent.fsgn5-6.fna&oh=c85cace4013c16849cc9836817567f0f&oe=601B1796",
+      fullName: "",
+      avatarURL: "",
       countryUser: "",
       phone: "",
     },
@@ -81,17 +82,38 @@ export const SetupAccount = () => {
   });
 
   return (
-    <div style={{ padding: "16px" }}>
-      <div
-        style={{
-          textAlign: "center",
-          marginTop: "21px",
-          fontSize: "26px",
-        }}
-      ></div>
-      <form onSubmit={formik.handleSubmit}>
-        <>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        textAlign: "center",
+        height: "80%",
+        width: isWide ? "450px" : "100%",
+        margin: "auto",
+        borderRadius: "6px",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: "hsla(0, 0%, 0%, 0.24)",
+        boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.16)",
+      }}
+    >
+      <div style={{ width: "90%" }}>
+        <div
+          style={{
+            width: "100%",
+            fontSize: "26px",
+          }}
+        >
+          Setup your account
+        </div>
+        <form
+          style={{ width: "100%", textAlign: "left" }}
+          onSubmit={formik.handleSubmit}
+        >
           <input
+            style={{ width: "91%", padding: "8px 16px", margin: "6px 0" }}
             required
             name="fullName"
             placeholder="First & last name"
@@ -100,25 +122,45 @@ export const SetupAccount = () => {
             onBlur={formik.handleBlur}
             value={formik.values.fullName}
           />
-          <select
-            required
-            placeholder="Select country"
-            onChange={({ value }: any) =>
-              formik.setFieldValue("country", value)
-            }
-            value={formik.values.country === "" ? "" : formik.values.country}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            <option value="Viet Nam">Viet Nam</option>
-            <option value="Foreign">Foreign</option>
-          </select>
-          <div>
-            <div>
-              {/* <image name="avatar" href={formik.values.avatarURL} /> */}
-            </div>
-            Photo:
+            <span>Where are you from?</span>
+            <select
+              style={{
+                border: "1px solid #e2eded",
+                outline: "none",
+                padding: "4px 8px",
+                backgroundColor: "#fff",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+              required
+              placeholder="Select country"
+              onChange={({ value }: any) =>
+                formik.setFieldValue("country", value)
+              }
+              value={formik.values.country === "" ? "" : formik.values.country}
+            >
+              <option value="Viet Nam">Viet Nam</option>
+              <option value="Foreign">Foreign</option>
+            </select>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span>Photo: </span>
             <input
               required
-              name="photoURL"
+              name="avatarURL"
               type="file"
               accept="image/png,image/jpeg,image/jpg"
               onChange={(e) => {
@@ -143,7 +185,7 @@ export const SetupAccount = () => {
                 console.log(uploadFiles);
                 Promise.all(uploadFiles)
                   .then(async (result) => {
-                    formik.setFieldValue("photoURL", result[0].assetUrl);
+                    formik.setFieldValue("avatarURL", result[0].assetUrl);
                   })
                   .catch((error) => {
                     console.log(error.message);
@@ -151,20 +193,52 @@ export const SetupAccount = () => {
               }}
             />
           </div>
-          Phone:
           <input
+            style={{ width: "90%", padding: "8px 16px", margin: "6px 0" }}
             required
             value={formik.values.phone !== "" ? formik.values.phone : ""}
             onChange={(e) => {
               formik.setFieldValue("phone", e.currentTarget.value);
             }}
+            placeholder="Your phone number"
           />
-          <button onClick={signout}>Not you</button>
-          <button disabled={formik.isSubmitting} type="submit">
+          <button
+            style={{
+              width: "100%",
+              borderTopLeftRadius: "6px",
+              borderTopRightRadius: "6px",
+              borderBottomRightRadius: "6px",
+              borderBottomLeftRadius: "6px",
+              marginTop: "12px",
+              backgroundColor: "#05944F",
+              boxShadow: "0 1px 4px hsla(0, 0%, 0%, 0.16)",
+              padding: "8px 16px",
+              margin: "6px 0",
+            }}
+            disabled={formik.isSubmitting}
+            type="submit"
+          >
             Submit
           </button>
-        </>
-      </form>
+          <button
+            style={{
+              width: "100%",
+              borderTopLeftRadius: "6px",
+              borderTopRightRadius: "6px",
+              borderBottomRightRadius: "6px",
+              borderBottomLeftRadius: "6px",
+              marginTop: "12px",
+              backgroundColor: "#fff",
+              boxShadow: "0 1px 4px hsla(0, 0%, 0%, 0.16)",
+              padding: "8px 16px",
+              margin: "6px 0",
+            }}
+            onClick={signout}
+          >
+            Not you
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
