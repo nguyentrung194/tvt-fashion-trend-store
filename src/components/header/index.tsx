@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import { MainHome } from "./main-home";
 import useMedia from "../../hooks/use-media";
+import { Navbar } from "./navbar";
 
 export const Header = () => {
   const isWide = useMedia("(min-width: 480px)");
@@ -26,6 +27,7 @@ export const Header = () => {
             backgroundColor: "rgb(247, 247, 247)",
             padding: "0 5px",
             borderBottom: "1px solid hsla(0, 0%, 0%, 0.1)",
+            zIndex: 9999,
           }}
         >
           <div
@@ -61,6 +63,7 @@ export const Header = () => {
               padding: "16px 12px",
             }}
           >
+            <Navbar />
             {auth.state.user ? (
               <>
                 <Link
