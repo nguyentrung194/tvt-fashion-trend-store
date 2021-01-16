@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 
 import { fbase } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
+import { useToasts } from "react-toast-notifications";
 
 export const ForgotPassword: React.FC<{}> = () => {
+  const { addToast } = useToasts();
   const isWide = useMedia("(min-width: 480px)");
   const formik = useFormik({
     initialValues: {
@@ -14,8 +16,12 @@ export const ForgotPassword: React.FC<{}> = () => {
     onSubmit: async (values) => {
       try {
         await fbase.auth().sendPasswordResetEmail(values.email);
+        addToast("We have sent you a link to reset your password", {
+          appearance: "success",
+          autoDismiss: true,
+        });
       } catch (error) {
-        console.log("Error!\n", error);
+        addToast(error.message, { appearance: "error", autoDismiss: true });
       }
     },
   });

@@ -3,9 +3,12 @@ import { useFormik } from "formik";
 import { useMutation, gql } from "@apollo/client";
 import { useAuth, storage, fbase, fana } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
+import { useToasts } from "react-toast-notifications";
 
 export const SetupAccount = () => {
   const isWide = useMedia("(min-width: 480px)");
+  const { addToast } = useToasts();
+
   const [userSetup] = useMutation(gql`
     mutation UserSetup($input: UserSetupInput!) {
       userSetup(input: $input) {
@@ -35,6 +38,10 @@ export const SetupAccount = () => {
     onSubmit: async (values) => {
       try {
         formik.setSubmitting(true);
+        addToast("This can take a few seconds", {
+          appearance: "info",
+          autoDismiss: true,
+        });
         const token: string = await user.getIdToken();
         console.log(token);
         const dataRes = await userSetup({
@@ -69,13 +76,19 @@ export const SetupAccount = () => {
             .catch(function (error) {
               console.log("Error!\n", error.message);
             });
+          addToast("Setup successfull!", {
+            appearance: "success",
+            autoDismiss: true,
+          });
         } else {
           console.log("Error on server backend!");
         }
-
         formik.setSubmitting(false);
       } catch (error) {
-        console.log("Error!\n", error);
+        addToast(error.message, {
+          appearance: "error",
+          autoDismiss: true,
+        });
         formik.setSubmitting(false);
       }
     },

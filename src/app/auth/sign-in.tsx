@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 import { fbase } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 
 export const SignIn = () => {
+  const { addToast } = useToasts();
   const isWide = useMedia("(min-width: 480px)");
   const handelSignInWithGoogle = async () => {
     const provider = new fbase.auth.GoogleAuthProvider();
@@ -13,12 +15,14 @@ export const SignIn = () => {
       .signInWithPopup(provider)
       .then((data) => {
         if (data) {
-          console.log("Login successful!");
+          addToast("Login successfull!", {
+            appearance: "success",
+            autoDismiss: true,
+          });
         }
       })
       .catch((error) => {
-        if (error.code !== "auth/popup-closed-by-user")
-          console.log(error.message);
+        addToast(error.message, { appearance: "error", autoDismiss: true });
       });
   };
 
@@ -32,8 +36,13 @@ export const SignIn = () => {
         await fbase
           .auth()
           .signInWithEmailAndPassword(values.email, values.password);
+
+        addToast("Login successfull!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
       } catch (error) {
-        console.log(error.message);
+        addToast(error.message, { appearance: "error", autoDismiss: true });
       }
     },
   });
