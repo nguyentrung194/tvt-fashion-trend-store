@@ -1,0 +1,9 @@
+query getProducts {
+  products(order_by: { createdAt: desc }) {
+    id
+    name
+    pricing
+    saleOff
+    URLImage
+  }
+}

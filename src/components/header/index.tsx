@@ -84,7 +84,7 @@ export const Header = () => {
                   />
                 </Link>
                 <Link
-                  to=""
+                  to="/"
                   style={{
                     padding: "0 12px",
                     color: "#03713d",

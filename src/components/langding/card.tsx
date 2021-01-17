@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Card = () => {
+export const Card = ({ props }: any) => {
   return (
     <div
       style={{
@@ -16,13 +16,13 @@ export const Card = () => {
           width: "100%",
           padding: "3px",
         }}
-        src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fimage-product.jpg?alt=media&token=aa684176-a048-42f7-b52f-379aca5beaf8"
+        src={props.URLImage}
         alt="product"
       />
-      <p>Sale off 20%</p>
+      <p>{props.isSale ? `Sale off ${props.saleOff}%` : ""}</p>
       <div>
         <div style={{ fontSize: "20px", fontWeight: 500, lineHeight: "24px" }}>
-          Áo thun
+          {props.name}
         </div>
         <div
           style={{
@@ -32,12 +32,15 @@ export const Card = () => {
             textDecoration: "line-through",
           }}
         >
-          200.000đ
+          {props.isSale ? `${props.pricing}VNĐ` : ``}
         </div>
         <div
           style={{ fontSize: "16px", fontWeight: "normal", lineHeight: "24px" }}
         >
-          160.000đ
+          {props.isSale
+            ? (props.pricing * (100 - props.saleOff)) / 100
+            : props.pricing}
+          VNĐ
         </div>
         <button>Add to cart</button>
       </div>

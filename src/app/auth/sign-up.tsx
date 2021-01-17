@@ -1,11 +1,13 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 import { fana, fbase } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 
 export const Signup = () => {
   const isWide = useMedia("(min-width: 480px)");
+  const { addToast } = useToasts();
   const handelSignInWithGoogle = async () => {
     const provider = new fbase.auth.GoogleAuthProvider();
     return await fbase.auth().signInWithPopup(provider);
@@ -25,8 +27,12 @@ export const Signup = () => {
           await userRes.user?.sendEmailVerification();
           fana.setUserId(userRes.user?.uid as string);
         }
+        addToast("Login successfull!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
       } catch (error) {
-        console.log(error.message);
+        addToast(error.message, { appearance: "error", autoDismiss: true });
       }
     },
   });
