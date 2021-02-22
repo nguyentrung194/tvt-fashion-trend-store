@@ -8,7 +8,6 @@ export const GET_PRODUCTS = gql`
       pricing
       saleOff
       URLImage
-      isSale
     }
   }
 `;

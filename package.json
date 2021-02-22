@@ -29,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "schemas": "graphql-codegen --config codegen.js",
+    "schemas:watch": "npm run schemas -- --watch"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +52,12 @@
     ]
   },
   "devDependencies": {
+    "prettier": "^2.2.1",
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/import-types-preset": "^1.18.1",
+    "@graphql-codegen/typescript": "^1.20.2",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

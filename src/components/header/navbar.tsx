@@ -12,6 +12,7 @@ export const Category = (props: any) => {
         alignItems: "center",
         cursor: "pointer",
       }}
+      onClick={props.onClick}
     >
       {props.title}
     </div>
@@ -27,7 +28,7 @@ export const categoriesData = [
   "Shirts",
 ];
 
-export const Navbar = () => {
+export const Navbar = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   if (!isWide)
     return (
@@ -50,7 +51,16 @@ export const Navbar = () => {
         }}
       >
         {categoriesData.map((el, id) => {
-          return <Category key={id} title={el} />;
+          return (
+            <Category
+              onClick={() => {
+                props.setByCategory(el);
+                window.scrollTo(0, window.innerHeight - 70);
+              }}
+              key={id}
+              title={el}
+            />
+          );
         })}
       </div>
     </>

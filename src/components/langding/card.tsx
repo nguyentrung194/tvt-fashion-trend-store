@@ -17,9 +17,9 @@ export const Card = ({ props }: any) => {
           padding: "3px",
         }}
         src={props.URLImage}
-        alt="product"
+        alt={props.name}
       />
-      <p>{props.isSale ? `Sale off ${props.saleOff}%` : ""}</p>
+      <p>{props.saleOff ? `Sale off ${props.saleOff}%` : ""}</p>
       <div>
         <div style={{ fontSize: "20px", fontWeight: 500, lineHeight: "24px" }}>
           {props.name}
@@ -37,7 +37,7 @@ export const Card = ({ props }: any) => {
         <div
           style={{ fontSize: "16px", fontWeight: "normal", lineHeight: "24px" }}
         >
-          {props.isSale
+          {props.saleOff
             ? (props.pricing * (100 - props.saleOff)) / 100
             : props.pricing}
           VNĐ

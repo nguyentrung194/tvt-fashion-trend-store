@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header } from "../header";
 import useMedia from "../../hooks/use-media";
 import { Cards } from "./cards";
 
 export const Home = () => {
+  const [byCategory, setByCategory] = useState("");
+
   const isWide = useMedia("(min-width: 480px)");
   return (
     <>
-      <Header />
+      <Header setByCategory={setByCategory} />
       <div
         style={{
           display: "grid",
@@ -24,9 +26,10 @@ export const Home = () => {
             }, 1fr))`,
             gridAutoRows: "auto",
             gridGap: isWide ? "6px" : "3px",
+            minHeight: "100vh",
           }}
         >
-          <Cards />
+          <Cards byCategory={byCategory} setByCategory={setByCategory} />
         </div>
       </div>
     </>

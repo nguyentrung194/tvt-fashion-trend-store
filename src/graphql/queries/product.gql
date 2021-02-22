@@ -1,9 +1,42 @@
-query getProducts {
+query GetProducts {
   products(order_by: { createdAt: desc }) {
     id
     name
     pricing
     saleOff
     URLImage
+  }
+}
+
+query ProductsByCategory($category: String!) {
+  products(
+    where: { categories_products: { category: { name: { _eq: $category } } } }
+  ) {
+    name
+    URLImage
+    pricing
+    saleOff
+  }
+}
+
+mutation InsertProduct(
+  $categories_name: String!
+  $url: String!
+  $name: String!
+  $pricing: Int!
+  $saleOff: Int!
+) {
+  insert_products(
+    objects: {
+      categories_products: {
+        data: { category: { data: { name: $categories_name } } }
+      }
+      URLImage: $url
+      name: $name
+      pricing: $pricing
+      saleOff: $saleOff
+    }
+  ) {
+    affected_rows
   }
 }

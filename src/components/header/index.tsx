@@ -5,7 +5,7 @@ import { MainHome } from "./main-home";
 import useMedia from "../../hooks/use-media";
 import { Navbar } from "./navbar";
 
-export const Header = () => {
+export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
   return (
@@ -63,7 +63,7 @@ export const Header = () => {
               padding: "16px 12px",
             }}
           >
-            <Navbar />
+            <Navbar setByCategory={props.setByCategory} />
             {auth.state.user ? (
               <>
                 <Link
@@ -77,7 +77,9 @@ export const Header = () => {
                   }}
                   to="/"
                 >
-                  {isWide ? "Logout" : ""}
+                  <div style={{ paddingRight: "6px" }}>
+                    {isWide ? "Logout" : ""}
+                  </div>
                   <img
                     src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogout-24.png?alt=media&token=95aa0afe-73f9-41df-b6f8-9384cac6f467"
                     alt="Logout"
@@ -93,7 +95,9 @@ export const Header = () => {
                     alignItems: "center",
                   }}
                 >
-                  {isWide ? "Cart" : ""}
+                  <div style={{ paddingRight: "6px" }}>
+                    {isWide ? "Cart" : ""}
+                  </div>
                   <img
                     src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
                     alt="Cart"
@@ -111,7 +115,9 @@ export const Header = () => {
                 }}
                 to="/auth/sign-in"
               >
-                {isWide ? "Login" : ""}
+                <div style={{ paddingRight: "6px" }}>
+                  {isWide ? "Login" : ""}
+                </div>
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogin-24.png?alt=media&token=9ef01eab-9547-4317-8217-61e56e380fdb"
                   alt="Login"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { Routes, Route, Navigate } from "react-router-dom";
 
@@ -28,59 +28,66 @@ function App() {
     const unAuthClient = createUnAuthClient();
 
     return (
-      <ApolloProvider client={unAuthClient}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/auth" element={<AuthLayout />}>
-            <Route path="/" element={<Navigate to="sign-in" />} />
-            <Route path="sign-up" element={<SignUpPage />} />
-            <Route path="sign-in" element={<SignInPage />} />
-            <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="setup" element={<Navigate to="/auth/sign-in" />} />
-            <Route
-              path="email-confirmation"
-              element={<Navigate to="/auth/sign-in" />}
-            />
-          </Route>
-          <Route path="log-out" element={<Navigate to="/" />} />
-          <Route path="/*" element={<Navigate to="/" replace={true} />} />
-        </Routes>
-      </ApolloProvider>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <ApolloProvider client={unAuthClient}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<AuthLayout />}>
+              <Route path="/" element={<Navigate to="sign-in" />} />
+              <Route path="sign-up" element={<SignUpPage />} />
+              <Route path="sign-in" element={<SignInPage />} />
+              <Route path="forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="setup" element={<Navigate to="/auth/sign-in" />} />
+              <Route
+                path="email-confirmation"
+                element={<Navigate to="/auth/sign-in" />}
+              />
+            </Route>
+            <Route path="log-out" element={<Navigate to="/" />} />
+            <Route path="/*" element={<Navigate to="/" replace={true} />} />
+          </Routes>
+        </ApolloProvider>
+      </Suspense>
     );
   } else {
     if (state.user && !state.user.emailVerified) {
       const unAuthClient = createUnAuthClient();
 
       return (
-        <ApolloProvider client={unAuthClient}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<AuthLayout />}>
-              <Route
-                path="/"
-                element={<Navigate to="/auth/email-confirmation" />}
-              />
-              <Route
-                path="sign-up"
-                element={<Navigate to="/auth/email-confirmation" />}
-              />
-              <Route
-                path="sign-in"
-                element={<Navigate to="/auth/email-confirmation" />}
-              />
-              <Route
-                path="forgot-password"
-                element={<Navigate to="/auth/email-confirmation" />}
-              />
-              <Route
-                path="setup"
-                element={<Navigate to="/auth/email-confirmation" />}
-              />
-              <Route path="email-confirmation" element={<VerifyEmailPage />} />
-            </Route>
-            <Route path="log-out" element={<Navigate to="/" />} />
-          </Routes>
-        </ApolloProvider>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <ApolloProvider client={unAuthClient}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auth" element={<AuthLayout />}>
+                <Route
+                  path="/"
+                  element={<Navigate to="/auth/email-confirmation" />}
+                />
+                <Route
+                  path="sign-up"
+                  element={<Navigate to="/auth/email-confirmation" />}
+                />
+                <Route
+                  path="sign-in"
+                  element={<Navigate to="/auth/email-confirmation" />}
+                />
+                <Route
+                  path="forgot-password"
+                  element={<Navigate to="/auth/email-confirmation" />}
+                />
+                <Route
+                  path="setup"
+                  element={<Navigate to="/auth/email-confirmation" />}
+                />
+                <Route
+                  path="email-confirmation"
+                  element={<VerifyEmailPage />}
+                />
+              </Route>
+              <Route path="log-out" element={<Navigate to="/" />} />
+            </Routes>
+          </ApolloProvider>
+        </Suspense>
       );
     } else {
       if (
@@ -91,30 +98,38 @@ function App() {
         const unAuthClient = createUnAuthClient();
 
         return (
-          <ApolloProvider client={unAuthClient}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/auth" element={<AuthLayout />}>
-                <Route path="/" element={<Navigate to="/auth/setup" />} />
-                <Route path="sign-up" element={<Navigate to="/auth/setup" />} />
-                <Route path="sign-in" element={<Navigate to="/auth/setup" />} />
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <ApolloProvider client={unAuthClient}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/auth" element={<AuthLayout />}>
+                  <Route path="/" element={<Navigate to="/auth/setup" />} />
+                  <Route
+                    path="sign-up"
+                    element={<Navigate to="/auth/setup" />}
+                  />
+                  <Route
+                    path="sign-in"
+                    element={<Navigate to="/auth/setup" />}
+                  />
+                  <Route
+                    path="forgot-password"
+                    element={<Navigate to="/auth/setup" />}
+                  />
+                  <Route
+                    path="email-confirmation"
+                    element={<Navigate to="/auth/setup" />}
+                  />
+                  <Route path="setup" element={<SetupAccountPage />} />
+                </Route>
                 <Route
-                  path="forgot-password"
-                  element={<Navigate to="/auth/setup" />}
+                  path="log-out"
+                  element={<Navigate to="/" replace={true} />}
                 />
-                <Route
-                  path="email-confirmation"
-                  element={<Navigate to="/auth/setup" />}
-                />
-                <Route path="setup" element={<SetupAccountPage />} />
-              </Route>
-              <Route
-                path="log-out"
-                element={<Navigate to="/" replace={true} />}
-              />
-              <Route path="/*" element={<Navigate to="/" replace={true} />} />
-            </Routes>
-          </ApolloProvider>
+                <Route path="/*" element={<Navigate to="/" replace={true} />} />
+              </Routes>
+            </ApolloProvider>
+          </Suspense>
         );
       }
       {
@@ -132,30 +147,38 @@ function App() {
 
         if (role === "user") {
           return (
-            <ApolloProvider client={client}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/auth" element={<AuthLayout />}>
-                  <Route path="/" element={<Navigate to="/" />} />
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <ApolloProvider client={client}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/auth" element={<AuthLayout />}>
+                    <Route path="/" element={<Navigate to="/" />} />
+                    <Route
+                      path="sign-up"
+                      element={<Navigate to="/" replace={true} />}
+                    />
+                    <Route
+                      path="sign-in"
+                      element={<Navigate to="/" replace={true} />}
+                    />
+                    <Route
+                      path="forgot-password"
+                      element={<Navigate to="/" />}
+                    />
+                    <Route
+                      path="email-confirmation"
+                      element={<Navigate to="/" />}
+                    />
+                    <Route path="setup" element={<Navigate to="/" />} />
+                  </Route>
+                  <Route path="/log-out" element={<Home />} />
                   <Route
-                    path="sign-up"
+                    path="/*"
                     element={<Navigate to="/" replace={true} />}
                   />
-                  <Route
-                    path="sign-in"
-                    element={<Navigate to="/" replace={true} />}
-                  />
-                  <Route path="forgot-password" element={<Navigate to="/" />} />
-                  <Route
-                    path="email-confirmation"
-                    element={<Navigate to="/" />}
-                  />
-                  <Route path="setup" element={<Navigate to="/" />} />
-                </Route>
-                <Route path="/log-out" element={<Home />} />
-                <Route path="/*" element={<Navigate to="/" replace={true} />} />
-              </Routes>
-            </ApolloProvider>
+                </Routes>
+              </ApolloProvider>
+            </Suspense>
           );
         } else {
           return null;

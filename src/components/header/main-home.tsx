@@ -1,8 +1,10 @@
 import React from "react";
+import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 
 export const MainHome = () => {
   const isWide = useMedia("(min-width: 480px)");
+  const auth = useAuth();
   return (
     <>
       <div
@@ -58,6 +60,17 @@ export const MainHome = () => {
             value=""
             placeholder="Tìm kiếm sản phẩm..."
           />
+        </div>
+        <div
+          style={{
+            padding: "18px",
+            fontSize: "18px",
+            fontWeight: 500,
+            lineHeight: "24px",
+            color: "#05944F",
+          }}
+        >
+          {auth.state.user ? "Welcome " + auth.state.user?.displayName : ""}
         </div>
       </div>
     </>
