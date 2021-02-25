@@ -77,7 +77,7 @@ export const Navbar = (props: any) => {
                 onClick={() => {
                   setIsOpen(false);
                   props.setByCategory(el);
-                  window.scrollTo(0, window.innerHeight - 40);
+                  window.scrollTo(0, window.innerHeight - 80);
                 }}
                 key={id}
                 title={el}

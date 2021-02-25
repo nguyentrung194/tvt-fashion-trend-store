@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card } from "./card";
 import { useProductsByCategoryQuery } from "../../graphql/autogenerate/hooks";
 import { useQuery } from "@apollo/client";
@@ -40,10 +40,10 @@ export const Cards = (props: any) => {
         return <Card key={el.id} props={el} />;
       })}
       {products.map((el: any) => {
-        return <Card key={el.id} props={el} />;
+        return <Card key={el.id + 1} props={el} />;
       })}
       {products.map((el: any) => {
-        return <Card key={el.id} props={el} />;
+        return <Card key={el.id + 2} props={el} />;
       })}
     </>
   );

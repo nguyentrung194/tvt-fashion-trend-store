@@ -19,7 +19,7 @@ export type ProductsByCategoryQuery = { __typename?: "query_root" } & {
   products: Array<
     { __typename?: "products" } & Pick<
       Types.Products,
-      "name" | "URLImage" | "pricing" | "saleOff"
+      "id" | "name" | "URLImage" | "pricing" | "saleOff"
     >
   >;
 };

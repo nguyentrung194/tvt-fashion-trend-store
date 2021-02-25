@@ -12,6 +12,7 @@ query ProductsByCategory($category: String!) {
   products(
     where: { categories_products: { category: { name: { _eq: $category } } } }
   ) {
+    id
     name
     URLImage
     pricing

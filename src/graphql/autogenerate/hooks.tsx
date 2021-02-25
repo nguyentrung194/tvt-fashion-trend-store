@@ -65,6 +65,7 @@ export const ProductsByCategoryDocument = gql`
     products(
       where: { categories_products: { category: { name: { _eq: $category } } } }
     ) {
+      id
       name
       URLImage
       pricing
