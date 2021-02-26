@@ -22,6 +22,21 @@ export const Header = (props: any) => {
         <div
           style={{
             display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            fontSize: "14px",
+            fontWeight: "normal",
+            lineHeight: "20px",
+            padding: "5px",
+            backgroundColor: "rgb(73, 173, 255)",
+          }}
+        >
+          <p>Freeship cho đơn hàng từ 400,000đ.</p>
+        </div>
+        <div
+          style={{
+            display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             backgroundColor: "rgb(247, 247, 247)",
@@ -40,20 +55,12 @@ export const Header = (props: any) => {
           >
             <Link to="/">
               <img
-                style={{ width: "40px", paddingRight: "16px" }}
+                style={{ width: "36px" }}
                 src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
                 alt="Logo"
               />
             </Link>
-            <p
-              style={{
-                fontSize: "14px",
-                fontWeight: "normal",
-                lineHeight: "20px",
-              }}
-            >
-              Freeship cho đơn hàng từ 400,000đ.
-            </p>
+            <span>IRONMAN</span>
           </div>
           <div
             style={{
@@ -63,7 +70,10 @@ export const Header = (props: any) => {
               padding: "16px 12px",
             }}
           >
-            <Navbar setByCategory={props.setByCategory} />
+            <Navbar
+              setByCategory={props.setByCategory}
+              executeScrollToListItem={props.executeScrollToListItem}
+            />
             {auth.state.user ? (
               <>
                 <Link
