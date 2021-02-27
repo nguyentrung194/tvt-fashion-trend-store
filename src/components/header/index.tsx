@@ -97,7 +97,7 @@ export const Header = (props: any) => {
               padding: "16px 12px",
             }}
           >
-            {isWide ? (
+            {!isWide ? (
               <span
                 onClick={() => {
                   props.setIsOpenCategories(true);
