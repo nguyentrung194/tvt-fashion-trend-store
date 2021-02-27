@@ -1,22 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
-import { MainHome } from "./main-home";
 import useMedia from "../../hooks/use-media";
-import { Navbar } from "./navbar";
+import { debounce } from "../../utilities/helpers";
 
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
+
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  const handleScroll = debounce(() => {
+    // find current scroll position
+    if (!isWide) {
+      return;
+    }
+    const currentScrollPos = window.pageYOffset;
+
+    // set state based on location info (explained in more detail below)
+    setVisible(
+      (prevScrollPos > currentScrollPos &&
+        prevScrollPos - currentScrollPos > 70) ||
+        currentScrollPos < 10
+    );
+
+    // set state to new scroll position
+    setPrevScrollPos(currentScrollPos);
+  }, 100);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos, visible, handleScroll]);
+
   return (
     <div>
       <div
         style={{
           position: "fixed",
-          top: 0,
-          left: 0,
           width: "100%",
-          zIndex: 9999,
+          zIndex: 9998,
+          transition: "top 0.3s",
+          top: visible ? "0" : "-120px",
         }}
       >
         <div
@@ -42,7 +69,7 @@ export const Header = (props: any) => {
             backgroundColor: "rgb(247, 247, 247)",
             padding: "0 5px",
             borderBottom: "1px solid hsla(0, 0%, 0%, 0.1)",
-            zIndex: 9999,
+            zIndex: 9998,
           }}
         >
           <div
@@ -70,12 +97,21 @@ export const Header = (props: any) => {
               padding: "16px 12px",
             }}
           >
-            <Navbar
-              setByCategory={props.setByCategory}
-              executeScrollToListItem={props.executeScrollToListItem}
-            />
-            {auth.state.user ? (
-              <>
+            <span
+              onClick={() => {
+                props.setIsOpenCategories(true);
+              }}
+            >
+              Categories
+            </span>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {auth.state.user ? (
                 <Link
                   onClick={auth.signout}
                   style={{
@@ -84,6 +120,7 @@ export const Header = (props: any) => {
                     textDecoration: "none",
                     display: "flex",
                     alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                   to="/"
                 >
@@ -95,49 +132,50 @@ export const Header = (props: any) => {
                     alt="Logout"
                   />
                 </Link>
+              ) : (
                 <Link
-                  to="/"
                   style={{
                     padding: "0 12px",
                     color: "#03713d",
                     textDecoration: "none",
                     display: "flex",
                     alignItems: "center",
+                    justifyContent: "space-between",
                   }}
+                  to="/auth/sign-in"
                 >
                   <div style={{ paddingRight: "6px" }}>
-                    {isWide ? "Cart" : ""}
+                    {isWide ? "Login" : ""}
                   </div>
                   <img
-                    src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
-                    alt="Cart"
+                    src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogin-24.png?alt=media&token=9ef01eab-9547-4317-8217-61e56e380fdb"
+                    alt="Login"
                   />
                 </Link>
-              </>
-            ) : (
+              )}
               <Link
+                to="/"
                 style={{
                   padding: "0 12px",
                   color: "#03713d",
                   textDecoration: "none",
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "space-between",
                 }}
-                to="/auth/sign-in"
               >
                 <div style={{ paddingRight: "6px" }}>
-                  {isWide ? "Login" : ""}
+                  {isWide ? "Cart" : ""}
                 </div>
                 <img
-                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogin-24.png?alt=media&token=9ef01eab-9547-4317-8217-61e56e380fdb"
-                  alt="Login"
+                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
+                  alt="Cart"
                 />
               </Link>
-            )}
+            </div>
           </div>
         </div>
       </div>
-      <MainHome />
     </div>
   );
 };

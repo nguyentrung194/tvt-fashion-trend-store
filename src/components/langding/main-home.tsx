@@ -19,7 +19,6 @@ export const MainHome = () => {
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          marginLeft: isWide ? "calc(var(--vw, 1vw) * 20)" : "",
         }}
       >
         <h1

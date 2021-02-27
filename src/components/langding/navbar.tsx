@@ -30,35 +30,27 @@ export const categoriesData = [
 
 export const Navbar = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
-  const [isOpen, setIsOpen] = useState(false);
   if (!isWide)
     return (
       <div>
-        <span
-          onClick={() => {
-            setIsOpen(true);
-          }}
-        >
-          Categories
-        </span>
         <div
           style={{
-            paddingTop: "calc(var(--vh, 1vh) * 16)",
+            paddingTop: "130px",
             position: "fixed",
             top: 0,
             left: 0,
             background: "white",
             width: "calc(var(--vw, 1vw) * 80)",
             height: "calc(var(--vh, 1vh) * 100)",
-            zIndex: -1,
-            display: isOpen ? "" : "none",
+            zIndex: 9997,
+            display: props.isOpenCategories ? "" : "none",
             boxShadow: "calc(var(--vw, 1vw) * 20) 0 rgba(136, 136, 136, 0.329)",
           }}
         >
           <button
             style={{
               position: "fixed",
-              top: 70,
+              top: 120,
               right: "calc(var(--vw, 1vw) * 23)",
               padding: "20px",
               border: "none",
@@ -66,7 +58,7 @@ export const Navbar = (props: any) => {
               fontSize: "30px",
             }}
             onClick={() => {
-              setIsOpen(false);
+              props.setIsOpenCategories(false);
             }}
           >
             X
@@ -75,9 +67,9 @@ export const Navbar = (props: any) => {
             return (
               <Category
                 onClick={() => {
-                  setIsOpen(false);
                   props.setByCategory(el);
                   props.executeScrollToListItem();
+                  props.setIsOpenCategories(false);
                 }}
                 key={id}
                 title={el}
@@ -91,14 +83,13 @@ export const Navbar = (props: any) => {
     <>
       <div
         style={{
-          paddingTop: "calc(var(--vh, 1vh) * 16)",
-          position: "fixed",
-          top: 0,
+          paddingTop: "20px",
+          position: "sticky",
+          top: 100,
           left: 0,
           background: "white",
           width: "calc(var(--vw, 1vw) * 20)",
-          height: "calc(var(--vh, 1vh) * 100)",
-          zIndex: -1,
+          zIndex: 9,
         }}
       >
         {categoriesData.map((el, id) => {

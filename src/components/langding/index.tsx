@@ -2,9 +2,13 @@ import React, { useRef, useState } from "react";
 import { Header } from "../header";
 import useMedia from "../../hooks/use-media";
 import { Cards } from "./cards";
+import { Cart } from "../cart";
+import { Navbar } from "./navbar";
+import { MainHome } from "./main-home";
 
 export const Home = () => {
   const [byCategory, setByCategory] = useState("");
+  const [isOpenCategories, setIsOpenCategories] = useState(false);
 
   const myRef: any = useRef(null);
   const executeScrollToListItem = () =>
@@ -17,10 +21,10 @@ export const Home = () => {
   const isWide = useMedia("(min-width: 480px)");
   return (
     <>
-      <Header
-        setByCategory={setByCategory}
-        executeScrollToListItem={executeScrollToListItem}
-      />
+      <Header setIsOpenCategories={setIsOpenCategories} />
+      <MainHome />
+
+      <Cart />
       <div
         style={{
           display: "grid",
@@ -28,8 +32,15 @@ export const Home = () => {
           margin: isWide ? "18px" : "3px",
         }}
       >
-        <div style={{ marginTop: "-100px" }}>
-          <div ref={myRef}></div>
+        <div>
+          <div style={{ marginTop: "-120px" }} ref={myRef}></div>
+          <div style={{ height: "120px" }}></div>
+          <Navbar
+            setByCategory={setByCategory}
+            executeScrollToListItem={executeScrollToListItem}
+            isOpenCategories={isOpenCategories}
+            setIsOpenCategories={setIsOpenCategories}
+          />
         </div>
         <div
           style={{
