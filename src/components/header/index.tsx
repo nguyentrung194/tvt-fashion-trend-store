@@ -97,13 +97,17 @@ export const Header = (props: any) => {
               padding: "16px 12px",
             }}
           >
-            <span
-              onClick={() => {
-                props.setIsOpenCategories(true);
-              }}
-            >
-              Categories
-            </span>
+            {isWide ? (
+              <span
+                onClick={() => {
+                  props.setIsOpenCategories(true);
+                }}
+              >
+                Categories
+              </span>
+            ) : (
+              <></>
+            )}
             <div
               style={{
                 display: "flex",
