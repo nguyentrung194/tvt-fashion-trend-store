@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import useMedia from "../../hooks/use-media";
 
-export const Cart = () => {
+export const Cart = ({ items }: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const [isOpenCart, setIsOpenCart] = useState(false);
+
+  if (!localStorage.getItem("products")) localStorage.setItem("products", "[]");
+  const sl = items.map((item: { id: any }) => [item.id, item]).values();
+  const sl2: any = new Map(sl);
+  const arr = [...sl2];
 
   return (
     <>
@@ -21,7 +26,6 @@ export const Cart = () => {
           right: 0,
           bottom: 0,
           zIndex: 9999,
-          // boxShadow: "-10px 0 30px rgba(0, 0, 0, 0.137)",
           boxShadow: `${
             isWide
               ? "-10px 0 30px rgba(136, 136, 136, 0.329)"
@@ -49,10 +53,19 @@ export const Cart = () => {
             borderBottom: "1px solid hsla(0, 0%, 0%, 0.1)",
           }}
         >
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
-            alt="Cart"
-          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
+              alt="Cart"
+            />
+            <div style={{ paddingLeft: "5px" }}>{arr.length} Item</div>
+          </div>
           <button
             style={{
               border: "none",
@@ -105,7 +118,7 @@ export const Cart = () => {
               margin: "5px",
             }}
           >
-            <div style={{ paddingRight: "6px" }}>Cart</div>
+            <div style={{ paddingRight: "5px" }}>{arr.length} Item</div>
             <img
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
@@ -119,7 +132,14 @@ export const Cart = () => {
               borderRadius: isWide ? "5px" : "30px",
             }}
           >
-            0 VNĐ
+            {items
+              .map((el: any) => el.pricing)
+              .reduce(
+                (accumulator: any, currentValue: any) =>
+                  accumulator + currentValue,
+                0
+              )}{" "}
+            VNĐ
           </div>
         </div>
       </button>

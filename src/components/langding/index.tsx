@@ -9,6 +9,9 @@ import { MainHome } from "./main-home";
 export const Home = () => {
   const [byCategory, setByCategory] = useState("");
   const [isOpenCategories, setIsOpenCategories] = useState(false);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("products") || "[]")
+  );
 
   const myRef: any = useRef(null);
   const executeScrollToListItem = () =>
@@ -24,7 +27,7 @@ export const Home = () => {
       <Header setIsOpenCategories={setIsOpenCategories} />
       <MainHome />
 
-      <Cart />
+      <Cart items={items} />
       <div
         style={{
           display: "grid",
@@ -53,7 +56,11 @@ export const Home = () => {
             minHeight: "100vh",
           }}
         >
-          <Cards byCategory={byCategory} setByCategory={setByCategory} />
+          <Cards
+            byCategory={byCategory}
+            setByCategory={setByCategory}
+            setItems={setItems}
+          />
         </div>
       </div>
     </>

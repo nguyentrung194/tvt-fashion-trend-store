@@ -14,15 +14,14 @@ import { VerifyEmailPage } from "./router/auth/verify-email";
 import createUnAuthClient from "./apollo/unauth-client";
 import createAuthApolloClient from "./apollo/auth-client";
 
-// test
 import { Home } from "./components/langding";
 
 function App() {
   const { state }: any = useAuth();
 
-  useEffect(() => {
-    console.log(state.user);
-  }, [state.user]);
+  // useEffect(() => {
+  //   console.log(state.user);
+  // }, [state.user]);
 
   if (!state.user) {
     const unAuthClient = createUnAuthClient();

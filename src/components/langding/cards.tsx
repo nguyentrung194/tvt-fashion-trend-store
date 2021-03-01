@@ -37,13 +37,13 @@ export const Cards = (props: any) => {
   return (
     <>
       {products.map((el: any) => {
-        return <Card key={el.id} props={el} />;
+        return <Card setItems={props.setItems} key={el.id} props={el} />;
       })}
       {products.map((el: any) => {
-        return <Card key={el.id + 1} props={el} />;
+        return <Card setItems={props.setItems} key={el.id + 1} props={el} />;
       })}
       {products.map((el: any) => {
-        return <Card key={el.id + 2} props={el} />;
+        return <Card setItems={props.setItems} key={el.id + 2} props={el} />;
       })}
     </>
   );

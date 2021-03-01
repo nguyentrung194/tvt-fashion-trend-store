@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const Card = ({ props }: any) => {
+export const Card = ({ props, setItems }: any) => {
+  const initSoluong = JSON.parse(
+    localStorage.getItem("products") || "[]"
+  ).filter((el: any) => el.id === props.id).length;
+
+  const [soluong, setSoluong] = useState(initSoluong || 0);
+
   return (
     <div
+      key={props.key}
       style={{
         border: "2px solid #e7e7e7",
         borderRadius: "4px",
@@ -42,7 +49,21 @@ export const Card = ({ props }: any) => {
             : props.pricing}
           VNĐ
         </div>
-        <button>Add to cart</button>
+        <button
+          onClick={() => {
+            const items = [
+              ...JSON.parse(localStorage.getItem("products") || "[]"),
+              props,
+            ];
+            const stringItems = JSON.stringify(items);
+            localStorage.setItem("products", stringItems ? stringItems : "");
+            setSoluong(soluong + 1);
+            setItems(items);
+          }}
+        >
+          Add to cart
+        </button>
+        <div>{soluong}</div>
       </div>
     </div>
   );

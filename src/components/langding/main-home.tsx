@@ -56,8 +56,10 @@ export const MainHome = () => {
               boxShadow: "none",
             }}
             type="search"
-            value=""
             placeholder="Tìm kiếm sản phẩm..."
+            onChange={() => {}}
+            onBlur={() => {}}
+            value={""}
           />
         </div>
         <div

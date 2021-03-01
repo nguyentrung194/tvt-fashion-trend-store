@@ -52,7 +52,6 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.2.1",
     "@graphql-codegen/cli": "^1.20.1",
     "@graphql-codegen/import-types-preset": "^1.18.1",
     "@graphql-codegen/typescript": "^1.20.2",
@@ -65,6 +64,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "prettier": "^2.2.1"
   }
 }
