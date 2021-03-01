@@ -44,7 +44,8 @@ export const Navbar = (props: any) => {
             height: "calc(var(--vh, 1vh) * 100)",
             zIndex: 9997,
             display: props.isOpenCategories ? "" : "none",
-            boxShadow: "calc(var(--vw, 1vw) * 20) 0 rgba(136, 136, 136, 0.329)",
+            boxShadow:
+              "calc(var(--vw, 1vw) * 20) 0 0 rgba(136, 136, 136, 0.329)",
           }}
         >
           <button
@@ -56,6 +57,7 @@ export const Navbar = (props: any) => {
               border: "none",
               background: "transparent",
               fontSize: "30px",
+              cursor: "pointer",
             }}
             onClick={() => {
               props.setIsOpenCategories(false);
@@ -77,6 +79,17 @@ export const Navbar = (props: any) => {
             );
           })}
         </div>
+        <div
+          style={{
+            display: !isWide && props.isOpenCategories ? "" : "none",
+            position: "fixed",
+            top: 0,
+            right: 0,
+            width: "calc(var(--vw, 1vw) * 20)",
+            height: "calc(var(--vh, 1vh) * 100)",
+            zIndex: 999,
+          }}
+        ></div>
       </div>
     );
   return (

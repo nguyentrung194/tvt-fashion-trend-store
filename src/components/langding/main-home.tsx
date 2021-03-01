@@ -1,9 +1,9 @@
 import React from "react";
 import { useAuth } from "../../hooks/use-auth";
-import useMedia from "../../hooks/use-media";
+// import useMedia from "../../hooks/use-media";
 
 export const MainHome = () => {
-  const isWide = useMedia("(min-width: 480px)");
+  // const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
   return (
     <>

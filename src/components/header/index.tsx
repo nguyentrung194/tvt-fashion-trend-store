@@ -157,25 +157,6 @@ export const Header = (props: any) => {
                   />
                 </Link>
               )}
-              <Link
-                to="/"
-                style={{
-                  padding: "0 12px",
-                  color: "#03713d",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div style={{ paddingRight: "6px" }}>
-                  {isWide ? "Cart" : ""}
-                </div>
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
-                  alt="Cart"
-                />
-              </Link>
             </div>
           </div>
         </div>
