@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const Card = ({ props, setItems }: any) => {
-  const initSoluong = JSON.parse(
-    localStorage.getItem("products") || "[]"
-  ).filter((el: any) => el.id === props.id).length;
-
-  const [soluong, setSoluong] = useState(initSoluong || 0);
-
+export const Card = ({ item, setItems, items }: any) => {
   return (
     <div
-      key={props.key}
+      key={item.key}
       style={{
         border: "2px solid #e7e7e7",
         borderRadius: "4px",
@@ -23,13 +17,13 @@ export const Card = ({ props, setItems }: any) => {
           width: "100%",
           padding: "3px",
         }}
-        src={props.URLImage}
-        alt={props.name}
+        src={item.URLImage}
+        alt={item.name}
       />
-      <p>{props.saleOff ? `Sale off ${props.saleOff}%` : ""}</p>
+      <p>{item.saleOff ? `Sale off ${item.saleOff}%` : ""}</p>
       <div>
         <div style={{ fontSize: "20px", fontWeight: 500, lineHeight: "24px" }}>
-          {props.name}
+          {item.name}
         </div>
         <div
           style={{
@@ -39,31 +33,44 @@ export const Card = ({ props, setItems }: any) => {
             textDecoration: "line-through",
           }}
         >
-          {props.isSale ? `${props.pricing}VNĐ` : ``}
+          {item.isSale ? `${item.pricing}VNĐ` : ``}
         </div>
         <div
           style={{ fontSize: "16px", fontWeight: "normal", lineHeight: "24px" }}
         >
-          {props.saleOff
-            ? (props.pricing * (100 - props.saleOff)) / 100
-            : props.pricing}
+          {item.saleOff
+            ? (item.pricing * (100 - item.saleOff)) / 100
+            : item.pricing}
           VNĐ
         </div>
         <button
           onClick={() => {
-            const items = [
+            const itemsIn = [
               ...JSON.parse(localStorage.getItem("products") || "[]"),
-              props,
-            ];
-            const stringItems = JSON.stringify(items);
-            localStorage.setItem("products", stringItems ? stringItems : "");
-            setSoluong(soluong + 1);
-            setItems(items);
+            ].find((el) => el.id === item.id)
+              ? [...JSON.parse(localStorage.getItem("products") || "[]")].map(
+                  (element: any) => {
+                    if (element.id === item.id) {
+                      return {
+                        ...element,
+                        soluong: element.soluong + 1,
+                      };
+                    }
+                    return element;
+                  }
+                )
+              : [
+                  ...JSON.parse(localStorage.getItem("products") || "[]"),
+                  { ...item, soluong: 1 },
+                ];
+            const stringItems = JSON.stringify(itemsIn);
+            setItems(itemsIn);
+            localStorage.setItem("products", stringItems ? stringItems : "[]");
           }}
         >
           Add to cart
         </button>
-        <div>{soluong}</div>
+        <div>{items.find((e: any) => e.id === item.id)?.soluong || 0}</div>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import useMedia from "../../hooks/use-media";
+import { Item } from "./item";
 
-export const Cart = ({ items }: any) => {
+export const Cart = ({ items, setItems }: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -81,6 +82,9 @@ export const Cart = ({ items }: any) => {
             X
           </button>
         </div>
+        {items.map((el: any) => {
+          return <Item key={el.id} el={el} setItems={setItems} />;
+        })}
       </div>
       <button
         onClick={() => {
@@ -133,7 +137,9 @@ export const Cart = ({ items }: any) => {
             }}
           >
             {items
-              .map((el: any) => el.pricing)
+              .map((el: any) => {
+                return el.pricing * el.soluong;
+              })
               .reduce(
                 (accumulator: any, currentValue: any) =>
                   accumulator + currentValue,

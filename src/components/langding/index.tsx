@@ -27,7 +27,7 @@ export const Home = () => {
       <Header setIsOpenCategories={setIsOpenCategories} />
       <MainHome />
 
-      <Cart items={items} />
+      <Cart items={items} setItems={setItems} />
       <div
         style={{
           display: "grid",
@@ -60,6 +60,7 @@ export const Home = () => {
             byCategory={byCategory}
             setByCategory={setByCategory}
             setItems={setItems}
+            items={items}
           />
         </div>
       </div>
