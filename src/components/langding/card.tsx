@@ -23,9 +23,10 @@ export const Card = ({ item, setItems, items }: any) => {
           color: "rgb(255, 255, 255)",
           zIndex: 2,
           borderRadius: "30px",
+          fontSize: "14px",
         }}
       >
-        <p>{item.saleOff ? `${item.saleOff}%` : ""}</p>
+        <p>{item.saleOff ? `- ${item.saleOff}%` : ""}</p>
       </div>
       <img
         style={{
@@ -39,9 +40,9 @@ export const Card = ({ item, setItems, items }: any) => {
       <div>
         <div
           style={{
-            fontSize: "20px",
+            fontSize: "18px",
             fontWeight: 500,
-            lineHeight: "24px",
+            lineHeight: "20px",
             textAlign: "start",
           }}
         >
@@ -49,14 +50,21 @@ export const Card = ({ item, setItems, items }: any) => {
         </div>
         <div
           style={{
-            fontSize: "16px",
+            fontSize: "14px",
             fontWeight: "normal",
             lineHeight: "24px",
             textDecoration: "line-through",
             textAlign: "start",
+            height: "24px",
           }}
         >
-          {item.saleOff ? `${item.pricing}VNĐ` : ``}
+          {item.saleOff
+            ? `${item.pricing.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}`
+            : ``}
+          {` `}
         </div>
         <div
           style={{
@@ -88,6 +96,7 @@ export const Card = ({ item, setItems, items }: any) => {
                 outline: "none",
                 display: "flex",
                 alignItems: "center",
+                fontSize: "14px",
               }}
               onClick={() => {
                 const itemsIn = [
@@ -116,9 +125,9 @@ export const Card = ({ item, setItems, items }: any) => {
                 );
               }}
             >
-              Cart
+              <span style={{ paddingRight: "2px" }}>Cart</span>
               <img
-                style={{ width: "18px" }}
+                style={{ width: "14px" }}
                 src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
                 alt="Cart"
               />
@@ -133,6 +142,7 @@ export const Card = ({ item, setItems, items }: any) => {
                 outline: "none",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <div>
@@ -140,7 +150,7 @@ export const Card = ({ item, setItems, items }: any) => {
                   style={{
                     border: "none",
                     background: "transparent",
-                    fontSize: "20px",
+                    fontSize: "14px",
                     cursor: "pointer",
                     outline: "none",
                     padding: "5px 10px",
@@ -169,7 +179,7 @@ export const Card = ({ item, setItems, items }: any) => {
                   +
                 </button>
               </div>
-              <div>
+              <div style={{ fontSize: "14px", padding: "5px 0px" }}>
                 {items.find((e: any) => e.id === item.id)?.soluong || 0}
               </div>
               <div>
@@ -177,7 +187,7 @@ export const Card = ({ item, setItems, items }: any) => {
                   style={{
                     border: "none",
                     background: "transparent",
-                    fontSize: "20px",
+                    fontSize: "14px",
                     cursor: "pointer",
                     outline: "none",
                     padding: "5px 10px",

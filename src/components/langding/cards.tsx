@@ -46,26 +46,34 @@ export const Cards = (props: any) => {
           />
         );
       })}
-      {products.map((el: any) => {
-        return (
-          <Card
-            setItems={props.setItems}
-            key={el.id + 1}
-            item={el}
-            items={props.items}
-          />
-        );
-      })}
-      {products.map((el: any) => {
-        return (
-          <Card
-            setItems={props.setItems}
-            key={el.id + 2}
-            item={el}
-            items={props.items}
-          />
-        );
-      })}
+      {products
+        .map((el: any) => {
+          return { ...el, id: el.id + "1" };
+        })
+        .map((el: any) => {
+          return (
+            <Card
+              setItems={props.setItems}
+              key={el.id + "1"}
+              item={el}
+              items={props.items}
+            />
+          );
+        })}
+      {products
+        .map((el: any) => {
+          return { ...el, id: el.id + "2" };
+        })
+        .map((el: any) => {
+          return (
+            <Card
+              setItems={props.setItems}
+              key={el.id + "2"}
+              item={el}
+              items={props.items}
+            />
+          );
+        })}
     </>
   );
 };
