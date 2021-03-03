@@ -74,6 +74,7 @@ export const Cart = ({ items, setItems }: any) => {
               fontSize: "20px",
               cursor: "pointer",
               outline: "none",
+              padding: "5px 10px",
             }}
             onClick={() => {
               setIsOpenCart(false);
@@ -144,8 +145,8 @@ export const Cart = ({ items, setItems }: any) => {
                 (accumulator: any, currentValue: any) =>
                   accumulator + currentValue,
                 0
-              )}{" "}
-            VNĐ
+              )
+              .toLocaleString("it-IT", { style: "currency", currency: "VND" })}
           </div>
         </div>
       </button>

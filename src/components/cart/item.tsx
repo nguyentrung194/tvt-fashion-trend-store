@@ -4,7 +4,12 @@ export const Item = ({ el, setItems }: any) => {
   return (
     <div>
       <div>{el.name}</div>
-      <div>{el.pricing}</div>
+      <div>
+        {el.pricing.toLocaleString("it-IT", {
+          style: "currency",
+          currency: "VND",
+        })}
+      </div>
       <div>{el.soluong}</div>
       <div>
         <img
