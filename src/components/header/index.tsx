@@ -80,7 +80,7 @@ export const Header = (props: any) => {
               alignItems: "center",
             }}
           >
-            <Link to="/">
+            <Link style={{ outline: "none" }} to="/">
               <img
                 style={{ width: "36px" }}
                 src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
