@@ -10,9 +10,11 @@ export const SignIn = () => {
   const isWide = useMedia("(min-width: 480px)");
   const handelSignInWithGoogle = async () => {
     const provider = new fbase.auth.GoogleAuthProvider();
+    fbase.auth().signInWithRedirect(provider);
     return await fbase
       .auth()
-      .signInWithPopup(provider)
+      .getRedirectResult()
+      // .signInWithPopup(provider)
       .then((data) => {
         if (data) {
           addToast("Login successfull!", {
