@@ -2,38 +2,38 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
-import { debounce } from "../../utilities/helpers";
+// import { debounce } from "../../helpers/helpers";
 
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
 
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
+  // const [prevScrollPos, setPrevScrollPos] = useState(0);
+  // const [visible, setVisible] = useState(true);
 
-  const handleScroll = debounce(() => {
-    // find current scroll position
-    if (!isWide) {
-      return;
-    }
-    const currentScrollPos = window.pageYOffset;
+  // const handleScroll = debounce(() => {
+  //   // find current scroll position
+  //   if (!isWide) {
+  //     return;
+  //   }
+  //   const currentScrollPos = window.pageYOffset;
 
-    // set state based on location info (explained in more detail below)
-    setVisible(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 70) ||
-        currentScrollPos < 10
-    );
+  //   // set state based on location info (explained in more detail below)
+  //   setVisible(
+  //     (prevScrollPos > currentScrollPos &&
+  //       prevScrollPos - currentScrollPos > 70) ||
+  //       currentScrollPos < 10
+  //   );
 
-    // set state to new scroll position
-    setPrevScrollPos(currentScrollPos);
-  }, 100);
+  //   // set state to new scroll position
+  //   setPrevScrollPos(currentScrollPos);
+  // }, 100);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, visible, handleScroll]);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [prevScrollPos, visible, handleScroll]);
 
   return (
     <div>
@@ -43,7 +43,7 @@ export const Header = (props: any) => {
           width: "100%",
           zIndex: 9998,
           transition: "top 0.3s",
-          top: visible ? "0" : "-120px",
+          // top: visible ? "0" : "-120px",
         }}
       >
         <div
@@ -66,10 +66,11 @@ export const Header = (props: any) => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            backgroundColor: "rgb(247, 247, 247)",
+            backgroundColor: "rgb(252, 252, 252)",
             padding: "0 5px",
             borderBottom: "1px solid hsla(0, 0%, 0%, 0.1)",
             zIndex: 9998,
+            boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.16)",
           }}
         >
           <div

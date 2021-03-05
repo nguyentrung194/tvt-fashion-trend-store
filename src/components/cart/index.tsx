@@ -150,7 +150,7 @@ export const Cart = ({ items, setItems }: any) => {
             <Link
               style={{
                 textDecoration: "none",
-                display: "flex",
+                display: arr.length ? "flex" : "none",
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "10px",
@@ -160,7 +160,7 @@ export const Cart = ({ items, setItems }: any) => {
                 fontWeight: 500,
                 lineHeight: "24px",
               }}
-              to="/"
+              to="/checkout"
             >
               Checkout
             </Link>

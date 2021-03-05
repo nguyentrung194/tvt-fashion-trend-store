@@ -1,17 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Header } from "../header";
 import useMedia from "../../hooks/use-media";
 import { Cards } from "./cards";
 import { Cart } from "../cart";
 import { Navbar } from "./navbar";
 import { MainHome } from "./main-home";
+import { isOpenContext } from "../../App";
 
 export const Home = () => {
   const [byCategory, setByCategory] = useState("");
-  const [isOpenCategories, setIsOpenCategories] = useState(false);
   const [items, setItems] = useState(
     JSON.parse(localStorage.getItem("products") || "[]")
   );
+
+  const { isOpen } = useContext(isOpenContext);
 
   const myRef: any = useRef(null);
   const executeScrollToListItem = () =>
@@ -24,7 +26,7 @@ export const Home = () => {
   const isWide = useMedia("(min-width: 480px)");
   return (
     <>
-      <Header setIsOpenCategories={setIsOpenCategories} />
+      <Header setIsOpenCategories={isOpen.set} />
       <MainHome />
 
       <Cart items={items} setItems={setItems} />
@@ -41,8 +43,8 @@ export const Home = () => {
           <Navbar
             setByCategory={setByCategory}
             executeScrollToListItem={executeScrollToListItem}
-            isOpenCategories={isOpenCategories}
-            setIsOpenCategories={setIsOpenCategories}
+            isOpenCategories={isOpen.get}
+            setIsOpenCategories={isOpen.set}
           />
         </div>
         <div

@@ -1,10 +1,10 @@
 import React from "react";
 import { hydrate, render } from "react-dom";
 import "./styles/reset.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ProvideAuth } from "./hooks/use-auth";
+import { AppStore } from "./AppStore";
 
 const root = document.getElementById("root") as any;
 
@@ -12,7 +12,7 @@ if (root.hasChildNodes()) {
   hydrate(
     <ProvideAuth>
       <BrowserRouter>
-        <App />
+        <AppStore />
       </BrowserRouter>
     </ProvideAuth>,
     root
@@ -21,7 +21,7 @@ if (root.hasChildNodes()) {
   render(
     <ProvideAuth>
       <BrowserRouter>
-        <App />
+        <AppStore />
       </BrowserRouter>
     </ProvideAuth>,
     root
