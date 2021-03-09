@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../../contexts/cart-context";
 
-export const Item = ({ item, setItems, items }: any) => {
+export const Product = ({ product }: any) => {
+  const { increase, decrease, removeProduct, cartItems } = useContext(
+    CartContext
+  );
+  const isInCart = (product: any) => {
+    return !!cartItems.find((item: any) => item.id === product.id);
+  };
   return (
     <div
-      key={item.key}
+      key={product.key}
       style={{
         border: "2px solid #e7e7e7",
         borderRadius: "4px",
@@ -36,16 +43,7 @@ export const Item = ({ item, setItems, items }: any) => {
               outline: "none",
             }}
             onClick={() => {
-              const items = [
-                ...JSON.parse(localStorage.getItem("products") || "[]"),
-              ].filter((element: any) => element.id !== item.id);
-
-              const stringItems = JSON.stringify(items);
-              localStorage.setItem(
-                "products",
-                stringItems ? stringItems : "[]"
-              );
-              setItems(items);
+              removeProduct(product);
             }}
           >
             x
@@ -57,8 +55,8 @@ export const Item = ({ item, setItems, items }: any) => {
           width: "100%",
           padding: "3px",
         }}
-        src={item.URLImage}
-        alt={item.name}
+        src={product.URLImage}
+        alt={product.name}
       />
 
       <div>
@@ -70,7 +68,7 @@ export const Item = ({ item, setItems, items }: any) => {
             textAlign: "start",
           }}
         >
-          {item.name}
+          {product.name}
         </div>
         <div
           style={{
@@ -82,8 +80,8 @@ export const Item = ({ item, setItems, items }: any) => {
             height: "24px",
           }}
         >
-          {item.saleOff
-            ? `${item.pricing.toLocaleString("it-IT", {
+          {product.saleOff
+            ? `${product.pricing.toLocaleString("it-IT", {
                 style: "currency",
                 currency: "VND",
               })}`
@@ -104,12 +102,12 @@ export const Item = ({ item, setItems, items }: any) => {
               lineHeight: "24px",
             }}
           >
-            {(item.saleOff
-              ? (item.pricing * (100 - item.saleOff)) / 100
-              : item.pricing
+            {(product.saleOff
+              ? (product.pricing * (100 - product.saleOff)) / 100
+              : product.pricing
             ).toLocaleString("it-IT", { style: "currency", currency: "VND" })}
           </div>
-          {!items.find((e: any) => e.id === item.id) ? (
+          {!isInCart(product) && (
             <button
               style={{
                 background: "rgb(73, 173, 255)",
@@ -123,30 +121,7 @@ export const Item = ({ item, setItems, items }: any) => {
                 fontSize: "14px",
               }}
               onClick={() => {
-                const itemsIn = [
-                  ...JSON.parse(localStorage.getItem("products") || "[]"),
-                ].find((el) => el.id === item.id)
-                  ? [
-                      ...JSON.parse(localStorage.getItem("products") || "[]"),
-                    ].map((element: any) => {
-                      if (element.id === item.id) {
-                        return {
-                          ...element,
-                          soluong: element.soluong + 1,
-                        };
-                      }
-                      return element;
-                    })
-                  : [
-                      ...JSON.parse(localStorage.getItem("products") || "[]"),
-                      { ...item, soluong: 1 },
-                    ];
-                const stringItems = JSON.stringify(itemsIn);
-                setItems(itemsIn);
-                localStorage.setItem(
-                  "products",
-                  stringItems ? stringItems : "[]"
-                );
+                increase(product);
               }}
             >
               <span style={{ paddingRight: "2px" }}>Cart</span>
@@ -156,7 +131,8 @@ export const Item = ({ item, setItems, items }: any) => {
                 alt="Cart"
               />
             </button>
-          ) : (
+          )}
+          {isInCart(product) && (
             <div
               style={{
                 background: "rgb(73, 173, 255)",
@@ -180,31 +156,14 @@ export const Item = ({ item, setItems, items }: any) => {
                     padding: "5px 10px",
                   }}
                   onClick={() => {
-                    const items = [
-                      ...JSON.parse(localStorage.getItem("products") || "[]"),
-                    ].map((element: any) => {
-                      if (element.id === item.id) {
-                        return {
-                          ...element,
-                          soluong: element.soluong + 1,
-                        };
-                      }
-                      return element;
-                    });
-
-                    const stringItems = JSON.stringify(items);
-                    localStorage.setItem(
-                      "products",
-                      stringItems ? stringItems : "[]"
-                    );
-                    setItems(items);
+                    increase(product);
                   }}
                 >
                   +
                 </button>
               </div>
               <div style={{ fontSize: "14px", padding: "5px 0px" }}>
-                {items.find((e: any) => e.id === item.id)?.soluong || 0}
+                {product.soluong}
               </div>
               <div>
                 <button
@@ -217,28 +176,7 @@ export const Item = ({ item, setItems, items }: any) => {
                     padding: "5px 10px",
                   }}
                   onClick={() => {
-                    const items = [
-                      ...JSON.parse(localStorage.getItem("products") || "[]"),
-                    ]
-                      .filter(
-                        (element: any) =>
-                          element.id !== item.id || element.soluong > 1
-                      )
-                      .map((element: any) => {
-                        if (element.id === item.id) {
-                          return {
-                            ...element,
-                            soluong: element.soluong - 1,
-                          };
-                        }
-                        return element;
-                      });
-                    const stringItems = JSON.stringify(items);
-                    localStorage.setItem(
-                      "products",
-                      stringItems ? stringItems : ""
-                    );
-                    setItems(items);
+                    decrease(product);
                   }}
                 >
                   -

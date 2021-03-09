@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { isOpenContext } from "../../../App";
+import { stateManagerProvider } from "../../../App";
 import useMedia from "../../../hooks/use-media";
 import { useQueryURL } from "../../../hooks/use-query-url";
 
 export const FilterProduct: React.FC<{}> = () => {
   const isWide = useMedia("(min-width: 480px)");
-  const { isOpen } = useContext(isOpenContext);
-
+  const { isOpen } = useContext(stateManagerProvider);
   const location = useLocation();
   const history = useNavigate();
   const query = useQueryURL();

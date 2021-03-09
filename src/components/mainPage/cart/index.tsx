@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../../contexts/cart-context";
 import useMedia from "../../../hooks/use-media";
-import { Item } from "./item";
+import { Product } from "./product";
 
 export const Cart = () => {
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("products") || "[]")
-  );
   const isWide = useMedia("(min-width: 480px)");
   const [isOpenCart, setIsOpenCart] = useState(false);
-
-  if (!localStorage.getItem("products")) localStorage.setItem("products", "[]");
-  const sl = items.map((item: { id: any }) => [item.id, item]).values();
-  const sl2: any = new Map(sl);
-  const arr = [...sl2];
+  const { cartItems, itemCount, total } = useContext(CartContext);
 
   return (
     <>
@@ -69,7 +63,7 @@ export const Cart = () => {
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
             />
-            <div style={{ paddingLeft: "5px" }}>{arr.length} Item</div>
+            <div style={{ paddingLeft: "5px" }}>{itemCount} Item</div>
           </div>
           <div>
             <button
@@ -82,8 +76,7 @@ export const Cart = () => {
                 padding: "5px 10px",
               }}
               onClick={() => {
-                localStorage.setItem("products", "[]");
-                setItems([]);
+                localStorage.setItem("cart", "[]");
               }}
             >
               Clear your cart
@@ -120,10 +113,8 @@ export const Cart = () => {
             gridGap: isWide ? "6px" : "3px",
           }}
         >
-          {items.map((el: any) => {
-            return (
-              <Item key={el.id} item={el} setItems={setItems} items={items} />
-            );
+          {cartItems.map((el: any) => {
+            return <Product key={el.id} product={el} />;
           })}
         </div>
         <div
@@ -153,7 +144,7 @@ export const Cart = () => {
             <Link
               style={{
                 textDecoration: "none",
-                display: arr.length ? "flex" : "none",
+                display: itemCount ? "flex" : "none",
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "10px",
@@ -175,21 +166,10 @@ export const Cart = () => {
                 borderRadius: "30px",
               }}
             >
-              {items
-                .map((el: any) => {
-                  return (
-                    el.pricing * el.soluong * ((100 - el.saleOff || 0) / 100)
-                  );
-                })
-                .reduce(
-                  (accumulator: any, currentValue: any) =>
-                    accumulator + currentValue,
-                  0
-                )
-                .toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+              {total.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
             </div>
           </div>
         </div>
@@ -230,7 +210,7 @@ export const Cart = () => {
               margin: "5px",
             }}
           >
-            <div style={{ paddingRight: "5px" }}>{arr.length} Item</div>
+            <div style={{ paddingRight: "5px" }}>{itemCount} Item</div>
             <img
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
@@ -244,18 +224,10 @@ export const Cart = () => {
               borderRadius: isWide ? "5px" : "30px",
             }}
           >
-            {items
-              .map((el: any) => {
-                return (
-                  el.pricing * el.soluong * ((100 - el.saleOff || 0) / 100)
-                );
-              })
-              .reduce(
-                (accumulator: any, currentValue: any) =>
-                  accumulator + currentValue,
-                0
-              )
-              .toLocaleString("it-IT", { style: "currency", currency: "VND" })}
+            {total.toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
           </div>
         </div>
       </button>

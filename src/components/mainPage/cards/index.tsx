@@ -14,7 +14,9 @@ export const ListProducts = () => {
       }}
     >
       <FilterProduct />
-      <List />
+      <div style={{ minHeight: "80vh" }}>
+        <List />
+      </div>
     </div>
   );
 };

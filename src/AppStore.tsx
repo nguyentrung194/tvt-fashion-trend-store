@@ -2,6 +2,7 @@ import React from "react";
 import { ToastProvider } from "react-toast-notifications";
 import App from "./App";
 import { useAuth } from "./hooks/use-auth";
+import CartContextProvider from "./contexts/cart-context";
 
 export const AppStore = () => {
   const { state } = useAuth();
@@ -11,7 +12,9 @@ export const AppStore = () => {
   }
   return (
     <ToastProvider autoDismissTimeout={3000} placement="bottom-left">
-      <App />
+      <CartContextProvider>
+        <App />
+      </CartContextProvider>
     </ToastProvider>
   );
 };

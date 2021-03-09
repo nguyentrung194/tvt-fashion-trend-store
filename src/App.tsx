@@ -17,14 +17,14 @@ import createAuthApolloClient from "./apollo/auth-client";
 import { Home } from "./components/mainPage";
 import { Checkout } from "./components/checkout";
 
-export const isOpenContext = createContext({
+export const stateManagerProvider = createContext({
   isOpen: { get: false, set: (state: any) => {} },
 });
 
 function App() {
   const { state }: any = useAuth();
   const [isOpenCategories, setIsOpenCategories] = useState(false);
-  const stateIsOpen = {
+  const stateManager = {
     isOpen: { get: isOpenCategories, set: setIsOpenCategories },
   };
 
@@ -34,7 +34,7 @@ function App() {
     return (
       <Suspense fallback={<h1>Loading...</h1>}>
         <ApolloProvider client={unAuthClient}>
-          <isOpenContext.Provider value={stateIsOpen}>
+          <stateManagerProvider.Provider value={stateManager}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/checkout" element={<Navigate to="/auth" />} />
@@ -55,7 +55,7 @@ function App() {
               <Route path="log-out" element={<Navigate to="/" />} />
               <Route path="/*" element={<Navigate to="/" replace={true} />} />
             </Routes>
-          </isOpenContext.Provider>
+          </stateManagerProvider.Provider>
         </ApolloProvider>
       </Suspense>
     );
@@ -66,7 +66,7 @@ function App() {
       return (
         <Suspense fallback={<h1>Loading...</h1>}>
           <ApolloProvider client={unAuthClient}>
-            <isOpenContext.Provider value={stateIsOpen}>
+            <stateManagerProvider.Provider value={stateManager}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/checkout" element={<Navigate to="/auth" />} />
@@ -99,7 +99,7 @@ function App() {
                 <Route path="log-out" element={<Navigate to="/" />} />
                 <Route path="/*" element={<Navigate to="/" replace={true} />} />
               </Routes>
-            </isOpenContext.Provider>
+            </stateManagerProvider.Provider>
           </ApolloProvider>
         </Suspense>
       );
@@ -114,7 +114,7 @@ function App() {
         return (
           <Suspense fallback={<h1>Loading...</h1>}>
             <ApolloProvider client={unAuthClient}>
-              <isOpenContext.Provider value={stateIsOpen}>
+              <stateManagerProvider.Provider value={stateManager}>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/checkout" element={<Navigate to="/auth" />} />
@@ -147,7 +147,7 @@ function App() {
                     element={<Navigate to="/" replace={true} />}
                   />
                 </Routes>
-              </isOpenContext.Provider>
+              </stateManagerProvider.Provider>
             </ApolloProvider>
           </Suspense>
         );
@@ -168,7 +168,7 @@ function App() {
           return (
             <Suspense fallback={<h1>Loading...</h1>}>
               <ApolloProvider client={client}>
-                <isOpenContext.Provider value={stateIsOpen}>
+                <stateManagerProvider.Provider value={stateManager}>
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/checkout" element={<Checkout />} />
@@ -198,7 +198,7 @@ function App() {
                       element={<Navigate to="/" replace={true} />}
                     />
                   </Routes>
-                </isOpenContext.Provider>
+                </stateManagerProvider.Provider>
               </ApolloProvider>
             </Suspense>
           );

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { isOpenContext } from "../../App";
+import { stateManagerProvider } from "../../App";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 // import { debounce } from "../../helpers/helpers";
@@ -8,7 +8,7 @@ import useMedia from "../../hooks/use-media";
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
-  const { isOpen } = useContext(isOpenContext);
+  const { isOpen } = useContext(stateManagerProvider);
   const navigate = useNavigate();
 
   // const [prevScrollPos, setPrevScrollPos] = useState(0);

@@ -79,7 +79,7 @@ export const List = (props: any) => {
         }}
       >
         {(products as any).map((product: any) => (
-          <Product key={product.id} item={product} />
+          <Product key={product.id} product={product} />
         ))}
       </div>
       <div>
