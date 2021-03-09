@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { isOpenContext } from "../../App";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 // import { debounce } from "../../helpers/helpers";
@@ -7,6 +8,8 @@ import useMedia from "../../hooks/use-media";
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
+  const { isOpen } = useContext(isOpenContext);
+  const navigate = useNavigate();
 
   // const [prevScrollPos, setPrevScrollPos] = useState(0);
   // const [visible, setVisible] = useState(true);
@@ -100,8 +103,10 @@ export const Header = (props: any) => {
           >
             {!isWide ? (
               <span
+                style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props.setIsOpenCategories(true);
+                  isOpen.set(true);
+                  navigate("/");
                 }}
               >
                 Categories
@@ -117,7 +122,7 @@ export const Header = (props: any) => {
               }}
             >
               {auth.state.user ? (
-                <Link
+                <button
                   onClick={auth.signout}
                   style={{
                     padding: "0 12px",
@@ -126,8 +131,13 @@ export const Header = (props: any) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    outline: "none",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: 500,
                   }}
-                  to="/"
                 >
                   <div style={{ paddingRight: "6px" }}>
                     {isWide ? "Logout" : ""}
@@ -136,7 +146,7 @@ export const Header = (props: any) => {
                     src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogout-24.png?alt=media&token=95aa0afe-73f9-41df-b6f8-9384cac6f467"
                     alt="Logout"
                   />
-                </Link>
+                </button>
               ) : (
                 <Link
                   style={{

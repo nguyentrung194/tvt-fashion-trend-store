@@ -1,5 +1,29 @@
 import * as Types from "./schemas";
 
+export type ProductsQueryVariables = Types.Exact<{
+  where: Types.Products_Bool_Exp;
+  order_by: Types.Products_Order_By;
+  limit?: Types.Scalars["Int"];
+  offset?: Types.Scalars["Int"];
+}>;
+
+export type ProductsQuery = { __typename?: "query_root" } & {
+  products_aggregate: { __typename?: "products_aggregate" } & {
+    aggregate?: Types.Maybe<
+      { __typename?: "products_aggregate_fields" } & Pick<
+        Types.Products_Aggregate_Fields,
+        "count"
+      >
+    >;
+  };
+  products: Array<
+    { __typename?: "products" } & Pick<
+      Types.Products,
+      "id" | "name" | "pricing" | "saleOff" | "URLImage"
+    >
+  >;
+};
+
 export type GetProductsQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type GetProductsQuery = { __typename?: "query_root" } & {
@@ -36,6 +60,114 @@ export type InsertProductMutation = { __typename?: "mutation_root" } & {
   insert_products?: Types.Maybe<
     { __typename?: "products_mutation_response" } & Pick<
       Types.Products_Mutation_Response,
+      "affected_rows"
+    >
+  >;
+};
+
+export type GetAddressQueryVariables = Types.Exact<{
+  email: Types.Scalars["String"];
+}>;
+
+export type GetAddressQuery = { __typename?: "query_root" } & {
+  users: Array<{ __typename?: "users" } & Pick<Types.Users, "address">>;
+};
+
+export type AddAddressMutationVariables = Types.Exact<{
+  address: Types.Scalars["jsonb"];
+  email: Types.Scalars["String"];
+}>;
+
+export type AddAddressMutation = { __typename?: "mutation_root" } & {
+  update_users?: Types.Maybe<
+    { __typename?: "users_mutation_response" } & Pick<
+      Types.Users_Mutation_Response,
+      "affected_rows"
+    >
+  >;
+};
+
+export type DeleteAddressMutationVariables = Types.Exact<{
+  index: Types.Scalars["Int"];
+  email: Types.Scalars["String"];
+}>;
+
+export type DeleteAddressMutation = { __typename?: "mutation_root" } & {
+  update_users?: Types.Maybe<
+    { __typename?: "users_mutation_response" } & Pick<
+      Types.Users_Mutation_Response,
+      "affected_rows"
+    >
+  >;
+};
+
+export type GetContactQueryVariables = Types.Exact<{
+  email: Types.Scalars["String"];
+}>;
+
+export type GetContactQuery = { __typename?: "query_root" } & {
+  users: Array<{ __typename?: "users" } & Pick<Types.Users, "phones">>;
+};
+
+export type AddContactMutationVariables = Types.Exact<{
+  phones: Types.Scalars["jsonb"];
+  email: Types.Scalars["String"];
+}>;
+
+export type AddContactMutation = { __typename?: "mutation_root" } & {
+  update_users?: Types.Maybe<
+    { __typename?: "users_mutation_response" } & Pick<
+      Types.Users_Mutation_Response,
+      "affected_rows"
+    >
+  >;
+};
+
+export type DeleteContactMutationVariables = Types.Exact<{
+  index: Types.Scalars["Int"];
+  email: Types.Scalars["String"];
+}>;
+
+export type DeleteContactMutation = { __typename?: "mutation_root" } & {
+  update_users?: Types.Maybe<
+    { __typename?: "users_mutation_response" } & Pick<
+      Types.Users_Mutation_Response,
+      "affected_rows"
+    >
+  >;
+};
+
+export type GetPaymentQueryVariables = Types.Exact<{
+  email: Types.Scalars["String"];
+}>;
+
+export type GetPaymentQuery = { __typename?: "query_root" } & {
+  users: Array<{ __typename?: "users" } & Pick<Types.Users, "payment">>;
+};
+
+export type AddPaymentMutationVariables = Types.Exact<{
+  payment: Types.Scalars["jsonb"];
+  email: Types.Scalars["String"];
+}>;
+
+export type AddPaymentMutation = { __typename?: "mutation_root" } & {
+  update_users?: Types.Maybe<
+    { __typename?: "users_mutation_response" } & Pick<
+      Types.Users_Mutation_Response,
+      "affected_rows"
+    >
+  >;
+};
+
+export type DeletePaymentMutationVariables = Types.Exact<{
+  index: Types.Scalars["Int"];
+  email: Types.Scalars["String"];
+}>;
+
+export type DeletePaymentMutation = { __typename?: "mutation_root" } & {
+  update_users?: Types.Maybe<
+    { __typename?: "users_mutation_response" } & Pick<
+      Types.Users_Mutation_Response,
       "affected_rows"
     >
   >;

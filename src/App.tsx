@@ -14,7 +14,7 @@ import { VerifyEmailPage } from "./router/auth/verify-email";
 import createUnAuthClient from "./apollo/unauth-client";
 import createAuthApolloClient from "./apollo/auth-client";
 
-import { Home } from "./components/langding";
+import { Home } from "./components/mainPage";
 import { Checkout } from "./components/checkout";
 
 export const isOpenContext = createContext({
@@ -163,7 +163,6 @@ function App() {
           state.customClaims.claims["https://hasura.io/jwt/claims"][
             "x-hasura-allowed-roles"
           ];
-        console.log(roleAlow);
 
         if (role === "user") {
           return (

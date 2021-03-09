@@ -20,9 +20,10 @@ export const YourOrderItem = () => {
             width: "100%",
           }}
         >
-          {products.map((el: any) => {
+          {products.map((el: any, idx: any) => {
             return (
               <div
+                key={idx}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr 7fr 3fr",
@@ -88,7 +89,6 @@ export const YourOrderItem = () => {
             })}
           </span>
         </div>
-        <div></div>
       </div>
     </div>
   );

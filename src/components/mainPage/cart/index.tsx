@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useMedia from "../../hooks/use-media";
+import useMedia from "../../../hooks/use-media";
 import { Item } from "./item";
 
-export const Cart = ({ items, setItems }: any) => {
+export const Cart = () => {
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("products") || "[]")
+  );
   const isWide = useMedia("(min-width: 480px)");
   const [isOpenCart, setIsOpenCart] = useState(false);
 

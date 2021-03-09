@@ -18,7 +18,7 @@ export const Checkout = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isWide ? "4fr 7fr" : "1fr",
+            gridTemplateColumns: isWide ? "5fr 7fr" : "1fr",
             gridGap: isWide ? "12px" : "6px",
             padding: "110px 14px 0",
             minHeight: "100vh",

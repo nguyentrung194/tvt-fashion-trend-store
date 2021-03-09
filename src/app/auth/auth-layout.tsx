@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 
-import { ToastProvider } from "react-toast-notifications";
-
 export const AuthLayout = () => {
   const { state }: any = useAuth();
   const navigate = useNavigate();
@@ -25,34 +23,32 @@ export const AuthLayout = () => {
   }, [state, navigate]);
   return (
     <>
-      <ToastProvider autoDismissTimeout={3000} placement="bottom-left">
-        <div
+      <div
+        style={{
+          display: "grid",
+          width: "100%",
+          height: `calc(var(--vh, 1vh) * 90)`,
+          gridTemplateColumns: "auto",
+          justifyContent: "center",
+          backgroundColor: "white",
+        }}
+      >
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
+          }}
           style={{
             display: "grid",
-            width: "100%",
-            height: `calc(var(--vh, 1vh) * 90)`,
-            gridTemplateColumns: "auto",
-            justifyContent: "center",
-            backgroundColor: "white",
+            placeItems: "center",
+            padding: "16px",
           }}
         >
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1 },
-            }}
-            style={{
-              display: "grid",
-              placeItems: "center",
-              padding: "16px",
-            }}
-          >
-            <Outlet />
-          </motion.div>
-        </div>
-      </ToastProvider>
+          <Outlet />
+        </motion.div>
+      </div>
     </>
   );
 };
