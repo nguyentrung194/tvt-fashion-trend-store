@@ -14,6 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   json: any;
+  jsonb: any;
   timestamp: any;
   timestamptz: any;
   uuid: any;
@@ -65,12 +66,13 @@ export type String_Comparison_Exp = {
 };
 
 export type UserSetupInput = {
+  address: Scalars["jsonb"];
   avatarUrl: Scalars["String"];
   country: Scalars["String"];
   countryCode: Scalars["String"];
   dialCode: Scalars["String"];
   displayName: Scalars["String"];
-  phone: Scalars["String"];
+  phones: Scalars["jsonb"];
   roles: Scalars["String"];
   token: Scalars["String"];
 };
@@ -419,6 +421,29 @@ export type Json_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars["json"]>>;
 };
 
+/** expression to compare columns of type jsonb. All fields are combined with logical 'AND'. */
+export type Jsonb_Comparison_Exp = {
+  /** is the column contained in the given json value */
+  _contained_in?: Maybe<Scalars["jsonb"]>;
+  /** does the column contain the given json value at the top level */
+  _contains?: Maybe<Scalars["jsonb"]>;
+  _eq?: Maybe<Scalars["jsonb"]>;
+  _gt?: Maybe<Scalars["jsonb"]>;
+  _gte?: Maybe<Scalars["jsonb"]>;
+  /** does the string exist as a top-level key in the column */
+  _has_key?: Maybe<Scalars["String"]>;
+  /** do all of these strings exist as top-level keys in the column */
+  _has_keys_all?: Maybe<Array<Scalars["String"]>>;
+  /** do any of these strings exist as top-level keys in the column */
+  _has_keys_any?: Maybe<Array<Scalars["String"]>>;
+  _in?: Maybe<Array<Scalars["jsonb"]>>;
+  _is_null?: Maybe<Scalars["Boolean"]>;
+  _lt?: Maybe<Scalars["jsonb"]>;
+  _lte?: Maybe<Scalars["jsonb"]>;
+  _neq?: Maybe<Scalars["jsonb"]>;
+  _nin?: Maybe<Array<Scalars["jsonb"]>>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: "mutation_root";
@@ -603,12 +628,22 @@ export type Mutation_RootUpdate_Products_By_PkArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
+  _append?: Maybe<Users_Append_Input>;
+  _delete_at_path?: Maybe<Users_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Users_Delete_Elem_Input>;
+  _delete_key?: Maybe<Users_Delete_Key_Input>;
+  _prepend?: Maybe<Users_Prepend_Input>;
   _set?: Maybe<Users_Set_Input>;
   where: Users_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Users_By_PkArgs = {
+  _append?: Maybe<Users_Append_Input>;
+  _delete_at_path?: Maybe<Users_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Users_Delete_Elem_Input>;
+  _delete_key?: Maybe<Users_Delete_Key_Input>;
+  _prepend?: Maybe<Users_Prepend_Input>;
   _set?: Maybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
 };
@@ -1253,6 +1288,7 @@ export type Timestamp_Comparison_Exp = {
 /** columns and relationships of "users" */
 export type Users = {
   __typename?: "users";
+  address?: Maybe<Scalars["jsonb"]>;
   avatarUrl?: Maybe<Scalars["String"]>;
   country?: Maybe<Scalars["String"]>;
   countryCode?: Maybe<Scalars["String"]>;
@@ -1263,9 +1299,25 @@ export type Users = {
   email?: Maybe<Scalars["String"]>;
   gender?: Maybe<Scalars["Boolean"]>;
   id: Scalars["uuid"];
-  phone?: Maybe<Scalars["String"]>;
+  payment?: Maybe<Scalars["jsonb"]>;
+  phones?: Maybe<Scalars["jsonb"]>;
   roles: Scalars["String"];
   updatedAt?: Maybe<Scalars["timestamp"]>;
+};
+
+/** columns and relationships of "users" */
+export type UsersAddressArgs = {
+  path?: Maybe<Scalars["String"]>;
+};
+
+/** columns and relationships of "users" */
+export type UsersPaymentArgs = {
+  path?: Maybe<Scalars["String"]>;
+};
+
+/** columns and relationships of "users" */
+export type UsersPhonesArgs = {
+  path?: Maybe<Scalars["String"]>;
 };
 
 /** aggregated selection of "users" */
@@ -1296,6 +1348,13 @@ export type Users_Aggregate_Order_By = {
   min?: Maybe<Users_Min_Order_By>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Users_Append_Input = {
+  address?: Maybe<Scalars["jsonb"]>;
+  payment?: Maybe<Scalars["jsonb"]>;
+  phones?: Maybe<Scalars["jsonb"]>;
+};
+
 /** input type for inserting array relation for remote table "users" */
 export type Users_Arr_Rel_Insert_Input = {
   data: Array<Users_Insert_Input>;
@@ -1307,6 +1366,7 @@ export type Users_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Users_Bool_Exp>>>;
   _not?: Maybe<Users_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Users_Bool_Exp>>>;
+  address?: Maybe<Jsonb_Comparison_Exp>;
   avatarUrl?: Maybe<String_Comparison_Exp>;
   country?: Maybe<String_Comparison_Exp>;
   countryCode?: Maybe<String_Comparison_Exp>;
@@ -1317,7 +1377,8 @@ export type Users_Bool_Exp = {
   email?: Maybe<String_Comparison_Exp>;
   gender?: Maybe<Boolean_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
-  phone?: Maybe<String_Comparison_Exp>;
+  payment?: Maybe<Jsonb_Comparison_Exp>;
+  phones?: Maybe<Jsonb_Comparison_Exp>;
   roles?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamp_Comparison_Exp>;
 };
@@ -1328,8 +1389,30 @@ export enum Users_Constraint {
   UsersPkey = "users_pkey",
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Users_Delete_At_Path_Input = {
+  address?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  payment?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  phones?: Maybe<Array<Maybe<Scalars["String"]>>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Users_Delete_Elem_Input = {
+  address?: Maybe<Scalars["Int"]>;
+  payment?: Maybe<Scalars["Int"]>;
+  phones?: Maybe<Scalars["Int"]>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Users_Delete_Key_Input = {
+  address?: Maybe<Scalars["String"]>;
+  payment?: Maybe<Scalars["String"]>;
+  phones?: Maybe<Scalars["String"]>;
+};
+
 /** input type for inserting data into table "users" */
 export type Users_Insert_Input = {
+  address?: Maybe<Scalars["jsonb"]>;
   avatarUrl?: Maybe<Scalars["String"]>;
   country?: Maybe<Scalars["String"]>;
   countryCode?: Maybe<Scalars["String"]>;
@@ -1340,7 +1423,8 @@ export type Users_Insert_Input = {
   email?: Maybe<Scalars["String"]>;
   gender?: Maybe<Scalars["Boolean"]>;
   id?: Maybe<Scalars["uuid"]>;
-  phone?: Maybe<Scalars["String"]>;
+  payment?: Maybe<Scalars["jsonb"]>;
+  phones?: Maybe<Scalars["jsonb"]>;
   roles?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["timestamp"]>;
 };
@@ -1357,7 +1441,6 @@ export type Users_Max_Fields = {
   displayName?: Maybe<Scalars["String"]>;
   email?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
-  phone?: Maybe<Scalars["String"]>;
   roles?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["timestamp"]>;
 };
@@ -1373,7 +1456,6 @@ export type Users_Max_Order_By = {
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  phone?: Maybe<Order_By>;
   roles?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -1390,7 +1472,6 @@ export type Users_Min_Fields = {
   displayName?: Maybe<Scalars["String"]>;
   email?: Maybe<Scalars["String"]>;
   id?: Maybe<Scalars["uuid"]>;
-  phone?: Maybe<Scalars["String"]>;
   roles?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["timestamp"]>;
 };
@@ -1406,7 +1487,6 @@ export type Users_Min_Order_By = {
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  phone?: Maybe<Order_By>;
   roles?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -1435,6 +1515,7 @@ export type Users_On_Conflict = {
 
 /** ordering options when selecting data from "users" */
 export type Users_Order_By = {
+  address?: Maybe<Order_By>;
   avatarUrl?: Maybe<Order_By>;
   country?: Maybe<Order_By>;
   countryCode?: Maybe<Order_By>;
@@ -1445,7 +1526,8 @@ export type Users_Order_By = {
   email?: Maybe<Order_By>;
   gender?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  phone?: Maybe<Order_By>;
+  payment?: Maybe<Order_By>;
+  phones?: Maybe<Order_By>;
   roles?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -1455,8 +1537,17 @@ export type Users_Pk_Columns_Input = {
   id: Scalars["uuid"];
 };
 
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Users_Prepend_Input = {
+  address?: Maybe<Scalars["jsonb"]>;
+  payment?: Maybe<Scalars["jsonb"]>;
+  phones?: Maybe<Scalars["jsonb"]>;
+};
+
 /** select columns of table "users" */
 export enum Users_Select_Column {
+  /** column name */
+  Address = "address",
   /** column name */
   AvatarUrl = "avatarUrl",
   /** column name */
@@ -1478,7 +1569,9 @@ export enum Users_Select_Column {
   /** column name */
   Id = "id",
   /** column name */
-  Phone = "phone",
+  Payment = "payment",
+  /** column name */
+  Phones = "phones",
   /** column name */
   Roles = "roles",
   /** column name */
@@ -1487,6 +1580,7 @@ export enum Users_Select_Column {
 
 /** input type for updating data in table "users" */
 export type Users_Set_Input = {
+  address?: Maybe<Scalars["jsonb"]>;
   avatarUrl?: Maybe<Scalars["String"]>;
   country?: Maybe<Scalars["String"]>;
   countryCode?: Maybe<Scalars["String"]>;
@@ -1497,13 +1591,16 @@ export type Users_Set_Input = {
   email?: Maybe<Scalars["String"]>;
   gender?: Maybe<Scalars["Boolean"]>;
   id?: Maybe<Scalars["uuid"]>;
-  phone?: Maybe<Scalars["String"]>;
+  payment?: Maybe<Scalars["jsonb"]>;
+  phones?: Maybe<Scalars["jsonb"]>;
   roles?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["timestamp"]>;
 };
 
 /** update columns of table "users" */
 export enum Users_Update_Column {
+  /** column name */
+  Address = "address",
   /** column name */
   AvatarUrl = "avatarUrl",
   /** column name */
@@ -1525,7 +1622,9 @@ export enum Users_Update_Column {
   /** column name */
   Id = "id",
   /** column name */
-  Phone = "phone",
+  Payment = "payment",
+  /** column name */
+  Phones = "phones",
   /** column name */
   Roles = "roles",
   /** column name */

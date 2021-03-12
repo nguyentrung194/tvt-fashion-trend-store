@@ -34,6 +34,10 @@ export const SetupAccount = () => {
       avatarURL: "",
       countryUser: "",
       phone: "",
+      city: "Can Tho",
+      district: "Ninh Kieu",
+      commune: "Vo Anh Kiet stress",
+      label: "Home",
     },
     onSubmit: async (values) => {
       try {
@@ -53,8 +57,16 @@ export const SetupAccount = () => {
               avatarUrl: values.avatarURL,
               country: values.country,
               countryCode: values.countryCode,
-              phone: values.phone,
+              phones: [{ local: "Home", phone: values.phone }],
               dialCode: values.dial,
+              address: [
+                {
+                  city: values.city,
+                  district: values.district,
+                  commune: values.commune,
+                  label: values.label,
+                },
+              ],
             },
           },
         });

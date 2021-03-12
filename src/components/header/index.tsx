@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
+import { FilterProduct } from "./fillter";
 // import { debounce } from "../../helpers/helpers";
 
 export const Header = (props: any) => {
@@ -73,23 +74,26 @@ export const Header = (props: any) => {
             boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.16)",
           }}
         >
-          <div
-            style={{
-              padding: "6px 6px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Link style={{ outline: "none" }} to="/">
-              <img
-                style={{ width: "36px" }}
-                src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
-                alt="Logo"
-              />
-            </Link>
-            <span>IRONMAN</span>
-          </div>
+          {isWide && (
+            <div
+              style={{
+                padding: "6px 6px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Link style={{ outline: "none" }} to="/">
+                <img
+                  style={{ width: "36px" }}
+                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
+                  alt="Logo"
+                />
+              </Link>
+              <span>IRONMAN</span>
+            </div>
+          )}
+          <FilterProduct />
           <div
             style={{
               display: "flex",
@@ -98,17 +102,6 @@ export const Header = (props: any) => {
               padding: "16px 12px",
             }}
           >
-            {!isWide ? (
-              <span
-                onClick={() => {
-                  props.setIsOpenCategories(true);
-                }}
-              >
-                Categories
-              </span>
-            ) : (
-              <></>
-            )}
             <div
               style={{
                 display: "flex",
@@ -117,7 +110,7 @@ export const Header = (props: any) => {
               }}
             >
               {auth.state.user ? (
-                <Link
+                <button
                   onClick={auth.signout}
                   style={{
                     padding: "0 12px",
@@ -126,8 +119,13 @@ export const Header = (props: any) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    outline: "none",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: 500,
                   }}
-                  to="/"
                 >
                   <div style={{ paddingRight: "6px" }}>
                     {isWide ? "Logout" : ""}
@@ -136,7 +134,7 @@ export const Header = (props: any) => {
                     src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogout-24.png?alt=media&token=95aa0afe-73f9-41df-b6f8-9384cac6f467"
                     alt="Logout"
                   />
-                </Link>
+                </button>
               ) : (
                 <Link
                   style={{

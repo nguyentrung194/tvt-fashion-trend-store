@@ -1,3 +1,28 @@
+query Products(
+  $where: products_bool_exp!
+  $order_by: products_order_by!
+  $limit: Int! = 10
+  $offset: Int! = 0
+) {
+  products_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+  products(
+    order_by: [$order_by]
+    where: $where
+    limit: $limit
+    offset: $offset
+  ) {
+    id
+    name
+    pricing
+    saleOff
+    URLImage
+  }
+}
+
 query GetProducts {
   products(order_by: { createdAt: desc }) {
     id
