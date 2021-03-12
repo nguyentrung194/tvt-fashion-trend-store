@@ -1,9 +1,7 @@
 import React from "react";
 import { useAuth } from "../../hooks/use-auth";
-// import useMedia from "../../hooks/use-media";
 
 export const MainHome = () => {
-  // const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
   return (
     <>
@@ -43,25 +41,6 @@ export const MainHome = () => {
           Ready to wear dresses tailored for you from online. Hurry up while
           stock lasts.
         </p>
-        <div style={{ height: "calc(var(--vh, 1vh) * 30)" }}>
-          <input
-            style={{
-              margin: "6px 4px",
-              padding: "8px 25px",
-              borderRadius: "5px",
-              borderWidth: "1px",
-              borderStyle: "solid",
-              borderColor: "hsla(0, 0%, 0%, 0.12)",
-              outline: "none",
-              boxShadow: "none",
-            }}
-            type="search"
-            placeholder="Tìm kiếm sản phẩm..."
-            onChange={() => {}}
-            onBlur={() => {}}
-            value={""}
-          />
-        </div>
         <div
           style={{
             padding: "18px",

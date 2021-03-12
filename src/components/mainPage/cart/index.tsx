@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import useMedia from "../../hooks/use-media";
-import { Item } from "./item";
+import { CartContext } from "../../../contexts/cart-context";
+import useMedia from "../../../hooks/use-media";
+import { Product } from "./product";
 
-export const Cart = ({ items, setItems }: any) => {
+export const Cart = () => {
   const isWide = useMedia("(min-width: 480px)");
   const [isOpenCart, setIsOpenCart] = useState(false);
-
-  if (!localStorage.getItem("products")) localStorage.setItem("products", "[]");
-  const sl = items.map((item: { id: any }) => [item.id, item]).values();
-  const sl2: any = new Map(sl);
-  const arr = [...sl2];
+  const { cartItems, itemCount, total, clearCart } = useContext(CartContext);
 
   return (
     <>
@@ -66,7 +63,7 @@ export const Cart = ({ items, setItems }: any) => {
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
             />
-            <div style={{ paddingLeft: "5px" }}>{arr.length} Item</div>
+            <div style={{ paddingLeft: "5px" }}>{itemCount} Item</div>
           </div>
           <div>
             <button
@@ -79,8 +76,7 @@ export const Cart = ({ items, setItems }: any) => {
                 padding: "5px 10px",
               }}
               onClick={() => {
-                localStorage.setItem("products", "[]");
-                setItems([]);
+                clearCart();
               }}
             >
               Clear your cart
@@ -117,10 +113,8 @@ export const Cart = ({ items, setItems }: any) => {
             gridGap: isWide ? "6px" : "3px",
           }}
         >
-          {items.map((el: any) => {
-            return (
-              <Item key={el.id} item={el} setItems={setItems} items={items} />
-            );
+          {cartItems.map((el: any) => {
+            return <Product key={el.id} product={el} />;
           })}
         </div>
         <div
@@ -150,7 +144,7 @@ export const Cart = ({ items, setItems }: any) => {
             <Link
               style={{
                 textDecoration: "none",
-                display: arr.length ? "flex" : "none",
+                display: itemCount ? "flex" : "none",
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "10px",
@@ -172,21 +166,10 @@ export const Cart = ({ items, setItems }: any) => {
                 borderRadius: "30px",
               }}
             >
-              {items
-                .map((el: any) => {
-                  return (
-                    el.pricing * el.soluong * ((100 - el.saleOff || 0) / 100)
-                  );
-                })
-                .reduce(
-                  (accumulator: any, currentValue: any) =>
-                    accumulator + currentValue,
-                  0
-                )
-                .toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+              {total.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
             </div>
           </div>
         </div>
@@ -198,23 +181,20 @@ export const Cart = ({ items, setItems }: any) => {
         style={{
           display: isOpenCart ? "none" : "",
           position: "fixed",
-          right: isWide ? "0px" : "calc(var(--vw, 1vw) * 10)",
+          right: isWide ? "0px" : "5px",
           bottom: isWide ? "50%" : "10px",
           zIndex: 999,
           background: "rgb(73, 173, 255)",
-          padding: isWide ? "5px" : "0",
-          borderRadius: isWide ? "5px" : "30px",
+          padding: "5px",
+          borderRadius: "5px",
           border: "none",
           cursor: "pointer",
           outline: "none",
-          width: isWide ? "auto" : "calc(var(--vw, 1vw) * 80)",
+          width: "auto",
         }}
       >
         <div
           style={{
-            display: isWide ? "" : "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
             padding: "5px",
             color: "rgb(255, 255, 255)",
           }}
@@ -227,7 +207,7 @@ export const Cart = ({ items, setItems }: any) => {
               margin: "5px",
             }}
           >
-            <div style={{ paddingRight: "5px" }}>{arr.length} Item</div>
+            <div style={{ paddingRight: "5px" }}>{itemCount} Item</div>
             <img
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
@@ -235,24 +215,16 @@ export const Cart = ({ items, setItems }: any) => {
           </div>
           <div
             style={{
-              padding: isWide ? "5px" : "10px",
+              padding: "5px",
               background: "rgb(255, 255, 255)",
               color: "rgb(0, 0, 0)",
-              borderRadius: isWide ? "5px" : "30px",
+              borderRadius: "5px",
             }}
           >
-            {items
-              .map((el: any) => {
-                return (
-                  el.pricing * el.soluong * ((100 - el.saleOff || 0) / 100)
-                );
-              })
-              .reduce(
-                (accumulator: any, currentValue: any) =>
-                  accumulator + currentValue,
-                0
-              )
-              .toLocaleString("it-IT", { style: "currency", currency: "VND" })}
+            {total.toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
           </div>
         </div>
       </button>

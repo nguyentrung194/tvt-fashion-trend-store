@@ -14,9 +14,8 @@ export const SignIn = () => {
     return await fbase
       .auth()
       .getRedirectResult()
-      // .signInWithPopup(provider)
       .then((data) => {
-        if (data) {
+        if (data.user) {
           addToast("Login successfull!", {
             appearance: "success",
             autoDismiss: true,
