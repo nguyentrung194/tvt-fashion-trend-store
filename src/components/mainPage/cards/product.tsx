@@ -2,13 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../../contexts/cart-context";
 
 export const Product = ({ product }: any) => {
-  const {
-    increase,
-    decrease,
-    removeProduct,
-    addProduct,
-    cartItems,
-  } = useContext(CartContext);
+  const { increase, decrease, addProduct, cartItems } = useContext(CartContext);
   const isInCart = (product: any) => {
     return !!cartItems?.find((item: any) => item.id === product.id);
   };

@@ -7,7 +7,7 @@ import { Product } from "./product";
 export const Cart = () => {
   const isWide = useMedia("(min-width: 480px)");
   const [isOpenCart, setIsOpenCart] = useState(false);
-  const { cartItems, itemCount, total } = useContext(CartContext);
+  const { cartItems, itemCount, total, clearCart } = useContext(CartContext);
 
   return (
     <>
@@ -76,7 +76,7 @@ export const Cart = () => {
                 padding: "5px 10px",
               }}
               onClick={() => {
-                localStorage.setItem("cart", "[]");
+                clearCart();
               }}
             >
               Clear your cart
@@ -181,23 +181,20 @@ export const Cart = () => {
         style={{
           display: isOpenCart ? "none" : "",
           position: "fixed",
-          right: isWide ? "0px" : "calc(var(--vw, 1vw) * 10)",
+          right: isWide ? "0px" : "5px",
           bottom: isWide ? "50%" : "10px",
           zIndex: 999,
           background: "rgb(73, 173, 255)",
-          padding: isWide ? "5px" : "0",
-          borderRadius: isWide ? "5px" : "30px",
+          padding: "5px",
+          borderRadius: "5px",
           border: "none",
           cursor: "pointer",
           outline: "none",
-          width: isWide ? "auto" : "calc(var(--vw, 1vw) * 80)",
+          width: "auto",
         }}
       >
         <div
           style={{
-            display: isWide ? "" : "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
             padding: "5px",
             color: "rgb(255, 255, 255)",
           }}
@@ -218,10 +215,10 @@ export const Cart = () => {
           </div>
           <div
             style={{
-              padding: isWide ? "5px" : "10px",
+              padding: "5px",
               background: "rgb(255, 255, 255)",
               color: "rgb(0, 0, 0)",
-              borderRadius: isWide ? "5px" : "30px",
+              borderRadius: "5px",
             }}
           >
             {total.toLocaleString("it-IT", {

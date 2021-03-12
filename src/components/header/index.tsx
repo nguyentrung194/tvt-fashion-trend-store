@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { stateManagerProvider } from "../../App";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
+import { FilterProduct } from "./fillter";
 // import { debounce } from "../../helpers/helpers";
 
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
-  const { isOpen } = useContext(stateManagerProvider);
-  const navigate = useNavigate();
 
   // const [prevScrollPos, setPrevScrollPos] = useState(0);
   // const [visible, setVisible] = useState(true);
@@ -76,23 +74,26 @@ export const Header = (props: any) => {
             boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.16)",
           }}
         >
-          <div
-            style={{
-              padding: "6px 6px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Link style={{ outline: "none" }} to="/">
-              <img
-                style={{ width: "36px" }}
-                src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
-                alt="Logo"
-              />
-            </Link>
-            <span>IRONMAN</span>
-          </div>
+          {isWide && (
+            <div
+              style={{
+                padding: "6px 6px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Link style={{ outline: "none" }} to="/">
+                <img
+                  style={{ width: "36px" }}
+                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
+                  alt="Logo"
+                />
+              </Link>
+              <span>IRONMAN</span>
+            </div>
+          )}
+          <FilterProduct />
           <div
             style={{
               display: "flex",
@@ -101,19 +102,6 @@ export const Header = (props: any) => {
               padding: "16px 12px",
             }}
           >
-            {!isWide ? (
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  isOpen.set(true);
-                  navigate("/");
-                }}
-              >
-                Categories
-              </span>
-            ) : (
-              <></>
-            )}
             <div
               style={{
                 display: "flex",

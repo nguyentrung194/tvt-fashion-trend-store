@@ -67,7 +67,6 @@ export const List = (props: any) => {
 
   return (
     <div>
-      <div>{productCount} products matched</div>
       <div
         style={{
           display: "grid",
@@ -82,7 +81,7 @@ export const List = (props: any) => {
           <Product key={product.id} product={product} />
         ))}
       </div>
-      <div>
+      <div style={{ position: "absolute", bottom: "6px", left: "6px" }}>
         <span>
           {page >= 1 && (
             <button

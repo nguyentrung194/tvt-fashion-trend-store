@@ -8,7 +8,7 @@ const Storage = (cartItems: any) => {
 export const sumItems = (cartItems: any) => {
   Storage(cartItems);
   let itemCount = cartItems.reduce(
-    (total: number, product: any) => total + product.quantity,
+    (total: number, product: any) => total + product.soluong,
     0
   );
   let total = cartItems.reduce(

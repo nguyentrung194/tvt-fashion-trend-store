@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../../contexts/cart-context";
 
 export const YourOrderItem = () => {
-  const products: any = JSON.parse(localStorage.getItem("products") || "[]");
+  const { cartItems, itemCount, total } = useContext(CartContext);
 
   return (
     <div>
@@ -20,7 +21,7 @@ export const YourOrderItem = () => {
             width: "100%",
           }}
         >
-          {products.map((el: any, idx: any) => {
+          {cartItems.map((el: any, idx: any) => {
             return (
               <div
                 key={idx}
@@ -37,7 +38,11 @@ export const YourOrderItem = () => {
                 <span>x</span>
                 <span>{el.name}</span>
                 <span style={{ textAlign: "right" }}>
-                  {(el.pricing * el.soluong).toLocaleString("it-IT", {
+                  {(
+                    el.pricing *
+                    el.soluong *
+                    ((100 - el.saleOff || 0) / 100)
+                  ).toLocaleString("it-IT", {
                     style: "currency",
                     currency: "VND",
                   })}
@@ -58,21 +63,10 @@ export const YourOrderItem = () => {
         >
           <span style={{ padding: "8px" }}>Sub Total</span>
           <span style={{ textAlign: "right", padding: "8px" }}>
-            {products
-              .map((el: any) => {
-                return (
-                  el.pricing * el.soluong * ((100 - el.saleOff || 0) / 100)
-                );
-              })
-              .reduce(
-                (accumulator: any, currentValue: any) =>
-                  accumulator + currentValue,
-                0
-              )
-              .toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
+            {total.toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
           </span>
           <span style={{ padding: "8px" }}>Delivery Fee</span>
           <span style={{ textAlign: "right", padding: "8px" }}>
