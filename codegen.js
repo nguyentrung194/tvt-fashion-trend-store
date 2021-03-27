@@ -1,9 +1,10 @@
 module.exports = {
   schema: [
     {
-      "https://store-of-king.hasura.app/v1/graphql": {
+      "https://fashion-trend-store.hasura.app/v1/graphql": {
         headers: {
-          "x-hasura-admin-secret": "12341234",
+          "x-hasura-admin-secret":
+            "soRWSD1evpn3FA8G339SiKFoDPP140anIHNExG1yC431f7lG1sWmYlkNSXKq6OIo",
         },
       },
     },

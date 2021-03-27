@@ -70,8 +70,10 @@ export const SignIn = () => {
         <div style={{ width: "90%" }}>
           <div
             style={{
-              width: "100%",
-              fontSize: "26px",
+              marginBottom: "10px",
+              fontSize: "21px",
+              fontWeight: 600,
+              color: "rgb(0, 158, 127)",
             }}
           >
             Welcome back
@@ -79,58 +81,75 @@ export const SignIn = () => {
           <p
             style={{
               width: "100%",
-              fontSize: "16px",
-              lineHeight: "24px",
-              paddingBottom: "14px",
+              fontSize: "14px",
+              lineHeight: "22px",
               color: "gray",
+              textAlign: "center",
             }}
           >
-            Don't have an account?{" "}
-            <Link
-              to="/auth/sign-up"
-              style={{
-                fontWeight: 500,
-                color: "#03713d",
-                textDecoration: "none",
-              }}
-            >
-              Sign up
-            </Link>
+            Login with your email & password
           </p>
-
-          <div style={{ width: "100%" }}>
+          <form
+            style={{ width: "100%", textAlign: "left" }}
+            onSubmit={formik.handleSubmit}
+          >
+            <input
+              name="email"
+              type="email"
+              style={{ width: "90%", padding: "8px 16px", margin: "6px 0" }}
+              placeholder="Email address"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+            />
+            <input
+              name="password"
+              type="password"
+              style={{ width: "90%", padding: "8px 16px", margin: "6px 0" }}
+              placeholder="Password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
             <button
-              onClick={handelSignInWithGoogle}
-              type="button"
               style={{
-                textAlign: "center",
+                // width: "100%",
+                // borderTopLeftRadius: "6px",
+                // borderTopRightRadius: "6px",
+                // borderBottomRightRadius: "6px",
+                // borderBottomLeftRadius: "6px",
+                // marginTop: "12px",
+                // backgroundColor: "#05944F",
+                // boxShadow: "0 1px 4px hsla(0, 0%, 0%, 0.16)",
+                // padding: "8px 16px",
+                // margin: "6px 0",
+                padding: "0px 30px",
+                fontSize: "15px",
+                fontWeight: 700,
                 cursor: "pointer",
-                outline: "none",
-                backgroundColor: "white",
-                height: "auto",
-                lineHeight: "normal",
-                minHeight: "40px",
-                padding: "8px 16px",
-                width: "100%",
-                boxShadow: "0 1px 4px hsla(0, 0%, 0%, 0.16)",
+                transition: "all 0.3s ease 0s",
                 borderRadius: "6px",
-                border: "none",
+                appearance: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                textAlign: "center",
+                textDecoration: "none",
+                fontFamily: "inherit",
+                border: "0px",
+                color: "rgb(255, 255, 255)",
+                backgroundColor: "rgb(0, 158, 127)",
+                height: "48px",
+                width: "100%",
               }}
+              disabled={formik.isSubmitting}
+              type="submit"
             >
-              <span
-                style={{
-                  color: `#151515`,
-                  fontSize: "14px",
-                  lineHeight: "16px",
-                  paddingLeft: "16px",
-                  textTransform: "none",
-                  verticalAlign: "middle",
-                }}
-              >
-                Sign in with Google
-              </span>
+              Continue
             </button>
-          </div>
+          </form>
+
           <div
             style={{
               width: "100%",
@@ -170,63 +189,84 @@ export const SignIn = () => {
               }}
             />
           </div>
-          <form
-            style={{ width: "100%", textAlign: "left" }}
-            onSubmit={formik.handleSubmit}
-          >
-            <input
-              name="email"
-              type="email"
-              style={{ width: "90%", padding: "8px 16px", margin: "6px 0" }}
-              placeholder="Email address"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            <input
-              name="password"
-              type="password"
-              style={{ width: "90%", padding: "8px 16px", margin: "6px 0" }}
-              placeholder="Password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            <div
-              style={{
-                textAlign: "right",
-                fontSize: "14px",
-                lineHeight: "16px",
-                color: "#757575",
-                paddingTop: "6px",
-              }}
-            >
-              <Link
-                style={{ color: "#03713d", textDecoration: "none" }}
-                to="/auth/forgot-password"
-              >
-                Forgot Password?
-              </Link>
-            </div>
+
+          <div style={{ width: "100%" }}>
             <button
+              onClick={handelSignInWithGoogle}
+              type="button"
               style={{
-                width: "100%",
-                borderTopLeftRadius: "6px",
-                borderTopRightRadius: "6px",
-                borderBottomRightRadius: "6px",
-                borderBottomLeftRadius: "6px",
-                marginTop: "12px",
-                backgroundColor: "#05944F",
-                boxShadow: "0 1px 4px hsla(0, 0%, 0%, 0.16)",
+                textAlign: "center",
+                cursor: "pointer",
+                outline: "none",
+                backgroundColor: "white",
+                height: "auto",
+                lineHeight: "normal",
+                minHeight: "40px",
                 padding: "8px 16px",
-                margin: "6px 0",
+                width: "100%",
+                boxShadow: "0 1px 4px hsla(0, 0%, 0%, 0.16)",
+                borderRadius: "6px",
+                border: "none",
               }}
-              disabled={formik.isSubmitting}
-              type="submit"
             >
-              Sign in
+              <span
+                style={{
+                  color: `#151515`,
+                  fontSize: "14px",
+                  lineHeight: "16px",
+                  paddingLeft: "16px",
+                  textTransform: "none",
+                  verticalAlign: "middle",
+                }}
+              >
+                Sign in with Google
+              </span>
             </button>
-          </form>
+          </div>
+          <p
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              lineHeight: "24px",
+              padding: "14px 0 14px 0",
+              color: "gray",
+              textAlign: "center",
+            }}
+          >
+            Don't have an account?{" "}
+            <Link
+              to="/auth/sign-up"
+              style={{
+                fontWeight: 500,
+                color: "#03713d",
+                textDecoration: "none",
+              }}
+            >
+              Sign up
+            </Link>
+          </p>
+          <div
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              lineHeight: "24px",
+              paddingBottom: "14px",
+              color: "gray",
+              textAlign: "center",
+            }}
+          >
+            Forgot your password?{" "}
+            <Link
+              style={{
+                fontWeight: 500,
+                color: "#03713d",
+                textDecoration: "none",
+              }}
+              to="/auth/forgot-password"
+            >
+              Reset It
+            </Link>
+          </div>
         </div>
       </div>
     </>

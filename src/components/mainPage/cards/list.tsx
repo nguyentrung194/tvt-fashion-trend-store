@@ -39,9 +39,22 @@ export const List = (props: any) => {
               : {},
           },
           {
-            name: {
-              _ilike: `%${query.get("search") || ""}%`,
-            },
+            _or: [
+              {
+                name: {
+                  _ilike: `%${query.get("search") || ""}%`,
+                },
+              },
+              {
+                name: {
+                  _iregex: `^${(query.get("search") || "")
+                    ?.split("")
+                    .filter((el) => el !== " ")
+                    .map((el) => `(${el}){1}.*`)
+                    .join(`\\s`)}$`,
+                },
+              },
+            ],
           },
         ],
       },
@@ -81,7 +94,7 @@ export const List = (props: any) => {
           <Product key={product.id} product={product} />
         ))}
       </div>
-      <div style={{ position: "absolute", bottom: "6px", left: "6px" }}>
+      <div style={{ margin: "3px 0 0 6px" }}>
         <span>
           {page >= 1 && (
             <button
