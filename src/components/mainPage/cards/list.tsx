@@ -7,6 +7,7 @@ import { useQueryURL } from "../../../hooks/use-query-url";
 import { useProductsQuery } from "../../../graphql/autogenerate/hooks";
 import { Product } from "./product";
 import useMedia from "../../../hooks/use-media";
+import { ProductLoading } from "./productLoading";
 
 const LIMIT = 3;
 
@@ -21,6 +22,13 @@ export const List = (props: any) => {
     ignoreQueryPrefix: true,
   });
   const page = parseInt(queryParams.page) || 1;
+  const productsTemplate: any = [{
+    id: 1,
+  }, {
+    id: 2,
+  }, {
+    id: 3,
+  }]
 
   const { data, loading, error } = useProductsQuery({
     variables: {
@@ -34,8 +42,8 @@ export const List = (props: any) => {
           {
             _or: queryParams.categories
               ? queryParams.categories.split(",").map((item: any) => ({
-                  categories_products: { category: { name: { _eq: item } } },
-                }))
+                categories_products: { category: { name: { _eq: item } } },
+              }))
               : {},
           },
           {
@@ -60,7 +68,52 @@ export const List = (props: any) => {
       },
     },
   });
-  if (loading) return <div>Loading...</div>;
+  if (loading) return (
+    <div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(auto-fill, minmax(${isWide ? "164px" : "135px"
+            }, 1fr))`,
+          gridAutoRows: "minmax(270px, 300px)",
+          gridGap: isWide ? "6px" : "3px",
+        }}
+      >
+        {(productsTemplate as any).map((product: any) => (
+          <ProductLoading key={product.id} product={product} />
+        ))}
+      </div>
+      <div style={{ margin: "3px 0 0 6px" }}>
+        <span>
+          {page >= 1 && (
+            <button
+              onClick={() => {
+                query.set("page", String(page - 1));
+                history(`${location.pathname}?${query}`);
+              }}
+              disabled={page === 1 ? true : false}
+            >
+              Previous
+            </button>
+          )}
+        </span>
+        <span>{` | Page ${page} | `}</span>
+        <span>
+          {page <= 1 && (
+            <button
+              onClick={() => {
+                query.set("page", String(page + 1));
+                history(`${location.pathname}?${query}`);
+              }}
+              disabled={page === 1 ? true : false}
+            >
+              Next
+            </button>
+          )}
+        </span>
+      </div>
+    </div>
+  );
   if (error) {
     console.log(error);
     return <div>Error!</div>;
@@ -83,9 +136,8 @@ export const List = (props: any) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(auto-fill, minmax(${
-            isWide ? "164px" : "135px"
-          }, 1fr))`,
+          gridTemplateColumns: `repeat(auto-fill, minmax(${isWide ? "164px" : "135px"
+            }, 1fr))`,
           gridAutoRows: "minmax(270px, 300px)",
           gridGap: isWide ? "6px" : "3px",
         }}

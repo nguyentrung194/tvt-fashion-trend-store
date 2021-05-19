@@ -12,37 +12,16 @@ export const Cart = () => {
   return (
     <>
       <div
+        className={`cart-container cart-container-${isOpenCart ? "visible" : "hidden"}`}
         style={{
-          display: isOpenCart ? "" : "none",
-          height: isWide
-            ? "calc(var(--vh, 1vh) * 100 )"
-            : "calc(var(--vh, 1vh) * 70 )",
           width: isWide
             ? "calc(var(--vw, 1vw) * 35)"
             : "calc(var(--vw, 1vw) * 100)",
-          background: "rgb(255, 255, 255)",
-          position: "fixed",
-          right: 0,
-          bottom: 0,
-          zIndex: 9999,
-          boxShadow: `${
-            isWide
-              ? "-10px 0 30px rgba(136, 136, 136, 0.329)"
-              : "0 calc(var(--vh, -1vh) * 30) 0 rgba(0, 0, 0, 0.4)"
-          }`,
+          right: isOpenCart ? 0 : (isWide
+            ? "calc(var(--vw, 1vw) * (-40))"
+            : "calc(var(--vw, 1vw) * (-110))"),
         }}
       >
-        <div
-          style={{
-            display: !isWide && isOpenCart ? "" : "none",
-            position: "fixed",
-            top: 0,
-            right: 0,
-            width: "calc(var(--vw, 1vw) * 100)",
-            height: "calc(var(--vh, 1vh) * 30)",
-            zIndex: 999,
-          }}
-        ></div>
         <div
           style={{
             display: "flex",
@@ -101,14 +80,13 @@ export const Cart = () => {
         <div
           style={{
             overflow: "scroll",
-            height: isWide ? "70vh" : "55vh",
+            height: "75vh",
             overflowX: "hidden",
             scrollbarWidth: "thin",
             scrollBehavior: "smooth",
             display: "grid",
-            gridTemplateColumns: `repeat(auto-fill, minmax(${
-              isWide ? "164px" : "135px"
-            }, 1fr))`,
+            gridTemplateColumns: `repeat(auto-fill, minmax(${isWide ? "164px" : "135px"
+              }, 1fr))`,
             gridAutoRows: "minmax(270px, 300px)",
             gridGap: isWide ? "6px" : "3px",
           }}
@@ -119,17 +97,18 @@ export const Cart = () => {
         </div>
         <div
           style={{
-            position: "fixed",
-            bottom: "10px",
-            right: isWide
-              ? "calc(var(--vw, 1vw) * 5)"
-              : "calc(var(--vw, 1vw) * 10)",
-            zIndex: 999,
+            position: "relative",
+            // bottom: "10px",
+            // right: isWide
+            //   ? "calc(var(--vw, 1vw) * 5)"
+            //   : "calc(var(--vw, 1vw) * 10)",
+            // zIndex: 999,
             background: "rgb(73, 173, 255)",
             borderRadius: "30px",
-            width: isWide
-              ? "calc(var(--vw, 1vw) * 25)"
-              : "calc(var(--vw, 1vw) * 80)",
+            margin: '30px'
+            // width: isWide
+            //   ? "calc(var(--vw, 1vw) * 25)"
+            //   : "calc(var(--vw, 1vw) * 80)",
           }}
         >
           <div
@@ -179,7 +158,7 @@ export const Cart = () => {
           setIsOpenCart(true);
         }}
         style={{
-          display: isOpenCart ? "none" : "",
+          opacity: isOpenCart ? "0" : "1",
           position: "fixed",
           right: isWide ? "0px" : "5px",
           bottom: isWide ? "50%" : "10px",
@@ -191,6 +170,7 @@ export const Cart = () => {
           cursor: "pointer",
           outline: "none",
           width: "auto",
+          transition: 'all 0.5s ease-in-out'
         }}
       >
         <div

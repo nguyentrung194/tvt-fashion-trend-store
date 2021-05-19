@@ -31,7 +31,7 @@ export const FilterProduct: React.FC<{}> = () => {
               e.preventDefault();
               query.delete("page");
               query.set("search", search);
-              history(`${location.pathname}?${query}`);
+              history(`/?${query}`);
             }}
             style={{
               backgroundColor: "rgba(204, 204, 204, 0.466)",
@@ -81,10 +81,10 @@ export const FilterProduct: React.FC<{}> = () => {
                 setCategories([value]);
                 if (value === "all") {
                   query.delete("categories");
-                  history(`${location.pathname}?${query}`);
+                  history(`/?${query}`);
                 } else if (value) {
                   query.set("categories", value);
-                  history(`${location.pathname}?${query}`);
+                  history(`/?${query}`);
                 }
               }}
               placeholder="Filter by categories"

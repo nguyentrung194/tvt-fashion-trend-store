@@ -1,7 +1,7 @@
 const local = {
   domain: "http://localhost:8888",
-  httpGrapqlUri: "https://fashion-trend-store.hasura.app/v1/graphql",
-  wsGrapqlUri: "wss://fashion-trend-store.hasura.app/v1/graphql",
+  httpGrapqlUri: "https://fashion-trend-v2.hasura.app/v1/graphql",
+  wsGrapqlUri: "wss://fashion-trend-v2.hasura.app/v1/graphql",
   firebase: {
     apiKey: "AIzaSyAlVjZX-mR0uXLE6Oje4Pwg0HXfHSsK62Q",
     authDomain: "fashion-trend-store.firebaseapp.com",
@@ -14,9 +14,9 @@ const local = {
 };
 
 const staging = {
-  domain: "http://localhost:8888",
-  httpGrapqlUri: "https://fashion-trend-store.hasura.app/v1/graphql",
-  wsGrapqlUri: "wss://fashion-trend-store.hasura.app/v1/graphql",
+  domain: "https://fashion-trend-store.web.app",
+  httpGrapqlUri: "https://fashion-trend-v2.hasura.app/v1/graphql",
+  wsGrapqlUri: "wss://fashion-trend-v2.hasura.app/v1/graphql",
   firebase: {
     apiKey: "AIzaSyAlVjZX-mR0uXLE6Oje4Pwg0HXfHSsK62Q",
     authDomain: "fashion-trend-store.firebaseapp.com",
@@ -29,9 +29,9 @@ const staging = {
 };
 
 const prod = {
-  domain: "http://localhost:8888",
-  httpGrapqlUri: "https://fashion-trend-store.hasura.app/v1/graphql",
-  wsGrapqlUri: "wss://fashion-trend-store.hasura.app/v1/graphql",
+  domain: "https://fashion-trend-store.web.app",
+  httpGrapqlUri: "https://fashion-trend-v2.hasura.app/v1/graphql",
+  wsGrapqlUri: "wss://fashion-trend-v2.hasura.app/v1/graphql",
   firebase: {
     apiKey: "AIzaSyAlVjZX-mR0uXLE6Oje4Pwg0HXfHSsK62Q",
     authDomain: "fashion-trend-store.firebaseapp.com",

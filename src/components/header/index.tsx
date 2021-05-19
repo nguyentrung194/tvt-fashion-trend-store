@@ -3,38 +3,10 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 import { FilterProduct } from "./fillter";
-// import { debounce } from "../../helpers/helpers";
 
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
   const auth = useAuth();
-
-  // const [prevScrollPos, setPrevScrollPos] = useState(0);
-  // const [visible, setVisible] = useState(true);
-
-  // const handleScroll = debounce(() => {
-  //   // find current scroll position
-  //   if (!isWide) {
-  //     return;
-  //   }
-  //   const currentScrollPos = window.pageYOffset;
-
-  //   // set state based on location info (explained in more detail below)
-  //   setVisible(
-  //     (prevScrollPos > currentScrollPos &&
-  //       prevScrollPos - currentScrollPos > 70) ||
-  //       currentScrollPos < 10
-  //   );
-
-  //   // set state to new scroll position
-  //   setPrevScrollPos(currentScrollPos);
-  // }, 100);
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [prevScrollPos, visible, handleScroll]);
 
   return (
     <div>
@@ -44,24 +16,8 @@ export const Header = (props: any) => {
           width: "100%",
           zIndex: 9998,
           transition: "top 0.3s",
-          // top: visible ? "0" : "-120px",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            fontSize: "14px",
-            fontWeight: "normal",
-            lineHeight: "20px",
-            padding: "5px",
-            backgroundColor: "rgb(73, 173, 255)",
-          }}
-        >
-          <p>Freeship cho đơn hàng từ 400,000đ.</p>
-        </div>
         <div
           style={{
             display: "flex",
@@ -74,34 +30,32 @@ export const Header = (props: any) => {
             boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.16)",
           }}
         >
-          {isWide && (
-            <div
-              style={{
-                padding: "6px 6px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Link style={{ outline: "none" }} to="/">
-                <img
-                  style={{ width: "36px" }}
-                  src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
-                  alt="Logo"
-                />
-              </Link>
-              <span>IRONMAN</span>
-            </div>
-          )}
-          <FilterProduct />
+          <div
+            style={{
+              padding: "6px 6px",
+              display: isWide ? "flex" : "none",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Link style={{ outline: "none" }} to="/">
+              <img
+                style={{ width: "36px" }}
+                src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
+                alt="Logo"
+              />
+            </Link>
+            <span>IRONMAN</span>
+          </div>
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              padding: "16px 12px",
+              // padding: "16px 12px",
             }}
           >
+            <FilterProduct />
             <div
               style={{
                 display: "flex",

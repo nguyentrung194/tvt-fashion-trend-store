@@ -55,20 +55,20 @@ export const DeliveryMethod = () => {
         >
           <div
             onClick={() => {
-              localStorage.setItem("DeliveryMethod", "1");
-              setOpt("1");
+              localStorage.setItem("DeliveryMethod", "0");
+              localStorage.setItem("DeliveryMethodInf", "0");
+              setOpt("0");
             }}
             style={{
               height: "64px",
               maxWidth: "200px",
               padding: "20px",
               backgroundColor:
-                opt === "1" ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
+                opt === "0" ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
               marginRight: "15px",
               marginBottom: "15px",
-              border: `1px solid ${
-                opt === "1" ? "rgb(5, 148, 79)" : "transparent"
-              }`,
+              border: `1px solid ${opt === "0" ? "rgb(5, 148, 79)" : "transparent"
+                }`,
               borderRadius: "5px",
               transition: "all 0.25s ease 0s",
               cursor: "pointer",
@@ -108,20 +108,19 @@ export const DeliveryMethod = () => {
           </div>
           <div
             onClick={() => {
-              localStorage.setItem("DeliveryMethod", "2");
-              setOpt("2");
+              localStorage.setItem("DeliveryMethod", "1");
+              setOpt("1");
             }}
             style={{
               height: "64px",
               maxWidth: "200px",
               padding: "20px",
               backgroundColor:
-                opt === "2" ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
+                opt === "1" ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
               marginRight: "15px",
               marginBottom: "15px",
-              border: `1px solid ${
-                opt === "2" ? "rgb(5, 148, 79)" : "transparent"
-              }`,
+              border: `1px solid ${opt === "1" ? "rgb(5, 148, 79)" : "transparent"
+                }`,
               borderRadius: "5px",
               transition: "all 0.25s ease 0s",
               cursor: "pointer",

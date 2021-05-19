@@ -7,7 +7,6 @@ import { Cart } from "./cart";
 export const Home = () => {
   return (
     <>
-      <Header />
       <Cart />
       <MainHome />
       <ListProducts />

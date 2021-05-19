@@ -1,5 +1,20 @@
 import * as Types from "./schemas";
 
+export type InsertOrderMutationVariables = Types.Exact<{
+  deliveryAddress: Types.Scalars["jsonb"];
+  contactNumber: Types.Scalars["jsonb"];
+  deliveryMethod: Types.Scalars["jsonb"];
+  paymentOption?: Types.Maybe<Types.Scalars["jsonb"]>;
+  products: Types.Scalars["jsonb"];
+  userId: Types.Scalars["String"];
+}>;
+
+export type InsertOrderMutation = { __typename?: "mutation_root" } & {
+  insert_orders_one?: Types.Maybe<
+    { __typename?: "orders" } & Pick<Types.Orders, "id">
+  >;
+};
+
 export type ProductsQueryVariables = Types.Exact<{
   where: Types.Products_Bool_Exp;
   order_by: Types.Products_Order_By;

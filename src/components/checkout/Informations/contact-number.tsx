@@ -27,10 +27,6 @@ export const ContactNumber = () => {
     onSubmit: async (values) => {
       try {
         formik.setSubmitting(true);
-        addToast("Add successfull!", {
-          appearance: "info",
-          autoDismiss: true,
-        });
         {
           /* {local, phone} */
         }
@@ -52,6 +48,10 @@ export const ContactNumber = () => {
           awaitRefetchQueries: true,
         });
         formik.setSubmitting(false);
+        addToast("Add successfull!", {
+          appearance: "info",
+          autoDismiss: true,
+        });
         setIsOpen(false);
         formik.handleReset();
       } catch (error) {
@@ -267,6 +267,7 @@ export const Phones = () => {
         key={idx}
         onClick={() => {
           localStorage.setItem("ContactNumber", idx);
+          localStorage.setItem("ContactNumberInf", JSON.stringify(el));
           setOpt(idx);
         }}
         style={{
@@ -274,12 +275,11 @@ export const Phones = () => {
           maxWidth: "200px",
           padding: "20px",
           backgroundColor:
-            opt === idx ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
+            opt == idx ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
           marginRight: "15px",
           marginBottom: "15px",
-          border: `1px solid ${
-            opt === idx ? "rgb(5, 148, 79)" : "transparent"
-          }`,
+          border: `1px solid ${opt == idx ? "rgb(5, 148, 79)" : "transparent"
+            }`,
           borderRadius: "5px",
           transition: "all 0.25s ease 0s",
           cursor: "pointer",
@@ -334,7 +334,7 @@ export const Phones = () => {
         >
           x
         </button>
-        {loadingDelete === idx ? (
+        {loadingDelete == idx ? (
           <h1>Loading...</h1>
         ) : (
           <>

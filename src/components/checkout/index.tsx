@@ -1,6 +1,5 @@
 import React from "react";
 import useMedia from "../../hooks/use-media";
-import { Header } from "../header";
 import { Informations } from "./Informations";
 import { YourOrder } from "./YourOrder";
 
@@ -9,7 +8,6 @@ export const Checkout = () => {
 
   return (
     <div>
-      <Header />
       <div
         style={{
           backgroundColor: "rgb(246, 246, 246)",

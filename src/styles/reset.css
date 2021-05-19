@@ -237,22 +237,25 @@ body {
 
 /* Start custom scrollbar */
 ::-webkit-scrollbar {
-  width: 17px;
+  width: 5px;
 }
-
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: rgb(255, 255, 255);
 }
-
 ::-webkit-scrollbar-thumb {
-  background-color: #d6dee1;
-  border-radius: 20px;
-  border: 6px solid transparent;
-  background-clip: content-box;
+  background-color: #949494;
+  opacity: 0.5;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #a8bbbf;
+::-moz-scrollbar {
+  width: 5px;
+}
+::-moz-scrollbar-track {
+  background-color: #222;
+}
+::-moz-scrollbar-thumb {
+  background-color: #949494;
+  opacity: 0.5;
 }
 /* End custom scrollbar */
 
@@ -278,4 +281,28 @@ body {
   font-family: inherit;
   border: 0px;
   height: 48px;
+}
+
+.cart-container {
+  letter-spacing: 1px;
+  text-align: center;
+  color: #17161a;
+  text-transform: uppercase;
+  height: 100vh;
+  -webkit-text-stroke: 1px rgba(124, 6, 228, 0.643);
+  transition: all 0.5s ease-in-out;
+  background: rgb(255, 255, 255);
+  height: calc(var(--vh, 1vh) * 100);
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  box-shadow: -10px 0 30px rgba(136, 136, 136, 0.329);
+  transition: all 0.5s ease-in-out;
+}
+.cart-container-visible {
+  opacity: 1;
+}
+
+.cart-container-hidden {
+  opacity: 0;
 }

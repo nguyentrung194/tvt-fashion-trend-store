@@ -2,7 +2,79 @@ import * as Types from "./operations";
 
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
+const defaultOptions = {};
 
+export const InsertOrderDocument = gql`
+  mutation InsertOrder(
+    $deliveryAddress: jsonb!
+    $contactNumber: jsonb!
+    $deliveryMethod: jsonb!
+    $paymentOption: jsonb
+    $products: jsonb!
+    $userId: String!
+  ) {
+    insert_orders_one(
+      object: {
+        deliveryAddress: $deliveryAddress
+        contactNumber: $contactNumber
+        deliveryMethod: $deliveryMethod
+        paymentOption: $paymentOption
+        products: $products
+        userId: $userId
+      }
+    ) {
+      id
+    }
+  }
+`;
+export type InsertOrderMutationFn = Apollo.MutationFunction<
+  Types.InsertOrderMutation,
+  Types.InsertOrderMutationVariables
+>;
+
+/**
+ * __useInsertOrderMutation__
+ *
+ * To run a mutation, you first call `useInsertOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertOrderMutation, { data, loading, error }] = useInsertOrderMutation({
+ *   variables: {
+ *      deliveryAddress: // value for 'deliveryAddress'
+ *      contactNumber: // value for 'contactNumber'
+ *      deliveryMethod: // value for 'deliveryMethod'
+ *      paymentOption: // value for 'paymentOption'
+ *      products: // value for 'products'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useInsertOrderMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.InsertOrderMutation,
+    Types.InsertOrderMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.InsertOrderMutation,
+    Types.InsertOrderMutationVariables
+  >(InsertOrderDocument, options);
+}
+export type InsertOrderMutationHookResult = ReturnType<
+  typeof useInsertOrderMutation
+>;
+export type InsertOrderMutationResult =
+  Apollo.MutationResult<Types.InsertOrderMutation>;
+export type InsertOrderMutationOptions = Apollo.BaseMutationOptions<
+  Types.InsertOrderMutation,
+  Types.InsertOrderMutationVariables
+>;
 export const ProductsDocument = gql`
   query Products(
     $where: products_bool_exp!
@@ -55,9 +127,10 @@ export function useProductsQuery(
     Types.ProductsQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<Types.ProductsQuery, Types.ProductsQueryVariables>(
     ProductsDocument,
-    baseOptions
+    options
   );
 }
 export function useProductsLazyQuery(
@@ -66,9 +139,10 @@ export function useProductsLazyQuery(
     Types.ProductsQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<Types.ProductsQuery, Types.ProductsQueryVariables>(
     ProductsDocument,
-    baseOptions
+    options
   );
 }
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
@@ -112,10 +186,11 @@ export function useGetProductsQuery(
     Types.GetProductsQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
     Types.GetProductsQuery,
     Types.GetProductsQueryVariables
-  >(GetProductsDocument, baseOptions);
+  >(GetProductsDocument, options);
 }
 export function useGetProductsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -123,10 +198,11 @@ export function useGetProductsLazyQuery(
     Types.GetProductsQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
     Types.GetProductsQuery,
     Types.GetProductsQueryVariables
-  >(GetProductsDocument, baseOptions);
+  >(GetProductsDocument, options);
 }
 export type GetProductsQueryHookResult = ReturnType<typeof useGetProductsQuery>;
 export type GetProductsLazyQueryHookResult = ReturnType<
@@ -172,10 +248,11 @@ export function useProductsByCategoryQuery(
     Types.ProductsByCategoryQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
     Types.ProductsByCategoryQuery,
     Types.ProductsByCategoryQueryVariables
-  >(ProductsByCategoryDocument, baseOptions);
+  >(ProductsByCategoryDocument, options);
 }
 export function useProductsByCategoryLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -183,10 +260,11 @@ export function useProductsByCategoryLazyQuery(
     Types.ProductsByCategoryQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
     Types.ProductsByCategoryQuery,
     Types.ProductsByCategoryQueryVariables
-  >(ProductsByCategoryDocument, baseOptions);
+  >(ProductsByCategoryDocument, options);
 }
 export type ProductsByCategoryQueryHookResult = ReturnType<
   typeof useProductsByCategoryQuery
@@ -253,15 +331,17 @@ export function useInsertProductMutation(
     Types.InsertProductMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.InsertProductMutation,
     Types.InsertProductMutationVariables
-  >(InsertProductDocument, baseOptions);
+  >(InsertProductDocument, options);
 }
 export type InsertProductMutationHookResult = ReturnType<
   typeof useInsertProductMutation
 >;
-export type InsertProductMutationResult = Apollo.MutationResult<Types.InsertProductMutation>;
+export type InsertProductMutationResult =
+  Apollo.MutationResult<Types.InsertProductMutation>;
 export type InsertProductMutationOptions = Apollo.BaseMutationOptions<
   Types.InsertProductMutation,
   Types.InsertProductMutationVariables
@@ -296,9 +376,10 @@ export function useGetAddressQuery(
     Types.GetAddressQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<Types.GetAddressQuery, Types.GetAddressQueryVariables>(
     GetAddressDocument,
-    baseOptions
+    options
   );
 }
 export function useGetAddressLazyQuery(
@@ -307,10 +388,11 @@ export function useGetAddressLazyQuery(
     Types.GetAddressQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
     Types.GetAddressQuery,
     Types.GetAddressQueryVariables
-  >(GetAddressDocument, baseOptions);
+  >(GetAddressDocument, options);
 }
 export type GetAddressQueryHookResult = ReturnType<typeof useGetAddressQuery>;
 export type GetAddressLazyQueryHookResult = ReturnType<
@@ -359,15 +441,17 @@ export function useAddAddressMutation(
     Types.AddAddressMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.AddAddressMutation,
     Types.AddAddressMutationVariables
-  >(AddAddressDocument, baseOptions);
+  >(AddAddressDocument, options);
 }
 export type AddAddressMutationHookResult = ReturnType<
   typeof useAddAddressMutation
 >;
-export type AddAddressMutationResult = Apollo.MutationResult<Types.AddAddressMutation>;
+export type AddAddressMutationResult =
+  Apollo.MutationResult<Types.AddAddressMutation>;
 export type AddAddressMutationOptions = Apollo.BaseMutationOptions<
   Types.AddAddressMutation,
   Types.AddAddressMutationVariables
@@ -411,15 +495,17 @@ export function useDeleteAddressMutation(
     Types.DeleteAddressMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.DeleteAddressMutation,
     Types.DeleteAddressMutationVariables
-  >(DeleteAddressDocument, baseOptions);
+  >(DeleteAddressDocument, options);
 }
 export type DeleteAddressMutationHookResult = ReturnType<
   typeof useDeleteAddressMutation
 >;
-export type DeleteAddressMutationResult = Apollo.MutationResult<Types.DeleteAddressMutation>;
+export type DeleteAddressMutationResult =
+  Apollo.MutationResult<Types.DeleteAddressMutation>;
 export type DeleteAddressMutationOptions = Apollo.BaseMutationOptions<
   Types.DeleteAddressMutation,
   Types.DeleteAddressMutationVariables
@@ -454,9 +540,10 @@ export function useGetContactQuery(
     Types.GetContactQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<Types.GetContactQuery, Types.GetContactQueryVariables>(
     GetContactDocument,
-    baseOptions
+    options
   );
 }
 export function useGetContactLazyQuery(
@@ -465,10 +552,11 @@ export function useGetContactLazyQuery(
     Types.GetContactQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
     Types.GetContactQuery,
     Types.GetContactQueryVariables
-  >(GetContactDocument, baseOptions);
+  >(GetContactDocument, options);
 }
 export type GetContactQueryHookResult = ReturnType<typeof useGetContactQuery>;
 export type GetContactLazyQueryHookResult = ReturnType<
@@ -517,15 +605,17 @@ export function useAddContactMutation(
     Types.AddContactMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.AddContactMutation,
     Types.AddContactMutationVariables
-  >(AddContactDocument, baseOptions);
+  >(AddContactDocument, options);
 }
 export type AddContactMutationHookResult = ReturnType<
   typeof useAddContactMutation
 >;
-export type AddContactMutationResult = Apollo.MutationResult<Types.AddContactMutation>;
+export type AddContactMutationResult =
+  Apollo.MutationResult<Types.AddContactMutation>;
 export type AddContactMutationOptions = Apollo.BaseMutationOptions<
   Types.AddContactMutation,
   Types.AddContactMutationVariables
@@ -569,15 +659,17 @@ export function useDeleteContactMutation(
     Types.DeleteContactMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.DeleteContactMutation,
     Types.DeleteContactMutationVariables
-  >(DeleteContactDocument, baseOptions);
+  >(DeleteContactDocument, options);
 }
 export type DeleteContactMutationHookResult = ReturnType<
   typeof useDeleteContactMutation
 >;
-export type DeleteContactMutationResult = Apollo.MutationResult<Types.DeleteContactMutation>;
+export type DeleteContactMutationResult =
+  Apollo.MutationResult<Types.DeleteContactMutation>;
 export type DeleteContactMutationOptions = Apollo.BaseMutationOptions<
   Types.DeleteContactMutation,
   Types.DeleteContactMutationVariables
@@ -612,9 +704,10 @@ export function useGetPaymentQuery(
     Types.GetPaymentQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<Types.GetPaymentQuery, Types.GetPaymentQueryVariables>(
     GetPaymentDocument,
-    baseOptions
+    options
   );
 }
 export function useGetPaymentLazyQuery(
@@ -623,10 +716,11 @@ export function useGetPaymentLazyQuery(
     Types.GetPaymentQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
     Types.GetPaymentQuery,
     Types.GetPaymentQueryVariables
-  >(GetPaymentDocument, baseOptions);
+  >(GetPaymentDocument, options);
 }
 export type GetPaymentQueryHookResult = ReturnType<typeof useGetPaymentQuery>;
 export type GetPaymentLazyQueryHookResult = ReturnType<
@@ -675,15 +769,17 @@ export function useAddPaymentMutation(
     Types.AddPaymentMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.AddPaymentMutation,
     Types.AddPaymentMutationVariables
-  >(AddPaymentDocument, baseOptions);
+  >(AddPaymentDocument, options);
 }
 export type AddPaymentMutationHookResult = ReturnType<
   typeof useAddPaymentMutation
 >;
-export type AddPaymentMutationResult = Apollo.MutationResult<Types.AddPaymentMutation>;
+export type AddPaymentMutationResult =
+  Apollo.MutationResult<Types.AddPaymentMutation>;
 export type AddPaymentMutationOptions = Apollo.BaseMutationOptions<
   Types.AddPaymentMutation,
   Types.AddPaymentMutationVariables
@@ -727,15 +823,17 @@ export function useDeletePaymentMutation(
     Types.DeletePaymentMutationVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
     Types.DeletePaymentMutation,
     Types.DeletePaymentMutationVariables
-  >(DeletePaymentDocument, baseOptions);
+  >(DeletePaymentDocument, options);
 }
 export type DeletePaymentMutationHookResult = ReturnType<
   typeof useDeletePaymentMutation
 >;
-export type DeletePaymentMutationResult = Apollo.MutationResult<Types.DeletePaymentMutation>;
+export type DeletePaymentMutationResult =
+  Apollo.MutationResult<Types.DeletePaymentMutation>;
 export type DeletePaymentMutationOptions = Apollo.BaseMutationOptions<
   Types.DeletePaymentMutation,
   Types.DeletePaymentMutationVariables

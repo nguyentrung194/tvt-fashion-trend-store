@@ -16,6 +16,8 @@ import createAuthApolloClient from "./apollo/auth-client";
 
 import { Home } from "./components/mainPage";
 import { Checkout } from "./components/checkout";
+import { HeaderLayout } from "./layouts/header-layout";
+import { Loader } from "./layouts/loader";
 
 function App() {
   const { state }: any = useAuth();
@@ -24,11 +26,13 @@ function App() {
     const unAuthClient = createUnAuthClient();
 
     return (
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Loader />}>
         <ApolloProvider client={unAuthClient}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/checkout" element={<Navigate to="/auth" />} />
+            <Route path="/" element={<HeaderLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/checkout" element={<Navigate to="/auth" />} />
+            </Route>
             <Route path="/auth" element={<AuthLayout />}>
               <Route path="/" element={<Navigate to="sign-in" />} />
               <Route path="sign-up" element={<SignUpPage />} />
@@ -51,11 +55,13 @@ function App() {
       const unAuthClient = createUnAuthClient();
 
       return (
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loader />}>
           <ApolloProvider client={unAuthClient}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/checkout" element={<Navigate to="/auth" />} />
+              <Route path="/" element={<HeaderLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/checkout" element={<Navigate to="/auth" />} />
+              </Route>
               <Route path="/auth" element={<AuthLayout />}>
                 <Route
                   path="/"
@@ -97,11 +103,13 @@ function App() {
         const unAuthClient = createUnAuthClient();
 
         return (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<Loader />}>
             <ApolloProvider client={unAuthClient}>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/checkout" element={<Navigate to="/auth" />} />
+                <Route path="/" element={<HeaderLayout />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/checkout" element={<Navigate to="/auth" />} />
+                </Route>
                 <Route path="/auth" element={<AuthLayout />}>
                   <Route path="/" element={<Navigate to="/auth/setup" />} />
                   <Route
@@ -137,20 +145,23 @@ function App() {
 
         const role =
           state.customClaims.claims["https://hasura.io/jwt/claims"][
-            "x-hasura-default-role"
+          "x-hasura-default-role"
           ];
         const roleAlow =
           state.customClaims.claims["https://hasura.io/jwt/claims"][
-            "x-hasura-allowed-roles"
+          "x-hasura-allowed-roles"
           ];
 
         if (role === "user") {
           return (
-            <Suspense fallback={<h1>Loading...</h1>}>
+            <Suspense fallback={<Loader />}>
               <ApolloProvider client={client}>
                 <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/" element={<HeaderLayout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                  </Route>
+
                   <Route path="/auth" element={<AuthLayout />}>
                     <Route path="/" element={<Navigate to="/" />} />
                     <Route
