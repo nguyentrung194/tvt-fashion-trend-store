@@ -1,7 +1,7 @@
 const local = {
-  domain: "http://localhost:8888",
-  httpGrapqlUri: "https://fashion-trend-v2.hasura.app/v1/graphql",
-  wsGrapqlUri: "wss://fashion-trend-v2.hasura.app/v1/graphql",
+  domain: "http://localhost:3000",
+  httpGrapqlUri: "http://localhost:8080/v1/graphql",
+  wsGrapqlUri: "wss://localhost:8080/v1/graphql",
   firebase: {
     apiKey: "AIzaSyAlVjZX-mR0uXLE6Oje4Pwg0HXfHSsK62Q",
     authDomain: "fashion-trend-store.firebaseapp.com",
@@ -9,7 +9,7 @@ const local = {
     storageBucket: "fashion-trend-store.appspot.com",
     messagingSenderId: "62813207555",
     appId: "1:62813207555:web:58ee976d25e00e87016236",
-    measurementId: "G-J4WDGZV8WD",
+    measurementId: "G-J4WDGZV8WD"
   },
 };
 

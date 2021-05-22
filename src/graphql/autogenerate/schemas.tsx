@@ -91,9 +91,9 @@ export type UserSetupInput = {
 
 export type UserSetupRes = {
   __typename?: "UserSetupRes";
-  message: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
   status: Scalars["String"];
-  statusCode: Scalars["Int"];
+  statusCode?: Maybe<Scalars["Int"]>;
 };
 
 /** columns and relationships of "categories" */
@@ -447,7 +447,7 @@ export type Delivery_Method_Mutation_Response = {
 /** on conflict condition type for table "delivery_method" */
 export type Delivery_Method_On_Conflict = {
   constraint: Delivery_Method_Constraint;
-  update_columns: Array<Delivery_Method_Update_Column>;
+  update_columns?: Array<Delivery_Method_Update_Column>;
   where?: Maybe<Delivery_Method_Bool_Exp>;
 };
 
@@ -1016,7 +1016,7 @@ export type Orders_Mutation_Response = {
 /** on conflict condition type for table "orders" */
 export type Orders_On_Conflict = {
   constraint: Orders_Constraint;
-  update_columns: Array<Orders_Update_Column>;
+  update_columns?: Array<Orders_Update_Column>;
   where?: Maybe<Orders_Bool_Exp>;
 };
 

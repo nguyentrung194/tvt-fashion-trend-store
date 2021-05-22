@@ -97,6 +97,7 @@ export const SetupAccount = () => {
         }
         formik.setSubmitting(false);
       } catch (error) {
+        console.log(error);
         addToast(error.message, {
           appearance: "error",
           autoDismiss: true,
