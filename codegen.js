@@ -1,10 +1,10 @@
 module.exports = {
   schema: [
     {
-      "https://fashion-trend-store.hasura.app/v1/graphql": {
+      "http://localhost:8080/v1/graphql": {
         headers: {
           "x-hasura-admin-secret":
-            "soRWSD1evpn3FA8G339SiKFoDPP140anIHNExG1yC431f7lG1sWmYlkNSXKq6OIo",
+            "mahouka204",
         },
       },
     },

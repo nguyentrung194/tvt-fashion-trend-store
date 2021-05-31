@@ -142,17 +142,12 @@ function App() {
       }
       {
         const client = createAuthApolloClient(state.user);
-
-        const role =
-          state.customClaims.claims["https://hasura.io/jwt/claims"][
-          "x-hasura-default-role"
-          ];
         const roleAlow =
           state.customClaims.claims["https://hasura.io/jwt/claims"][
           "x-hasura-allowed-roles"
           ];
 
-        if (role === "user") {
+        if (roleAlow.includes("user")) {
           return (
             <Suspense fallback={<Loader />}>
               <ApolloProvider client={client}>

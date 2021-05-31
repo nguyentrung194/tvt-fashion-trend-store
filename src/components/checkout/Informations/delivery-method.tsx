@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CartContext } from "../../../contexts/cart-context";
 import useMedia from "../../../hooks/use-media";
 
 export const DeliveryMethod = () => {
   const isWide = useMedia("(min-width: 480px)");
-  const [opt, setOpt] = useState(localStorage.getItem("DeliveryMethod") || "");
+  const [opt, setOpt] = useState(
+    localStorage.getItem("DeliveryMethodInf") || ""
+  );
+  const { addDeliveryMethod } = useContext(CartContext);
 
   return (
     <div>
@@ -55,7 +59,11 @@ export const DeliveryMethod = () => {
         >
           <div
             onClick={() => {
-              localStorage.setItem("DeliveryMethod", "0");
+              localStorage.setItem(
+                "DeliveryMethod",
+                "{fee: 31000, discount: 13000}"
+              );
+              addDeliveryMethod({ fee: 31000, discount: 13000 });
               localStorage.setItem("DeliveryMethodInf", "0");
               setOpt("0");
             }}
@@ -67,8 +75,9 @@ export const DeliveryMethod = () => {
                 opt === "0" ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
               marginRight: "15px",
               marginBottom: "15px",
-              border: `1px solid ${opt === "0" ? "rgb(5, 148, 79)" : "transparent"
-                }`,
+              border: `1px solid ${
+                opt === "0" ? "rgb(5, 148, 79)" : "transparent"
+              }`,
               borderRadius: "5px",
               transition: "all 0.25s ease 0s",
               cursor: "pointer",
@@ -108,7 +117,11 @@ export const DeliveryMethod = () => {
           </div>
           <div
             onClick={() => {
-              localStorage.setItem("DeliveryMethod", "1");
+              localStorage.setItem(
+                "DeliveryMethod",
+                "{fee: 12000, discount: 0}"
+              );
+              addDeliveryMethod({ fee: 12000, discount: 0 });
               setOpt("1");
             }}
             style={{
@@ -119,8 +132,9 @@ export const DeliveryMethod = () => {
                 opt === "1" ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
               marginRight: "15px",
               marginBottom: "15px",
-              border: `1px solid ${opt === "1" ? "rgb(5, 148, 79)" : "transparent"
-                }`,
+              border: `1px solid ${
+                opt === "1" ? "rgb(5, 148, 79)" : "transparent"
+              }`,
               borderRadius: "5px",
               transition: "all 0.25s ease 0s",
               cursor: "pointer",

@@ -1,7 +1,7 @@
 const local = {
-  domain: "http://localhost:3000",
-  httpGrapqlUri: "http://localhost:8080/v1/graphql",
-  wsGrapqlUri: "wss://localhost:8080/v1/graphql",
+  domain: "https://fashion-trend-store.web.app",
+  httpGrapqlUri: "https://fashion-trend-v2.hasura.app/v1/graphql",
+  wsGrapqlUri: "wss://fashion-trend-v2.hasura.app/v1/graphql",
   firebase: {
     apiKey: "AIzaSyAlVjZX-mR0uXLE6Oje4Pwg0HXfHSsK62Q",
     authDomain: "fashion-trend-store.firebaseapp.com",

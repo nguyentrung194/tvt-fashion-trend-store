@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "../../hooks/use-auth";
+import background from '../../img/background-mainhome.png'
 
 export const MainHome = () => {
   const auth = useAuth();
@@ -7,14 +8,14 @@ export const MainHome = () => {
     <>
       <div
         style={{
-          padding: "200px 14px 0",
+          padding: "200px 14px 200px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           textAlign: "center",
-          backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fbackground.png?alt=media&token=1d07174b-df32-437e-9abb-39b94a96a261)`,
-          backgroundPosition: "center center",
+          backgroundImage: `url(${background})`,
+          backgroundPosition: "center bottom",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}

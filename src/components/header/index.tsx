@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 import useMedia from "../../hooks/use-media";
 import { FilterProduct } from "./fillter";
+import logo64 from '../../img/logo64.png'
 
 export const Header = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");
@@ -41,7 +42,7 @@ export const Header = (props: any) => {
             <Link style={{ outline: "none" }} to="/">
               <img
                 style={{ width: "36px" }}
-                src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogo64.png?alt=media&token=6e9b629e-1300-414e-9a1c-7e3fbe60019b"
+                src={logo64}
                 alt="Logo"
               />
             </Link>
@@ -84,10 +85,10 @@ export const Header = (props: any) => {
                   <div style={{ paddingRight: "6px" }}>
                     {isWide ? "Logout" : ""}
                   </div>
-                  <img
+                  {/* <img
                     src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogout-24.png?alt=media&token=95aa0afe-73f9-41df-b6f8-9384cac6f467"
                     alt="Logout"
-                  />
+                  /> */}
                 </button>
               ) : (
                 <Link
@@ -104,10 +105,10 @@ export const Header = (props: any) => {
                   <div style={{ paddingRight: "6px" }}>
                     {isWide ? "Login" : ""}
                   </div>
-                  <img
+                  {/* <img
                     src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Flogin-24.png?alt=media&token=9ef01eab-9547-4317-8217-61e56e380fdb"
                     alt="Login"
-                  />
+                  /> */}
                 </Link>
               )}
             </div>

@@ -6,10 +6,14 @@ export const CartContext = createContext<any>(null);
 const storage = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart") as string)
   : [];
+const deliveryMethod = localStorage.getItem("deliveryMethod")
+  ? JSON.parse(localStorage.getItem("deliveryMethod") as string)
+  : { fee: 0, discount: 0 };
 const initialState = {
   cartItems: storage,
   ...sumItems(storage),
   checkout: false,
+  deliveryMethod: deliveryMethod,
 };
 
 const CartContextProvider = ({ children }: any) => {
@@ -40,6 +44,10 @@ const CartContextProvider = ({ children }: any) => {
     dispatch({ type: "CHECKOUT" });
   };
 
+  const addDeliveryMethod = (payload: any) => {
+    dispatch({ type: "ADD_DELIVERY_METHOD", payload });
+  };
+
   const contextValues = {
     removeProduct,
     addProduct,
@@ -47,6 +55,7 @@ const CartContextProvider = ({ children }: any) => {
     decrease,
     clearCart,
     handleCheckout,
+    addDeliveryMethod,
     ...state,
   };
 

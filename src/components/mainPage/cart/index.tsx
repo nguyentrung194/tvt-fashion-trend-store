@@ -38,10 +38,10 @@ export const Cart = () => {
               justifyContent: "center",
             }}
           >
-            <img
+            {/* <img
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
-            />
+            /> */}
             <div style={{ paddingLeft: "5px" }}>{itemCount} Item</div>
           </div>
           <div>
@@ -188,10 +188,10 @@ export const Cart = () => {
             }}
           >
             <div style={{ paddingRight: "5px" }}>{itemCount} Item</div>
-            <img
+            {/* <img
               src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
               alt="Cart"
-            />
+            /> */}
           </div>
           <div
             style={{

@@ -91,9 +91,9 @@ export type UserSetupInput = {
 
 export type UserSetupRes = {
   __typename?: "UserSetupRes";
-  message?: Maybe<Scalars["String"]>;
+  message: Scalars["String"];
   status: Scalars["String"];
-  statusCode?: Maybe<Scalars["Int"]>;
+  statusCode: Scalars["Int"];
 };
 
 /** columns and relationships of "categories" */
@@ -391,14 +391,6 @@ export type Delivery_Method_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "delivery_method" */
-export enum Delivery_Method_Constraint {
-  /** unique or primary key constraint */
-  DeliveryMethodNameKey = "delivery_method_name_key",
-  /** unique or primary key constraint */
-  DeliveryMethodPkey = "delivery_method_pkey",
-}
-
 /** input type for incrementing numeric columns in table "delivery_method" */
 export type Delivery_Method_Inc_Input = {
   deliveryTime?: Maybe<Scalars["Int"]>;
@@ -444,13 +436,6 @@ export type Delivery_Method_Mutation_Response = {
   returning: Array<Delivery_Method>;
 };
 
-/** on conflict condition type for table "delivery_method" */
-export type Delivery_Method_On_Conflict = {
-  constraint: Delivery_Method_Constraint;
-  update_columns?: Array<Delivery_Method_Update_Column>;
-  where?: Maybe<Delivery_Method_Bool_Exp>;
-};
-
 /** Ordering options when selecting data from "delivery_method". */
 export type Delivery_Method_Order_By = {
   deliveryTime?: Maybe<Order_By>;
@@ -458,11 +443,6 @@ export type Delivery_Method_Order_By = {
   fee?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: delivery_method */
-export type Delivery_Method_Pk_Columns_Input = {
-  id: Scalars["uuid"];
 };
 
 /** select columns of table "delivery_method" */
@@ -520,20 +500,6 @@ export type Delivery_Method_Sum_Fields = {
   fee?: Maybe<Scalars["Int"]>;
 };
 
-/** update columns of table "delivery_method" */
-export enum Delivery_Method_Update_Column {
-  /** column name */
-  DeliveryTime = "deliveryTime",
-  /** column name */
-  Discount = "discount",
-  /** column name */
-  Fee = "fee",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-}
-
 /** aggregate var_pop on columns */
 export type Delivery_Method_Var_Pop_Fields = {
   __typename?: "delivery_method_var_pop_fields";
@@ -590,12 +556,8 @@ export type Mutation_Root = {
   delete_categories_products?: Maybe<Categories_Products_Mutation_Response>;
   /** delete data from the table: "delivery_method" */
   delete_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
-  /** delete single row from the table: "delivery_method" */
-  delete_delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** delete data from the table: "orders" */
   delete_orders?: Maybe<Orders_Mutation_Response>;
-  /** delete single row from the table: "orders" */
-  delete_orders_by_pk?: Maybe<Orders>;
   /** delete data from the table: "products" */
   delete_products?: Maybe<Products_Mutation_Response>;
   /** delete data from the table: "users" */
@@ -630,12 +592,8 @@ export type Mutation_Root = {
   update_categories_products?: Maybe<Categories_Products_Mutation_Response>;
   /** update data of the table: "delivery_method" */
   update_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
-  /** update single row of the table: "delivery_method" */
-  update_delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** update data of the table: "orders" */
   update_orders?: Maybe<Orders_Mutation_Response>;
-  /** update single row of the table: "orders" */
-  update_orders_by_pk?: Maybe<Orders>;
   /** update data of the table: "products" */
   update_products?: Maybe<Products_Mutation_Response>;
   /** update data of the table: "users" */
@@ -659,18 +617,8 @@ export type Mutation_RootDelete_Delivery_MethodArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Delivery_Method_By_PkArgs = {
-  id: Scalars["uuid"];
-};
-
-/** mutation root */
 export type Mutation_RootDelete_OrdersArgs = {
   where: Orders_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Orders_By_PkArgs = {
-  id: Scalars["uuid"];
 };
 
 /** mutation root */
@@ -706,25 +654,21 @@ export type Mutation_RootInsert_Categories_Products_OneArgs = {
 /** mutation root */
 export type Mutation_RootInsert_Delivery_MethodArgs = {
   objects: Array<Delivery_Method_Insert_Input>;
-  on_conflict?: Maybe<Delivery_Method_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Delivery_Method_OneArgs = {
   object: Delivery_Method_Insert_Input;
-  on_conflict?: Maybe<Delivery_Method_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_OrdersArgs = {
   objects: Array<Orders_Insert_Input>;
-  on_conflict?: Maybe<Orders_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Orders_OneArgs = {
   object: Orders_Insert_Input;
-  on_conflict?: Maybe<Orders_On_Conflict>;
 };
 
 /** mutation root */
@@ -767,13 +711,6 @@ export type Mutation_RootUpdate_Delivery_MethodArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Delivery_Method_By_PkArgs = {
-  _inc?: Maybe<Delivery_Method_Inc_Input>;
-  _set?: Maybe<Delivery_Method_Set_Input>;
-  pk_columns: Delivery_Method_Pk_Columns_Input;
-};
-
-/** mutation root */
 export type Mutation_RootUpdate_OrdersArgs = {
   _append?: Maybe<Orders_Append_Input>;
   _delete_at_path?: Maybe<Orders_Delete_At_Path_Input>;
@@ -783,18 +720,6 @@ export type Mutation_RootUpdate_OrdersArgs = {
   _prepend?: Maybe<Orders_Prepend_Input>;
   _set?: Maybe<Orders_Set_Input>;
   where: Orders_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Orders_By_PkArgs = {
-  _append?: Maybe<Orders_Append_Input>;
-  _delete_at_path?: Maybe<Orders_Delete_At_Path_Input>;
-  _delete_elem?: Maybe<Orders_Delete_Elem_Input>;
-  _delete_key?: Maybe<Orders_Delete_Key_Input>;
-  _inc?: Maybe<Orders_Inc_Input>;
-  _prepend?: Maybe<Orders_Prepend_Input>;
-  _set?: Maybe<Orders_Set_Input>;
-  pk_columns: Orders_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -935,12 +860,6 @@ export type Orders_Bool_Exp = {
   userId?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "orders" */
-export enum Orders_Constraint {
-  /** unique or primary key constraint */
-  OrdersPkey = "orders_pkey",
-}
-
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Orders_Delete_At_Path_Input = {
   contactNumber?: Maybe<Array<Scalars["String"]>>;
@@ -1013,13 +932,6 @@ export type Orders_Mutation_Response = {
   returning: Array<Orders>;
 };
 
-/** on conflict condition type for table "orders" */
-export type Orders_On_Conflict = {
-  constraint: Orders_Constraint;
-  update_columns?: Array<Orders_Update_Column>;
-  where?: Maybe<Orders_Bool_Exp>;
-};
-
 /** Ordering options when selecting data from "orders". */
 export type Orders_Order_By = {
   contactNumber?: Maybe<Order_By>;
@@ -1031,11 +943,6 @@ export type Orders_Order_By = {
   paymentOption?: Maybe<Order_By>;
   products?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: orders */
-export type Orders_Pk_Columns_Input = {
-  id: Scalars["uuid"];
 };
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
@@ -1105,28 +1012,6 @@ export type Orders_Sum_Fields = {
   __typename?: "orders_sum_fields";
   orderNumber?: Maybe<Scalars["Int"]>;
 };
-
-/** update columns of table "orders" */
-export enum Orders_Update_Column {
-  /** column name */
-  ContactNumber = "contactNumber",
-  /** column name */
-  CreatedAt = "createdAt",
-  /** column name */
-  DeliveryAddress = "deliveryAddress",
-  /** column name */
-  DeliveryMethod = "deliveryMethod",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderNumber = "orderNumber",
-  /** column name */
-  PaymentOption = "paymentOption",
-  /** column name */
-  Products = "products",
-  /** column name */
-  UserId = "userId",
-}
 
 /** aggregate var_pop on columns */
 export type Orders_Var_Pop_Fields = {
@@ -1391,14 +1276,10 @@ export type Query_Root = {
   delivery_method: Array<Delivery_Method>;
   /** fetch aggregated fields from the table: "delivery_method" */
   delivery_method_aggregate: Delivery_Method_Aggregate;
-  /** fetch data from the table: "delivery_method" using primary key columns */
-  delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** fetch data from the table: "orders" */
   orders: Array<Orders>;
   /** fetch aggregated fields from the table: "orders" */
   orders_aggregate: Orders_Aggregate;
-  /** fetch data from the table: "orders" using primary key columns */
-  orders_by_pk?: Maybe<Orders>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
@@ -1457,10 +1338,6 @@ export type Query_RootDelivery_Method_AggregateArgs = {
   where?: Maybe<Delivery_Method_Bool_Exp>;
 };
 
-export type Query_RootDelivery_Method_By_PkArgs = {
-  id: Scalars["uuid"];
-};
-
 export type Query_RootOrdersArgs = {
   distinct_on?: Maybe<Array<Orders_Select_Column>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -1475,10 +1352,6 @@ export type Query_RootOrders_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Orders_Order_By>>;
   where?: Maybe<Orders_Bool_Exp>;
-};
-
-export type Query_RootOrders_By_PkArgs = {
-  id: Scalars["uuid"];
 };
 
 export type Query_RootProductsArgs = {
@@ -1527,14 +1400,10 @@ export type Subscription_Root = {
   delivery_method: Array<Delivery_Method>;
   /** fetch aggregated fields from the table: "delivery_method" */
   delivery_method_aggregate: Delivery_Method_Aggregate;
-  /** fetch data from the table: "delivery_method" using primary key columns */
-  delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** fetch data from the table: "orders" */
   orders: Array<Orders>;
   /** fetch aggregated fields from the table: "orders" */
   orders_aggregate: Orders_Aggregate;
-  /** fetch data from the table: "orders" using primary key columns */
-  orders_by_pk?: Maybe<Orders>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
@@ -1593,10 +1462,6 @@ export type Subscription_RootDelivery_Method_AggregateArgs = {
   where?: Maybe<Delivery_Method_Bool_Exp>;
 };
 
-export type Subscription_RootDelivery_Method_By_PkArgs = {
-  id: Scalars["uuid"];
-};
-
 export type Subscription_RootOrdersArgs = {
   distinct_on?: Maybe<Array<Orders_Select_Column>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -1611,10 +1476,6 @@ export type Subscription_RootOrders_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Orders_Order_By>>;
   where?: Maybe<Orders_Bool_Exp>;
-};
-
-export type Subscription_RootOrders_By_PkArgs = {
-  id: Scalars["uuid"];
 };
 
 export type Subscription_RootProductsArgs = {

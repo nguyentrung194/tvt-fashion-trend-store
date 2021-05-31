@@ -9,7 +9,7 @@ import { Product } from "./product";
 import useMedia from "../../../hooks/use-media";
 import { ProductLoading } from "./productLoading";
 
-const LIMIT = 3;
+const LIMIT = 10;
 
 export const List = (props: any) => {
   const isWide = useMedia("(min-width: 480px)");

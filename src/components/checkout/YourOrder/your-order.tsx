@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../../contexts/cart-context";
 
 export const YourOrderItem = () => {
-  const { cartItems, itemCount, total } = useContext(CartContext);
+  const { cartItems, total, deliveryMethod } = useContext(CartContext);
 
   return (
     <div>
@@ -70,14 +70,14 @@ export const YourOrderItem = () => {
           </span>
           <span style={{ padding: "8px" }}>Delivery Fee</span>
           <span style={{ textAlign: "right", padding: "8px" }}>
-            {(0).toLocaleString("it-IT", {
+            {deliveryMethod.fee.toLocaleString("it-IT", {
               style: "currency",
               currency: "VND",
             })}
           </span>
           <span style={{ padding: "8px" }}>Discount</span>
           <span style={{ textAlign: "right", padding: "8px" }}>
-            {(0).toLocaleString("it-IT", {
+            {deliveryMethod.discount.toLocaleString("it-IT", {
               style: "currency",
               currency: "VND",
             })}
