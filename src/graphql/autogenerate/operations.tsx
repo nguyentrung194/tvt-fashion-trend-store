@@ -1,5 +1,43 @@
 import * as Types from "./schemas";
 
+export type InsertCommentMutationVariables = Types.Exact<{
+  comment: Types.Scalars["String"];
+  userId: Types.Scalars["uuid"];
+  productId: Types.Scalars["uuid"];
+}>;
+
+export type InsertCommentMutation = { __typename?: "mutation_root" } & {
+  insert_comment_one?: Types.Maybe<
+    { __typename?: "comment" } & Pick<Types.Comment, "id">
+  >;
+};
+
+export type CommentOfProductQueryVariables = Types.Exact<{
+  id: Types.Scalars["uuid"];
+}>;
+
+export type CommentOfProductQuery = { __typename?: "query_root" } & {
+  comment: Array<
+    { __typename?: "comment" } & Pick<Types.Comment, "comment" | "userId">
+  >;
+  products_by_pk?: Types.Maybe<
+    { __typename?: "products" } & Pick<
+      Types.Products,
+      "id" | "URLImage" | "name" | "pricing" | "saleOff"
+    >
+  >;
+};
+
+export type GetAvatarByPkQueryVariables = Types.Exact<{
+  userId: Types.Scalars["uuid"];
+}>;
+
+export type GetAvatarByPkQuery = { __typename?: "query_root" } & {
+  users_by_pk?: Types.Maybe<
+    { __typename?: "users" } & Pick<Types.Users, "avatarUrl">
+  >;
+};
+
 export type InsertOrderMutationVariables = Types.Exact<{
   deliveryAddress: Types.Scalars["jsonb"];
   contactNumber: Types.Scalars["jsonb"];

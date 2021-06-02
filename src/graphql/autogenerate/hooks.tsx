@@ -4,6 +4,184 @@ import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {};
 
+export const InsertCommentDocument = gql`
+  mutation InsertComment($comment: String!, $userId: uuid!, $productId: uuid!) {
+    insert_comment_one(
+      object: { comment: $comment, userId: $userId, productId: $productId }
+    ) {
+      id
+    }
+  }
+`;
+export type InsertCommentMutationFn = Apollo.MutationFunction<
+  Types.InsertCommentMutation,
+  Types.InsertCommentMutationVariables
+>;
+
+/**
+ * __useInsertCommentMutation__
+ *
+ * To run a mutation, you first call `useInsertCommentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertCommentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertCommentMutation, { data, loading, error }] = useInsertCommentMutation({
+ *   variables: {
+ *      comment: // value for 'comment'
+ *      userId: // value for 'userId'
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useInsertCommentMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.InsertCommentMutation,
+    Types.InsertCommentMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.InsertCommentMutation,
+    Types.InsertCommentMutationVariables
+  >(InsertCommentDocument, options);
+}
+export type InsertCommentMutationHookResult = ReturnType<
+  typeof useInsertCommentMutation
+>;
+export type InsertCommentMutationResult =
+  Apollo.MutationResult<Types.InsertCommentMutation>;
+export type InsertCommentMutationOptions = Apollo.BaseMutationOptions<
+  Types.InsertCommentMutation,
+  Types.InsertCommentMutationVariables
+>;
+export const CommentOfProductDocument = gql`
+  query CommentOfProduct($id: uuid!) {
+    comment(where: { productId: { _eq: $id } }) {
+      comment
+      userId
+    }
+    products_by_pk(id: $id) {
+      id
+      URLImage
+      name
+      pricing
+      saleOff
+    }
+  }
+`;
+
+/**
+ * __useCommentOfProductQuery__
+ *
+ * To run a query within a React component, call `useCommentOfProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCommentOfProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCommentOfProductQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCommentOfProductQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    Types.CommentOfProductQuery,
+    Types.CommentOfProductQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    Types.CommentOfProductQuery,
+    Types.CommentOfProductQueryVariables
+  >(CommentOfProductDocument, options);
+}
+export function useCommentOfProductLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.CommentOfProductQuery,
+    Types.CommentOfProductQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    Types.CommentOfProductQuery,
+    Types.CommentOfProductQueryVariables
+  >(CommentOfProductDocument, options);
+}
+export type CommentOfProductQueryHookResult = ReturnType<
+  typeof useCommentOfProductQuery
+>;
+export type CommentOfProductLazyQueryHookResult = ReturnType<
+  typeof useCommentOfProductLazyQuery
+>;
+export type CommentOfProductQueryResult = Apollo.QueryResult<
+  Types.CommentOfProductQuery,
+  Types.CommentOfProductQueryVariables
+>;
+export const GetAvatarByPkDocument = gql`
+  query GetAvatarByPk($userId: uuid!) {
+    users_by_pk(id: $userId) {
+      avatarUrl
+    }
+  }
+`;
+
+/**
+ * __useGetAvatarByPkQuery__
+ *
+ * To run a query within a React component, call `useGetAvatarByPkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAvatarByPkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAvatarByPkQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useGetAvatarByPkQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    Types.GetAvatarByPkQuery,
+    Types.GetAvatarByPkQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    Types.GetAvatarByPkQuery,
+    Types.GetAvatarByPkQueryVariables
+  >(GetAvatarByPkDocument, options);
+}
+export function useGetAvatarByPkLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.GetAvatarByPkQuery,
+    Types.GetAvatarByPkQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    Types.GetAvatarByPkQuery,
+    Types.GetAvatarByPkQueryVariables
+  >(GetAvatarByPkDocument, options);
+}
+export type GetAvatarByPkQueryHookResult = ReturnType<
+  typeof useGetAvatarByPkQuery
+>;
+export type GetAvatarByPkLazyQueryHookResult = ReturnType<
+  typeof useGetAvatarByPkLazyQuery
+>;
+export type GetAvatarByPkQueryResult = Apollo.QueryResult<
+  Types.GetAvatarByPkQuery,
+  Types.GetAvatarByPkQueryVariables
+>;
 export const InsertOrderDocument = gql`
   mutation InsertOrder(
     $deliveryAddress: jsonb!

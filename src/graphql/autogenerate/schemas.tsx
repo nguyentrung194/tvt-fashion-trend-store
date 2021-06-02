@@ -360,6 +360,140 @@ export enum Categories_Update_Column {
   Name = "name",
 }
 
+/** columns and relationships of "comment" */
+export type Comment = {
+  __typename?: "comment";
+  comment: Scalars["String"];
+  id: Scalars["uuid"];
+  productId: Scalars["uuid"];
+  userId: Scalars["uuid"];
+};
+
+/** aggregated selection of "comment" */
+export type Comment_Aggregate = {
+  __typename?: "comment_aggregate";
+  aggregate?: Maybe<Comment_Aggregate_Fields>;
+  nodes: Array<Comment>;
+};
+
+/** aggregate fields of "comment" */
+export type Comment_Aggregate_Fields = {
+  __typename?: "comment_aggregate_fields";
+  count: Scalars["Int"];
+  max?: Maybe<Comment_Max_Fields>;
+  min?: Maybe<Comment_Min_Fields>;
+};
+
+/** aggregate fields of "comment" */
+export type Comment_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Comment_Select_Column>>;
+  distinct?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Boolean expression to filter rows from the table "comment". All fields are combined with a logical 'AND'. */
+export type Comment_Bool_Exp = {
+  _and?: Maybe<Array<Comment_Bool_Exp>>;
+  _not?: Maybe<Comment_Bool_Exp>;
+  _or?: Maybe<Array<Comment_Bool_Exp>>;
+  comment?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  productId?: Maybe<Uuid_Comparison_Exp>;
+  userId?: Maybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "comment" */
+export enum Comment_Constraint {
+  /** unique or primary key constraint */
+  CommentPkey = "comment_pkey",
+}
+
+/** input type for inserting data into table "comment" */
+export type Comment_Insert_Input = {
+  comment?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  productId?: Maybe<Scalars["uuid"]>;
+  userId?: Maybe<Scalars["uuid"]>;
+};
+
+/** aggregate max on columns */
+export type Comment_Max_Fields = {
+  __typename?: "comment_max_fields";
+  comment?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  productId?: Maybe<Scalars["uuid"]>;
+  userId?: Maybe<Scalars["uuid"]>;
+};
+
+/** aggregate min on columns */
+export type Comment_Min_Fields = {
+  __typename?: "comment_min_fields";
+  comment?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  productId?: Maybe<Scalars["uuid"]>;
+  userId?: Maybe<Scalars["uuid"]>;
+};
+
+/** response of any mutation on the table "comment" */
+export type Comment_Mutation_Response = {
+  __typename?: "comment_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Comment>;
+};
+
+/** on conflict condition type for table "comment" */
+export type Comment_On_Conflict = {
+  constraint: Comment_Constraint;
+  update_columns?: Array<Comment_Update_Column>;
+  where?: Maybe<Comment_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "comment". */
+export type Comment_Order_By = {
+  comment?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  productId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: comment */
+export type Comment_Pk_Columns_Input = {
+  id: Scalars["uuid"];
+};
+
+/** select columns of table "comment" */
+export enum Comment_Select_Column {
+  /** column name */
+  Comment = "comment",
+  /** column name */
+  Id = "id",
+  /** column name */
+  ProductId = "productId",
+  /** column name */
+  UserId = "userId",
+}
+
+/** input type for updating data in table "comment" */
+export type Comment_Set_Input = {
+  comment?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["uuid"]>;
+  productId?: Maybe<Scalars["uuid"]>;
+  userId?: Maybe<Scalars["uuid"]>;
+};
+
+/** update columns of table "comment" */
+export enum Comment_Update_Column {
+  /** column name */
+  Comment = "comment",
+  /** column name */
+  Id = "id",
+  /** column name */
+  ProductId = "productId",
+  /** column name */
+  UserId = "userId",
+}
+
 /** columns and relationships of "delivery_method" */
 export type Delivery_Method = {
   __typename?: "delivery_method";
@@ -616,6 +750,10 @@ export type Mutation_Root = {
   delete_categories_by_pk?: Maybe<Categories>;
   /** delete data from the table: "categories_products" */
   delete_categories_products?: Maybe<Categories_Products_Mutation_Response>;
+  /** delete data from the table: "comment" */
+  delete_comment?: Maybe<Comment_Mutation_Response>;
+  /** delete single row from the table: "comment" */
+  delete_comment_by_pk?: Maybe<Comment>;
   /** delete data from the table: "delivery_method" */
   delete_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
   /** delete single row from the table: "delivery_method" */
@@ -640,6 +778,10 @@ export type Mutation_Root = {
   insert_categories_products?: Maybe<Categories_Products_Mutation_Response>;
   /** insert a single row into the table: "categories_products" */
   insert_categories_products_one?: Maybe<Categories_Products>;
+  /** insert data into the table: "comment" */
+  insert_comment?: Maybe<Comment_Mutation_Response>;
+  /** insert a single row into the table: "comment" */
+  insert_comment_one?: Maybe<Comment>;
   /** insert data into the table: "delivery_method" */
   insert_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
   /** insert a single row into the table: "delivery_method" */
@@ -662,6 +804,10 @@ export type Mutation_Root = {
   update_categories_by_pk?: Maybe<Categories>;
   /** update data of the table: "categories_products" */
   update_categories_products?: Maybe<Categories_Products_Mutation_Response>;
+  /** update data of the table: "comment" */
+  update_comment?: Maybe<Comment_Mutation_Response>;
+  /** update single row of the table: "comment" */
+  update_comment_by_pk?: Maybe<Comment>;
   /** update data of the table: "delivery_method" */
   update_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
   /** update single row of the table: "delivery_method" */
@@ -694,6 +840,16 @@ export type Mutation_RootDelete_Categories_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Categories_ProductsArgs = {
   where: Categories_Products_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_CommentArgs = {
+  where: Comment_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Comment_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 /** mutation root */
@@ -756,6 +912,18 @@ export type Mutation_RootInsert_Categories_ProductsArgs = {
 /** mutation root */
 export type Mutation_RootInsert_Categories_Products_OneArgs = {
   object: Categories_Products_Insert_Input;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_CommentArgs = {
+  objects: Array<Comment_Insert_Input>;
+  on_conflict?: Maybe<Comment_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Comment_OneArgs = {
+  object: Comment_Insert_Input;
+  on_conflict?: Maybe<Comment_On_Conflict>;
 };
 
 /** mutation root */
@@ -822,6 +990,18 @@ export type Mutation_RootUpdate_Categories_By_PkArgs = {
 export type Mutation_RootUpdate_Categories_ProductsArgs = {
   _set?: Maybe<Categories_Products_Set_Input>;
   where: Categories_Products_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_CommentArgs = {
+  _set?: Maybe<Comment_Set_Input>;
+  where: Comment_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Comment_By_PkArgs = {
+  _set?: Maybe<Comment_Set_Input>;
+  pk_columns: Comment_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -1510,6 +1690,12 @@ export type Query_Root = {
   categories_products: Array<Categories_Products>;
   /** An aggregate relationship */
   categories_products_aggregate: Categories_Products_Aggregate;
+  /** fetch data from the table: "comment" */
+  comment: Array<Comment>;
+  /** fetch aggregated fields from the table: "comment" */
+  comment_aggregate: Comment_Aggregate;
+  /** fetch data from the table: "comment" using primary key columns */
+  comment_by_pk?: Maybe<Comment>;
   /** fetch data from the table: "delivery_method" */
   delivery_method: Array<Delivery_Method>;
   /** fetch aggregated fields from the table: "delivery_method" */
@@ -1570,6 +1756,26 @@ export type Query_RootCategories_Products_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Categories_Products_Order_By>>;
   where?: Maybe<Categories_Products_Bool_Exp>;
+};
+
+export type Query_RootCommentArgs = {
+  distinct_on?: Maybe<Array<Comment_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Comment_Order_By>>;
+  where?: Maybe<Comment_Bool_Exp>;
+};
+
+export type Query_RootComment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Comment_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Comment_Order_By>>;
+  where?: Maybe<Comment_Bool_Exp>;
+};
+
+export type Query_RootComment_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 export type Query_RootDelivery_MethodArgs = {
@@ -1664,6 +1870,12 @@ export type Subscription_Root = {
   categories_products: Array<Categories_Products>;
   /** An aggregate relationship */
   categories_products_aggregate: Categories_Products_Aggregate;
+  /** fetch data from the table: "comment" */
+  comment: Array<Comment>;
+  /** fetch aggregated fields from the table: "comment" */
+  comment_aggregate: Comment_Aggregate;
+  /** fetch data from the table: "comment" using primary key columns */
+  comment_by_pk?: Maybe<Comment>;
   /** fetch data from the table: "delivery_method" */
   delivery_method: Array<Delivery_Method>;
   /** fetch aggregated fields from the table: "delivery_method" */
@@ -1724,6 +1936,26 @@ export type Subscription_RootCategories_Products_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Categories_Products_Order_By>>;
   where?: Maybe<Categories_Products_Bool_Exp>;
+};
+
+export type Subscription_RootCommentArgs = {
+  distinct_on?: Maybe<Array<Comment_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Comment_Order_By>>;
+  where?: Maybe<Comment_Bool_Exp>;
+};
+
+export type Subscription_RootComment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Comment_Select_Column>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<Comment_Order_By>>;
+  where?: Maybe<Comment_Bool_Exp>;
+};
+
+export type Subscription_RootComment_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 export type Subscription_RootDelivery_MethodArgs = {

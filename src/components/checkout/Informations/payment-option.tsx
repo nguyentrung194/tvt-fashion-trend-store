@@ -1,54 +1,54 @@
-import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { CartContext } from "../../../contexts/cart-context";
 import {
-  GetPaymentDocument,
-  useAddPaymentMutation,
   useGetPaymentQuery,
   useInsertOrderMutation,
 } from "../../../graphql/autogenerate/hooks";
 import { useAuth } from "../../../hooks/use-auth";
-import useMedia from "../../../hooks/use-media";
 
 export const PaymentOption = () => {
-  const isWide = useMedia("(min-width: 480px)");
-  const [isOpen, setIsOpen] = useState(false);
   const { addToast } = useToasts();
-  // const [addPayment] = useAddPaymentMutation();
   const [insertOrderMutation] = useInsertOrderMutation();
   const {
-    state: { user, customClaims },
+    state: { customClaims },
   } = useAuth();
   const navigate = useNavigate();
   const { clearCart } = useContext(CartContext);
   const handleOrder = async () => {
     try {
-      const dataRes = await insertOrderMutation({
+      await insertOrderMutation({
         variables: {
-          contactNumber: JSON.parse(localStorage.getItem("ContactNumberInf") || ""),
-          deliveryAddress: JSON.parse(localStorage.getItem("DeliveryAddressInf") || ""),
-          deliveryMethod: JSON.parse(localStorage.getItem("DeliveryMethodInf") || ""),
+          contactNumber: JSON.parse(
+            localStorage.getItem("ContactNumberInf") || ""
+          ),
+          deliveryAddress: JSON.parse(
+            localStorage.getItem("DeliveryAddressInf") || ""
+          ),
+          deliveryMethod: JSON.parse(
+            localStorage.getItem("DeliveryMethodInf") || ""
+          ),
           products: JSON.parse(localStorage.getItem("cart") || ""),
-          userId: customClaims?.claims["https://hasura.io/jwt/claims"][
-            "x-hasura-user-id-on-db"
-          ]
+          userId:
+            customClaims?.claims["https://hasura.io/jwt/claims"][
+              "x-hasura-user-id-on-db"
+            ],
         },
       });
       addToast("Order successfull!", {
         appearance: "info",
         autoDismiss: true,
       });
-      navigate("your-order")
-      clearCart()
+      navigate("your-order");
+      clearCart();
     } catch (error) {
       addToast(error.message, {
         appearance: "error",
         autoDismiss: true,
       });
     }
-  }
+  };
 
   // const formik: any = useFormik({
   //   initialValues: {
@@ -335,7 +335,13 @@ export const PaymentOption = () => {
           }}
         >
           {/* <button className="button-order">Payment -5% of bill</button> */}
-          <button className="button-order" onClick={() => handleOrder()} onKeyPress={() => handleOrder()}>Order</button>
+          <button
+            className="button-order"
+            onClick={() => handleOrder()}
+            onKeyPress={() => handleOrder()}
+          >
+            Order
+          </button>
         </div>
       </div>
     </div>
@@ -373,8 +379,9 @@ export const Payments = () => {
             opt === idx ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
           marginRight: "15px",
           marginBottom: "15px",
-          border: `1px solid ${opt === idx ? "rgb(5, 148, 79)" : "transparent"
-            }`,
+          border: `1px solid ${
+            opt === idx ? "rgb(5, 148, 79)" : "transparent"
+          }`,
           borderRadius: "5px",
           transition: "all 0.25s ease 0s",
           cursor: "pointer",

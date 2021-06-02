@@ -169,7 +169,7 @@ export const Product = ({ product }: any) => {
           }}
         >
           <a
-            href={`./detail?id=${product.id}`}
+            href={`./detail/${product.id}`}
             className="button-summit"
             style={{
               background: "#2072cf",

@@ -1,0 +1,27 @@
+mutation InsertComment($comment: String!, $userId: uuid!, $productId: uuid!) {
+  insert_comment_one(
+    object: { comment: $comment, userId: $userId, productId: $productId }
+  ) {
+    id
+  }
+}
+
+query CommentOfProduct($id: uuid!) {
+  comment(where: { productId: { _eq: $id } }) {
+    comment
+    userId
+  }
+  products_by_pk(id: $id) {
+    id
+    URLImage
+    name
+    pricing
+    saleOff
+  }
+}
+
+query GetAvatarByPk($userId: uuid!) {
+  users_by_pk(id: $userId) {
+    avatarUrl
+  }
+}
