@@ -212,6 +212,66 @@ export type GetProductsQueryResult = Apollo.QueryResult<
   Types.GetProductsQuery,
   Types.GetProductsQueryVariables
 >;
+export const ProductByPkDocument = gql`
+  query ProductByPk($id: uuid!) {
+    products_by_pk(id: $id) {
+      id
+      URLImage
+      name
+      pricing
+      saleOff
+    }
+  }
+`;
+
+/**
+ * __useProductByPkQuery__
+ *
+ * To run a query within a React component, call `useProductByPkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductByPkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductByPkQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProductByPkQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    Types.ProductByPkQuery,
+    Types.ProductByPkQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    Types.ProductByPkQuery,
+    Types.ProductByPkQueryVariables
+  >(ProductByPkDocument, options);
+}
+export function useProductByPkLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.ProductByPkQuery,
+    Types.ProductByPkQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    Types.ProductByPkQuery,
+    Types.ProductByPkQueryVariables
+  >(ProductByPkDocument, options);
+}
+export type ProductByPkQueryHookResult = ReturnType<typeof useProductByPkQuery>;
+export type ProductByPkLazyQueryHookResult = ReturnType<
+  typeof useProductByPkLazyQuery
+>;
+export type ProductByPkQueryResult = Apollo.QueryResult<
+  Types.ProductByPkQuery,
+  Types.ProductByPkQueryVariables
+>;
 export const ProductsByCategoryDocument = gql`
   query ProductsByCategory($category: String!) {
     products(

@@ -306,3 +306,11 @@ body {
 .cart-container-hidden {
   opacity: 0;
 }
+.button-summit {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 6px;
+  box-shadow: 0 1px 4px hsla(0, 0%, 0%, 0.16);
+  padding: 4px 8px;
+  cursor: pointer;
+}

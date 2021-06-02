@@ -91,9 +91,9 @@ export type UserSetupInput = {
 
 export type UserSetupRes = {
   __typename?: "UserSetupRes";
-  message: Scalars["String"];
+  message?: Maybe<Scalars["String"]>;
   status: Scalars["String"];
-  statusCode: Scalars["Int"];
+  statusCode?: Maybe<Scalars["Int"]>;
 };
 
 /** columns and relationships of "categories" */
@@ -156,6 +156,12 @@ export type Categories_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
 };
 
+/** unique or primary key constraints on table "categories" */
+export enum Categories_Constraint {
+  /** unique or primary key constraint */
+  CategoriesPkey = "categories_pkey",
+}
+
 /** input type for inserting data into table "categories" */
 export type Categories_Insert_Input = {
   categories_products?: Maybe<Categories_Products_Arr_Rel_Insert_Input>;
@@ -189,6 +195,15 @@ export type Categories_Mutation_Response = {
 /** input type for inserting object relation for remote table "categories" */
 export type Categories_Obj_Rel_Insert_Input = {
   data: Categories_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Categories_On_Conflict>;
+};
+
+/** on conflict condition type for table "categories" */
+export type Categories_On_Conflict = {
+  constraint: Categories_Constraint;
+  update_columns?: Array<Categories_Update_Column>;
+  where?: Maybe<Categories_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "categories". */
@@ -196,6 +211,11 @@ export type Categories_Order_By = {
   categories_products_aggregate?: Maybe<Categories_Products_Aggregate_Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: categories */
+export type Categories_Pk_Columns_Input = {
+  id: Scalars["uuid"];
 };
 
 /** columns and relationships of "categories_products" */
@@ -332,6 +352,14 @@ export type Categories_Set_Input = {
   name?: Maybe<Scalars["String"]>;
 };
 
+/** update columns of table "categories" */
+export enum Categories_Update_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+}
+
 /** columns and relationships of "delivery_method" */
 export type Delivery_Method = {
   __typename?: "delivery_method";
@@ -391,6 +419,12 @@ export type Delivery_Method_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
 };
 
+/** unique or primary key constraints on table "delivery_method" */
+export enum Delivery_Method_Constraint {
+  /** unique or primary key constraint */
+  DeliveryMethodPkey = "delivery_method_pkey",
+}
+
 /** input type for incrementing numeric columns in table "delivery_method" */
 export type Delivery_Method_Inc_Input = {
   deliveryTime?: Maybe<Scalars["Int"]>;
@@ -436,6 +470,13 @@ export type Delivery_Method_Mutation_Response = {
   returning: Array<Delivery_Method>;
 };
 
+/** on conflict condition type for table "delivery_method" */
+export type Delivery_Method_On_Conflict = {
+  constraint: Delivery_Method_Constraint;
+  update_columns?: Array<Delivery_Method_Update_Column>;
+  where?: Maybe<Delivery_Method_Bool_Exp>;
+};
+
 /** Ordering options when selecting data from "delivery_method". */
 export type Delivery_Method_Order_By = {
   deliveryTime?: Maybe<Order_By>;
@@ -443,6 +484,11 @@ export type Delivery_Method_Order_By = {
   fee?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: delivery_method */
+export type Delivery_Method_Pk_Columns_Input = {
+  id: Scalars["uuid"];
 };
 
 /** select columns of table "delivery_method" */
@@ -500,6 +546,20 @@ export type Delivery_Method_Sum_Fields = {
   fee?: Maybe<Scalars["Int"]>;
 };
 
+/** update columns of table "delivery_method" */
+export enum Delivery_Method_Update_Column {
+  /** column name */
+  DeliveryTime = "deliveryTime",
+  /** column name */
+  Discount = "discount",
+  /** column name */
+  Fee = "fee",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+}
+
 /** aggregate var_pop on columns */
 export type Delivery_Method_Var_Pop_Fields = {
   __typename?: "delivery_method_var_pop_fields";
@@ -552,16 +612,26 @@ export type Mutation_Root = {
   __typename?: "mutation_root";
   /** delete data from the table: "categories" */
   delete_categories?: Maybe<Categories_Mutation_Response>;
+  /** delete single row from the table: "categories" */
+  delete_categories_by_pk?: Maybe<Categories>;
   /** delete data from the table: "categories_products" */
   delete_categories_products?: Maybe<Categories_Products_Mutation_Response>;
   /** delete data from the table: "delivery_method" */
   delete_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
+  /** delete single row from the table: "delivery_method" */
+  delete_delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** delete data from the table: "orders" */
   delete_orders?: Maybe<Orders_Mutation_Response>;
+  /** delete single row from the table: "orders" */
+  delete_orders_by_pk?: Maybe<Orders>;
   /** delete data from the table: "products" */
   delete_products?: Maybe<Products_Mutation_Response>;
+  /** delete single row from the table: "products" */
+  delete_products_by_pk?: Maybe<Products>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
+  /** delete single row from the table: "users" */
+  delete_users_by_pk?: Maybe<Users>;
   /** insert data into the table: "categories" */
   insert_categories?: Maybe<Categories_Mutation_Response>;
   /** insert a single row into the table: "categories" */
@@ -588,22 +658,37 @@ export type Mutation_Root = {
   insert_users_one?: Maybe<Users>;
   /** update data of the table: "categories" */
   update_categories?: Maybe<Categories_Mutation_Response>;
+  /** update single row of the table: "categories" */
+  update_categories_by_pk?: Maybe<Categories>;
   /** update data of the table: "categories_products" */
   update_categories_products?: Maybe<Categories_Products_Mutation_Response>;
   /** update data of the table: "delivery_method" */
   update_delivery_method?: Maybe<Delivery_Method_Mutation_Response>;
+  /** update single row of the table: "delivery_method" */
+  update_delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** update data of the table: "orders" */
   update_orders?: Maybe<Orders_Mutation_Response>;
+  /** update single row of the table: "orders" */
+  update_orders_by_pk?: Maybe<Orders>;
   /** update data of the table: "products" */
   update_products?: Maybe<Products_Mutation_Response>;
+  /** update single row of the table: "products" */
+  update_products_by_pk?: Maybe<Products>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
+  /** update single row of the table: "users" */
+  update_users_by_pk?: Maybe<Users>;
   userSetup?: Maybe<UserSetupRes>;
 };
 
 /** mutation root */
 export type Mutation_RootDelete_CategoriesArgs = {
   where: Categories_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Categories_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 /** mutation root */
@@ -617,8 +702,18 @@ export type Mutation_RootDelete_Delivery_MethodArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Delivery_Method_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_OrdersArgs = {
   where: Orders_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Orders_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 /** mutation root */
@@ -627,18 +722,30 @@ export type Mutation_RootDelete_ProductsArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Products_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Users_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
+/** mutation root */
 export type Mutation_RootInsert_CategoriesArgs = {
   objects: Array<Categories_Insert_Input>;
+  on_conflict?: Maybe<Categories_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Categories_OneArgs = {
   object: Categories_Insert_Input;
+  on_conflict?: Maybe<Categories_On_Conflict>;
 };
 
 /** mutation root */
@@ -654,47 +761,61 @@ export type Mutation_RootInsert_Categories_Products_OneArgs = {
 /** mutation root */
 export type Mutation_RootInsert_Delivery_MethodArgs = {
   objects: Array<Delivery_Method_Insert_Input>;
+  on_conflict?: Maybe<Delivery_Method_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Delivery_Method_OneArgs = {
   object: Delivery_Method_Insert_Input;
+  on_conflict?: Maybe<Delivery_Method_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_OrdersArgs = {
   objects: Array<Orders_Insert_Input>;
+  on_conflict?: Maybe<Orders_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Orders_OneArgs = {
   object: Orders_Insert_Input;
+  on_conflict?: Maybe<Orders_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_ProductsArgs = {
   objects: Array<Products_Insert_Input>;
+  on_conflict?: Maybe<Products_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Products_OneArgs = {
   object: Products_Insert_Input;
+  on_conflict?: Maybe<Products_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
   objects: Array<Users_Insert_Input>;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_CategoriesArgs = {
   _set?: Maybe<Categories_Set_Input>;
   where: Categories_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Categories_By_PkArgs = {
+  _set?: Maybe<Categories_Set_Input>;
+  pk_columns: Categories_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -711,6 +832,13 @@ export type Mutation_RootUpdate_Delivery_MethodArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_Delivery_Method_By_PkArgs = {
+  _inc?: Maybe<Delivery_Method_Inc_Input>;
+  _set?: Maybe<Delivery_Method_Set_Input>;
+  pk_columns: Delivery_Method_Pk_Columns_Input;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_OrdersArgs = {
   _append?: Maybe<Orders_Append_Input>;
   _delete_at_path?: Maybe<Orders_Delete_At_Path_Input>;
@@ -723,10 +851,29 @@ export type Mutation_RootUpdate_OrdersArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdate_Orders_By_PkArgs = {
+  _append?: Maybe<Orders_Append_Input>;
+  _delete_at_path?: Maybe<Orders_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Orders_Delete_Elem_Input>;
+  _delete_key?: Maybe<Orders_Delete_Key_Input>;
+  _inc?: Maybe<Orders_Inc_Input>;
+  _prepend?: Maybe<Orders_Prepend_Input>;
+  _set?: Maybe<Orders_Set_Input>;
+  pk_columns: Orders_Pk_Columns_Input;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_ProductsArgs = {
   _inc?: Maybe<Products_Inc_Input>;
   _set?: Maybe<Products_Set_Input>;
   where: Products_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Products_By_PkArgs = {
+  _inc?: Maybe<Products_Inc_Input>;
+  _set?: Maybe<Products_Set_Input>;
+  pk_columns: Products_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -738,6 +885,17 @@ export type Mutation_RootUpdate_UsersArgs = {
   _prepend?: Maybe<Users_Prepend_Input>;
   _set?: Maybe<Users_Set_Input>;
   where: Users_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_By_PkArgs = {
+  _append?: Maybe<Users_Append_Input>;
+  _delete_at_path?: Maybe<Users_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Users_Delete_Elem_Input>;
+  _delete_key?: Maybe<Users_Delete_Key_Input>;
+  _prepend?: Maybe<Users_Prepend_Input>;
+  _set?: Maybe<Users_Set_Input>;
+  pk_columns: Users_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -860,6 +1018,12 @@ export type Orders_Bool_Exp = {
   userId?: Maybe<String_Comparison_Exp>;
 };
 
+/** unique or primary key constraints on table "orders" */
+export enum Orders_Constraint {
+  /** unique or primary key constraint */
+  OrdersPkey = "orders_pkey",
+}
+
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Orders_Delete_At_Path_Input = {
   contactNumber?: Maybe<Array<Scalars["String"]>>;
@@ -932,6 +1096,13 @@ export type Orders_Mutation_Response = {
   returning: Array<Orders>;
 };
 
+/** on conflict condition type for table "orders" */
+export type Orders_On_Conflict = {
+  constraint: Orders_Constraint;
+  update_columns?: Array<Orders_Update_Column>;
+  where?: Maybe<Orders_Bool_Exp>;
+};
+
 /** Ordering options when selecting data from "orders". */
 export type Orders_Order_By = {
   contactNumber?: Maybe<Order_By>;
@@ -943,6 +1114,11 @@ export type Orders_Order_By = {
   paymentOption?: Maybe<Order_By>;
   products?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: orders */
+export type Orders_Pk_Columns_Input = {
+  id: Scalars["uuid"];
 };
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
@@ -1012,6 +1188,28 @@ export type Orders_Sum_Fields = {
   __typename?: "orders_sum_fields";
   orderNumber?: Maybe<Scalars["Int"]>;
 };
+
+/** update columns of table "orders" */
+export enum Orders_Update_Column {
+  /** column name */
+  ContactNumber = "contactNumber",
+  /** column name */
+  CreatedAt = "createdAt",
+  /** column name */
+  DeliveryAddress = "deliveryAddress",
+  /** column name */
+  DeliveryMethod = "deliveryMethod",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderNumber = "orderNumber",
+  /** column name */
+  PaymentOption = "paymentOption",
+  /** column name */
+  Products = "products",
+  /** column name */
+  UserId = "userId",
+}
 
 /** aggregate var_pop on columns */
 export type Orders_Var_Pop_Fields = {
@@ -1116,6 +1314,12 @@ export type Products_Bool_Exp = {
   updated_at?: Maybe<Timestamp_Comparison_Exp>;
 };
 
+/** unique or primary key constraints on table "products" */
+export enum Products_Constraint {
+  /** unique or primary key constraint */
+  ProductsPkey = "products_pkey",
+}
+
 /** input type for incrementing numeric columns in table "products" */
 export type Products_Inc_Input = {
   pricing?: Maybe<Scalars["Int"]>;
@@ -1170,6 +1374,15 @@ export type Products_Mutation_Response = {
 /** input type for inserting object relation for remote table "products" */
 export type Products_Obj_Rel_Insert_Input = {
   data: Products_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Products_On_Conflict>;
+};
+
+/** on conflict condition type for table "products" */
+export type Products_On_Conflict = {
+  constraint: Products_Constraint;
+  update_columns?: Array<Products_Update_Column>;
+  where?: Maybe<Products_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "products". */
@@ -1182,6 +1395,11 @@ export type Products_Order_By = {
   pricing?: Maybe<Order_By>;
   saleOff?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: products */
+export type Products_Pk_Columns_Input = {
+  id: Scalars["uuid"];
 };
 
 /** select columns of table "products" */
@@ -1241,6 +1459,24 @@ export type Products_Sum_Fields = {
   saleOff?: Maybe<Scalars["Int"]>;
 };
 
+/** update columns of table "products" */
+export enum Products_Update_Column {
+  /** column name */
+  UrlImage = "URLImage",
+  /** column name */
+  CreatedAt = "createdAt",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Pricing = "pricing",
+  /** column name */
+  SaleOff = "saleOff",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
 /** aggregate var_pop on columns */
 export type Products_Var_Pop_Fields = {
   __typename?: "products_var_pop_fields";
@@ -1268,6 +1504,8 @@ export type Query_Root = {
   categories: Array<Categories>;
   /** fetch aggregated fields from the table: "categories" */
   categories_aggregate: Categories_Aggregate;
+  /** fetch data from the table: "categories" using primary key columns */
+  categories_by_pk?: Maybe<Categories>;
   /** An array relationship */
   categories_products: Array<Categories_Products>;
   /** An aggregate relationship */
@@ -1276,18 +1514,26 @@ export type Query_Root = {
   delivery_method: Array<Delivery_Method>;
   /** fetch aggregated fields from the table: "delivery_method" */
   delivery_method_aggregate: Delivery_Method_Aggregate;
+  /** fetch data from the table: "delivery_method" using primary key columns */
+  delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** fetch data from the table: "orders" */
   orders: Array<Orders>;
   /** fetch aggregated fields from the table: "orders" */
   orders_aggregate: Orders_Aggregate;
+  /** fetch data from the table: "orders" using primary key columns */
+  orders_by_pk?: Maybe<Orders>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
   products_aggregate: Products_Aggregate;
+  /** fetch data from the table: "products" using primary key columns */
+  products_by_pk?: Maybe<Products>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
 };
 
 export type Query_RootCategoriesArgs = {
@@ -1304,6 +1550,10 @@ export type Query_RootCategories_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Categories_Order_By>>;
   where?: Maybe<Categories_Bool_Exp>;
+};
+
+export type Query_RootCategories_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 export type Query_RootCategories_ProductsArgs = {
@@ -1338,6 +1588,10 @@ export type Query_RootDelivery_Method_AggregateArgs = {
   where?: Maybe<Delivery_Method_Bool_Exp>;
 };
 
+export type Query_RootDelivery_Method_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
 export type Query_RootOrdersArgs = {
   distinct_on?: Maybe<Array<Orders_Select_Column>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -1352,6 +1606,10 @@ export type Query_RootOrders_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Orders_Order_By>>;
   where?: Maybe<Orders_Bool_Exp>;
+};
+
+export type Query_RootOrders_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 export type Query_RootProductsArgs = {
@@ -1370,6 +1628,10 @@ export type Query_RootProducts_AggregateArgs = {
   where?: Maybe<Products_Bool_Exp>;
 };
 
+export type Query_RootProducts_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
 export type Query_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -1386,12 +1648,18 @@ export type Query_RootUsers_AggregateArgs = {
   where?: Maybe<Users_Bool_Exp>;
 };
 
+export type Query_RootUsers_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
 export type Subscription_Root = {
   __typename?: "subscription_root";
   /** fetch data from the table: "categories" */
   categories: Array<Categories>;
   /** fetch aggregated fields from the table: "categories" */
   categories_aggregate: Categories_Aggregate;
+  /** fetch data from the table: "categories" using primary key columns */
+  categories_by_pk?: Maybe<Categories>;
   /** An array relationship */
   categories_products: Array<Categories_Products>;
   /** An aggregate relationship */
@@ -1400,18 +1668,26 @@ export type Subscription_Root = {
   delivery_method: Array<Delivery_Method>;
   /** fetch aggregated fields from the table: "delivery_method" */
   delivery_method_aggregate: Delivery_Method_Aggregate;
+  /** fetch data from the table: "delivery_method" using primary key columns */
+  delivery_method_by_pk?: Maybe<Delivery_Method>;
   /** fetch data from the table: "orders" */
   orders: Array<Orders>;
   /** fetch aggregated fields from the table: "orders" */
   orders_aggregate: Orders_Aggregate;
+  /** fetch data from the table: "orders" using primary key columns */
+  orders_by_pk?: Maybe<Orders>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
   products_aggregate: Products_Aggregate;
+  /** fetch data from the table: "products" using primary key columns */
+  products_by_pk?: Maybe<Products>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
 };
 
 export type Subscription_RootCategoriesArgs = {
@@ -1428,6 +1704,10 @@ export type Subscription_RootCategories_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Categories_Order_By>>;
   where?: Maybe<Categories_Bool_Exp>;
+};
+
+export type Subscription_RootCategories_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 export type Subscription_RootCategories_ProductsArgs = {
@@ -1462,6 +1742,10 @@ export type Subscription_RootDelivery_Method_AggregateArgs = {
   where?: Maybe<Delivery_Method_Bool_Exp>;
 };
 
+export type Subscription_RootDelivery_Method_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
 export type Subscription_RootOrdersArgs = {
   distinct_on?: Maybe<Array<Orders_Select_Column>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -1476,6 +1760,10 @@ export type Subscription_RootOrders_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Orders_Order_By>>;
   where?: Maybe<Orders_Bool_Exp>;
+};
+
+export type Subscription_RootOrders_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 export type Subscription_RootProductsArgs = {
@@ -1494,6 +1782,10 @@ export type Subscription_RootProducts_AggregateArgs = {
   where?: Maybe<Products_Bool_Exp>;
 };
 
+export type Subscription_RootProducts_By_PkArgs = {
+  id: Scalars["uuid"];
+};
+
 export type Subscription_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -1508,6 +1800,10 @@ export type Subscription_RootUsers_AggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<Users_Order_By>>;
   where?: Maybe<Users_Bool_Exp>;
+};
+
+export type Subscription_RootUsers_By_PkArgs = {
+  id: Scalars["uuid"];
 };
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
@@ -1608,6 +1904,12 @@ export type Users_Bool_Exp = {
   updatedAt?: Maybe<Timestamp_Comparison_Exp>;
 };
 
+/** unique or primary key constraints on table "users" */
+export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersPkey = "users_pkey",
+}
+
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Users_Delete_At_Path_Input = {
   address?: Maybe<Array<Scalars["String"]>>;
@@ -1689,6 +1991,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** on conflict condition type for table "users" */
+export type Users_On_Conflict = {
+  constraint: Users_Constraint;
+  update_columns?: Array<Users_Update_Column>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
 /** Ordering options when selecting data from "users". */
 export type Users_Order_By = {
   address?: Maybe<Order_By>;
@@ -1706,6 +2015,11 @@ export type Users_Order_By = {
   phones?: Maybe<Order_By>;
   roles?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: users */
+export type Users_Pk_Columns_Input = {
+  id: Scalars["uuid"];
 };
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
@@ -1767,6 +2081,40 @@ export type Users_Set_Input = {
   roles?: Maybe<Scalars["String"]>;
   updatedAt?: Maybe<Scalars["timestamp"]>;
 };
+
+/** update columns of table "users" */
+export enum Users_Update_Column {
+  /** column name */
+  Address = "address",
+  /** column name */
+  AvatarUrl = "avatarUrl",
+  /** column name */
+  Country = "country",
+  /** column name */
+  CountryCode = "countryCode",
+  /** column name */
+  CreatedAt = "createdAt",
+  /** column name */
+  DateOfBirth = "dateOfBirth",
+  /** column name */
+  DialCode = "dialCode",
+  /** column name */
+  DisplayName = "displayName",
+  /** column name */
+  Email = "email",
+  /** column name */
+  Gender = "gender",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Payment = "payment",
+  /** column name */
+  Phones = "phones",
+  /** column name */
+  Roles = "roles",
+  /** column name */
+  UpdatedAt = "updatedAt",
+}
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {

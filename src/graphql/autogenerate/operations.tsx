@@ -50,6 +50,19 @@ export type GetProductsQuery = { __typename?: "query_root" } & {
   >;
 };
 
+export type ProductByPkQueryVariables = Types.Exact<{
+  id: Types.Scalars["uuid"];
+}>;
+
+export type ProductByPkQuery = { __typename?: "query_root" } & {
+  products_by_pk?: Types.Maybe<
+    { __typename?: "products" } & Pick<
+      Types.Products,
+      "id" | "URLImage" | "name" | "pricing" | "saleOff"
+    >
+  >;
+};
+
 export type ProductsByCategoryQueryVariables = Types.Exact<{
   category: Types.Scalars["String"];
 }>;

@@ -18,6 +18,7 @@ import { Home } from "./components/mainPage";
 import { Checkout } from "./components/checkout";
 import { HeaderLayout } from "./layouts/header-layout";
 import { Loader } from "./layouts/loader";
+import { DetailProduct } from "./components/details-product";
 
 function App() {
   const { state }: any = useAuth();
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HeaderLayout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/detail" element={<DetailProduct />} />
               <Route path="/checkout" element={<Navigate to="/auth" />} />
             </Route>
             <Route path="/auth" element={<AuthLayout />}>
@@ -60,6 +62,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HeaderLayout />}>
                 <Route path="/" element={<Home />} />
+                <Route path="/detail" element={<DetailProduct />} />
                 <Route path="/checkout" element={<Navigate to="/auth" />} />
               </Route>
               <Route path="/auth" element={<AuthLayout />}>
@@ -108,6 +111,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HeaderLayout />}>
                   <Route path="/" element={<Home />} />
+                  <Route path="/detail" element={<DetailProduct />} />
                   <Route path="/checkout" element={<Navigate to="/auth" />} />
                 </Route>
                 <Route path="/auth" element={<AuthLayout />}>
@@ -144,7 +148,7 @@ function App() {
         const client = createAuthApolloClient(state.user);
         const roleAlow =
           state.customClaims.claims["https://hasura.io/jwt/claims"][
-          "x-hasura-allowed-roles"
+            "x-hasura-allowed-roles"
           ];
 
         if (roleAlow.includes("user")) {
@@ -154,6 +158,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<HeaderLayout />}>
                     <Route path="/" element={<Home />} />
+                    <Route path="/detail" element={<DetailProduct />} />
                     <Route path="/checkout" element={<Checkout />} />
                   </Route>
 

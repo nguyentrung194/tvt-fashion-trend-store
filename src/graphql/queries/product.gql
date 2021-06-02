@@ -32,6 +32,15 @@ query GetProducts {
     URLImage
   }
 }
+query ProductByPk($id: uuid!) {
+  products_by_pk(id: $id) {
+    id
+    URLImage
+    name
+    pricing
+    saleOff
+  }
+}
 
 query ProductsByCategory($category: String!) {
   products(

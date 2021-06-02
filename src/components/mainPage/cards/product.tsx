@@ -24,6 +24,19 @@ export const Product = ({ product }: any) => {
         style={{
           position: "absolute",
           top: "3px",
+          left: "3px",
+          fontSize: "18px",
+          fontWeight: 500,
+          lineHeight: "20px",
+          textAlign: "start",
+        }}
+      >
+        {product.name}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          top: "3px",
           right: "3px",
           backgroundColor: "rgb(255, 173, 94)",
           padding: product.saleOff ? "6px" : "",
@@ -47,21 +60,11 @@ export const Product = ({ product }: any) => {
       <div>
         <div
           style={{
-            fontSize: "18px",
-            fontWeight: 500,
-            lineHeight: "20px",
-            textAlign: "start",
-          }}
-        >
-          {product.name}
-        </div>
-        <div
-          style={{
             fontSize: "14px",
             fontWeight: "normal",
             lineHeight: "24px",
             textDecoration: "line-through",
-            textAlign: "start",
+            textAlign: "center",
             height: "24px",
           }}
         >
@@ -76,7 +79,8 @@ export const Product = ({ product }: any) => {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            // justifyContent: "space-between",
+            flexDirection: "column",
             alignItems: "center",
           }}
         >
@@ -94,37 +98,22 @@ export const Product = ({ product }: any) => {
           </div>
           {!isInCart(product) && (
             <button
+              className="button-summit"
               style={{
                 background: "rgb(73, 173, 255)",
-                padding: "5px",
-                borderRadius: "30px",
-                border: "none",
-                cursor: "pointer",
-                outline: "none",
-                display: "flex",
-                alignItems: "center",
-                fontSize: "14px",
               }}
               onClick={() => {
                 addProduct(product);
               }}
             >
-              <span style={{ paddingRight: "2px" }}>Cart</span>
-              <img
-                style={{ width: "14px" }}
-                src="https://firebasestorage.googleapis.com/v0/b/store-of-king.appspot.com/o/asset%2Fcart-24.png?alt=media&token=1dbe43f1-b34b-4884-9420-b137f6808ea2"
-                alt="Cart"
-              />
+              <span style={{ paddingRight: "2px" }}>Add to cart</span>
             </button>
           )}
           {isInCart(product) && (
             <div
+              className="button-submit"
               style={{
                 background: "rgb(73, 173, 255)",
-                borderRadius: "30px",
-                border: "none",
-                cursor: "pointer",
-                outline: "none",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -173,6 +162,22 @@ export const Product = ({ product }: any) => {
               </div>
             </div>
           )}
+        </div>
+        <div
+          style={{
+            marginTop: "12px",
+          }}
+        >
+          <a
+            href={`./detail?id=${product.id}`}
+            className="button-summit"
+            style={{
+              background: "#2072cf",
+              textDecoration: "none",
+            }}
+          >
+            Xem chi tiết
+          </a>
         </div>
       </div>
     </div>

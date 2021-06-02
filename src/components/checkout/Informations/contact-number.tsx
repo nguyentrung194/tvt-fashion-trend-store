@@ -242,7 +242,7 @@ export const ContactNumber = () => {
 };
 
 export const Phones = () => {
-  const [opt, setOpt] = useState(localStorage.getItem("ContactNumber") || "");
+  const [opt, setOpt] = useState(localStorage.getItem("ContactNumber") || "-1");
 
   const {
     state: { user },
@@ -278,8 +278,7 @@ export const Phones = () => {
             opt == idx ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
           marginRight: "15px",
           marginBottom: "15px",
-          border: `1px solid ${opt == idx ? "rgb(5, 148, 79)" : "transparent"
-            }`,
+          border: `1px solid ${opt == idx ? "rgb(5, 148, 79)" : "transparent"}`,
           borderRadius: "5px",
           transition: "all 0.25s ease 0s",
           cursor: "pointer",

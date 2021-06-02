@@ -5,7 +5,7 @@ import useMedia from "../../../hooks/use-media";
 export const DeliveryMethod = () => {
   const isWide = useMedia("(min-width: 480px)");
   const [opt, setOpt] = useState(
-    localStorage.getItem("DeliveryMethodInf") || ""
+    localStorage.getItem("DeliveryMethodInf") || "-1"
   );
   const { addDeliveryMethod } = useContext(CartContext);
 

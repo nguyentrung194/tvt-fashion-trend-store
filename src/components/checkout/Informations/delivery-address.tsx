@@ -290,7 +290,7 @@ export const Phones = () => {
   const { addToast } = useToasts();
 
   const { data, error, loading } = useGetAddressQuery({
-    variables: { email: user?.email || "" },
+    variables: { email: user?.email || "-1" },
   });
   if (error && !data) {
     console.log(error);
@@ -316,8 +316,7 @@ export const Phones = () => {
             opt == idx ? "rgb(255, 255, 255)" : "rgb(246, 246, 246)",
           marginRight: "15px",
           marginBottom: "15px",
-          border: `1px solid ${opt == idx ? "rgb(5, 148, 79)" : "transparent"
-            }`,
+          border: `1px solid ${opt == idx ? "rgb(5, 148, 79)" : "transparent"}`,
           borderRadius: "5px",
           transition: "all 0.25s ease 0s",
           cursor: "pointer",
